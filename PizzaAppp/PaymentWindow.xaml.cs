@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PizzaAppp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PaymentWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PaymentWindow : Window
     {
-        public MainWindow()
+        public PaymentWindow()
         {
             InitializeComponent();
-            
-            List<int> listTst= new List<int>();
-            for (int i = 0; i < 20; i++)
-            {
-                listTst.Add(i);
-            }
-
-            Menu_lB.ItemsSource;
-
-
         }
     }
 }
