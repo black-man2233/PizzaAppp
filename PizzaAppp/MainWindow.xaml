@@ -10,6 +10,7 @@
         Background="#d9b030"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <!--Styuling everybutton on the mainPage-->
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -68,12 +69,12 @@
                />
         
         <!--Menukortets ListBoxen-->
-        <ListBox Name="Menu_lB"
+        <DataGrid Name="Menu_Dg"
                  Margin="10,0,115,10"
-                 Grid.RowSpan="3"
-                 Grid.Row="1">
+                 Grid.Row="1"
+                 Grid.RowSpan="3">
             Menu kort
-        </ListBox>
+        </DataGrid>
 
         <!--Indkæbskurvens ListBoxen-->
         <ListBox Name="Cart_lB"  

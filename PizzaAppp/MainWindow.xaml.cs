@@ -30,7 +30,7 @@ namespace PizzaAppp
                 listTst.Add(i);
             }
 
-            Menu_lB.ItemsSource;
+            
 
 
         }
