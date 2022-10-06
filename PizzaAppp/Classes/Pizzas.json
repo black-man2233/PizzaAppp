@@ -1,0 +1,62 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Margherita",
+    "price": "4 kr"
+  },
+  {
+    "id": 2,
+    "name": "Vesuvio",
+    "price": "1 kr"
+  },
+  {
+    "id": 3,
+    "name": "Capricciosa",
+    "price": "5 kr"
+  },
+  {
+    "id": 4,
+    "name": "Hawaii",
+    "price": "84 kr"
+  },
+  {
+    "id": 5,
+    "name": "Quatro stagioni",
+    "price": "3 kr"
+  },
+  {
+    "id": 6,
+    "name": "Pepperoni",
+    "price": "2 kr"
+  },
+  {
+    "id": 1,
+    "name": "Margherita",
+    "price": "4 kr"
+  },
+  {
+    "id": 2,
+    "name": "Vesuvio",
+    "price": "1 kr"
+  },
+  {
+    "id": 300,
+    "name": "Capricciosa",
+    "price": "5 kr"
+  },
+  {
+    "id": 4,
+    "name": "Hawaii",
+    "price": "84 kr"
+  },
+  {
+    "id": 5,
+    "name": "Quatro stagioni",
+    "price": "3 kr"
+  },
+  {
+    "id": 6,
+    "name": "Pepperoni",
+    "price": "2 kr"
+  }
+]

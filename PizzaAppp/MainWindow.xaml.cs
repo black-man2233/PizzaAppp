@@ -1,17 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PizzaAppp.Classes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PizzaAppp
 {
@@ -20,18 +11,51 @@ namespace PizzaAppp
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
         public MainWindow()
         {
+
             InitializeComponent();
-            
-            List<int> listTst= new List<int>();
-            for (int i = 0; i < 20; i++)
+
+            PizzaMenu();
+            CartF();
+
+        }
+
+        /// <summary>
+        /// Indlæser dataen fra pizza.Json, og fylder den op i menu DataGrid
+        /// </summary>
+        void PizzaMenu()
+        {
+
+            //stigen til Pizza.Json
+            string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaAppp\Classes\Pizzas.json");
+
+            // konverter JSON string til liste med Person 
+            var data = JsonConvert.DeserializeObject<List<Pizzaerne>>(jsonText);
+
+            //udfylder Menu dataGrid med Objekter fra Pizza.Json
+
+            Menu_Dg.Items.Clear();
+            Menu_Dg.ItemsSource = data;
+
+        }
+
+        void CartF()
+        {
+            Cart_lB.Items.Clear();
+            Cart_lB.ItemsSource = data;
+
+        }
+
+        private void Menu_Dg_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            foreach (Pizzaerne item in Menu_Dg.SelectedItems)
             {
-                listTst.Add(i);
+
+                Cart_lB.Items.Add(item);
             }
-
-            
-
 
         }
     }
