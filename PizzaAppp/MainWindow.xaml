@@ -7,8 +7,11 @@
         xmlns:local="clr-namespace:PizzaAppp"
         mc:Ignorable="d"
         Title="Home" Height="800" Width="1040"
-       
+       Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
         Background="#d9b030"
+     BorderBrush="#FF3B5998"
+    ResizeMode="NoResize"
+                BorderThickness=".5"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!--Styuling everybutton on the mainPage-->
@@ -29,6 +32,12 @@
             </Setter>
         </Style>
     </Window.Resources>
+
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="5"
+                          Opacity=".5"
+                          ShadowDepth="3" />
+    </Window.Effect>
 
     <!--Body of the software-->
     <Grid Background="#000" Margin="4">
@@ -73,22 +82,21 @@
 
         <!--Menukortets ListBoxen-->
         <DataGrid Name="Menu_Dg"
-                 Height="Auto"
                  Grid.Row="1"
                  Grid.RowSpan="3"
-                 HorizontalScrollBarVisibility="Disabled" 
-                  
+                 
                  FontSize="20"
                  AutoGenerateColumns="True" 
                  IsReadOnly="True"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
-                  CanUserReorderColumns="False" 
-                  
-                  Margin="1,0,0,20" 
-                  SelectionChanged="Menu_Dg_SelectionChanged">
+                 CanUserAddRows="False"
+                 CanUserDeleteRows="False"
+                 CanUserResizeColumns="False"
+                 CanUserResizeRows="False"
+                 CanUserReorderColumns="False" 
+                 RowHeight="35"
+                 
+                  Margin="1,0,0,20"
+                  MouseDoubleClick="Menu_Dg_MouseDoubleClick">
             <DataGrid.Resources>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers>
@@ -102,13 +110,14 @@
         </DataGrid>
 
         <!--Indkæbskurvens ListBoxen-->
-        <DataGrid Name="Cart_lB"   
+        <DataGrid Name="Cart_Dg"   
                  Grid.Row="1"
-                  Grid.Column="2"
-                  FontSize="20"
+                 Grid.Column="2"
+                 FontSize="20"
                  Height="Auto" 
-                  Margin="0,0,0,59" 
-                  Grid.RowSpan="2"
+                 Margin="0,0,0,59" 
+                 Grid.RowSpan="2"
+                 RowHeight="35"
                  
                  AutoGenerateColumns="True" 
                  IsReadOnly="False"
@@ -117,12 +126,7 @@
                  CanUserResizeColumns="False"
                  CanUserResizeRows="False"
                  CanUserReorderColumns="False" 
-                  
-                  
                   >
-            <Label Width="249" Height="145" FontSize="45" FontWeight="SemiBold" >
-                Den er Tom
-            </Label>
         </DataGrid>
 
         <!--Den samlede pris af indkøbskruvens indhold-->
@@ -137,18 +141,8 @@
                HorizontalContentAlignment="Right"
                VerticalContentAlignment="Bottom"/>
 
-        <!--Knappen der overføre til betalinges vindue-->
-        <Button Name="ToPayment_bt"
-                Content="Til Betaling"
-                FontFamily="Arial"
-                FontSize=" 30"
-                FontWeight="DemiBold"
-                Grid.Column="2"
-                Grid.Row="3"
-                Margin="23"/>
-
         <!--Tilføje til indkøbskurv knappen-->
-        <Button Name="AddToBasket_bt"
+        <!--<Button Name="AddToBasket_bt"
                 Content="Tilføj"
                 FontFamily="Arial"
                 FontSize=" 33"
@@ -157,6 +151,16 @@
                 Height="112"
                 Grid.Column="1"
                 Grid.Row="2"
+                Margin="23"/>-->
+
+        <!--Knappen der overføre til betalinges vindue-->
+        <Button Name="ToPayment_bt"
+                Content="Til Betaling"
+                FontFamily="Arial"
+                FontSize=" 30"
+                FontWeight="DemiBold"
+                Grid.Column="2"
+                Grid.Row="3"
                 Margin="23"/>
 
 
