@@ -1,32 +1,32 @@
 ﻿[
   {
-    "ID": "1",
-    "NAME": "MARGHERITA",
-    "PRICE": "76"
+    "id": "1",
+    "name": "Margherita",
+    "price": "76"
   },
   {
-    "ID": "2",
-    "NAME": "VESUVIO",
-    "PRICE": "3"
+    "id": "2",
+    "name": "Vesuvio",
+    "price": "3"
   },
   {
-    "ID": "3",
-    "NAME": "CAPRICCIOSA",
-    "PRICE": "5"
+    "id": "3",
+    "name": "Capricciosa",
+    "price": "5"
   },
   {
-    "ID": "4",
-    "NAME": "HAWAII",
-    "PRICE": "84"
+    "id": "4",
+    "name": "Hawaii",
+    "price": "84"
   },
   {
-    "ID": "5",
-    "NAME": "QUATRO STAGIONI",
-    "PRICE": "12"
+    "id": "5",
+    "name": "Quatro stagioni",
+    "price": "12"
   },
   {
-    "ID": "6",
-    "NAME": "PEPPERONI",
-    "PRICE": "3"
+    "id": "6",
+    "name": "Pepperoni",
+    "price": "3"
   }
-] 
+]

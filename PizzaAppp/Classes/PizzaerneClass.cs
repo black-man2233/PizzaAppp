@@ -1,21 +1,59 @@
-﻿namespace PizzaAppp.Classes
+﻿using System.ComponentModel;
+
+namespace PizzaAppp.Classes
 {
-    public class Pizzaerne
+    public class PizzaerneMenu : INotifyPropertyChanged
     {
-        //propertien til pizza navnet
+        //propertien til Pizzaes ID
+        private int _id;
         public int Id
         {
-            get; set;
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged("Id");
+
+            }
         }
-        public string? Name { get; set; }
+
+        //propertien til pizza navnet
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
 
         //propertien til pizzas pris
+        private int _price;
+
         public int Price
         {
-            get;
-            set;
+            get { return _price; }
+            set
+            {
+                _price = value;
+                OnPropertyChanged("Price");
+            }
         }
+
+        //it updates data, so the datagrid gets the latest update
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string PropertyNavn)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
+            }
+        }
+
     }
+
 }
 
 

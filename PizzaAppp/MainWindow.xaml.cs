@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PizzaAppp.Classes;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 
@@ -11,37 +11,70 @@ namespace PizzaAppp
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        List<Pizzaerne> cartData;
-        //stigen til Pizza.Json
-        string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaAppp\Classes\Pizzas.json");
-
-        List<Pizzaerne> cartList;
-
         public MainWindow()
         {
+
             InitializeComponent();
-
-            Menu_Dg.Items.Clear();
-            Cart_Dg.ItemsSource = cartData;
-
-            PizzaMenu();
+            //Generer Id til pizzaerne så man kan ved hvilken man leder efter
+            IdGenerator();
+            //udfylder gridene op med listen af pizzaer
+            MenuAndCart();
         }
 
 
-        ///<summary>
-        /// Indlæser dataen fra pizza.Json, og fylder den op i menu DataGrid
+        //stigen til Pizza.Json
+        static string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaAppp\Classes\Pizzas.json");
+
+        // konverter JSON string til liste med Pizza 
+        ObservableCollection<PizzaerneMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaerneMenu>>(jsonText);
+
+        //lisen som husker på de vaglte pizzaere
+        ObservableCollection<ShoppingCart> cartData = new ObservableCollection<ShoppingCart>();
+
+
+        /// <summary>
+        /// Generates an Id number for evey pizza on the menu
         /// </summary>
-        void PizzaMenu()
+        void IdGenerator()
         {
+            for (int amountOfPizzas = 0; amountOfPizzas < menuData.Count - 1;)
+            {
+                for (int indexOfPizza = 1; indexOfPizza < menuData.Count; indexOfPizza++)
+                {
+                    menuData[amountOfPizzas].Id = indexOfPizza;
+                    amountOfPizzas++;
+                }
+            }
 
-            // konverter JSON string til liste med Pizza 
-            var menuData = JsonConvert.DeserializeObject<List<Pizzaerne>>(jsonText);
+        }
 
-            //udfylder Menu dataGrid med Objekter fra Pizza.Json
+        /// <summary>
+        /// Clears and fills up menu with a list of the pizzas
+        /// </summary>
+        void MenuAndCart()
+        {
+            //menuData.Add(new PizzaerneMenu(1,"Hello", 1));
+            Menu_Dg.Items.Clear();
+            Cart_Dg.Items.Clear();
             Menu_Dg.ItemsSource = menuData;
+            Cart_Dg.ItemsSource = cartData;
 
-            cartList = menuData;
+        }
+
+        void TotPrice()
+        {
+            for (int i = 0; i < menuData.Count - 1; i++)
+            {
+                int total = Sum(menuData[i].Price);
+            }
+
+            foreach (var item in menuData[i].Price)
+            {
+
+            }
+
+
+
         }
 
 
@@ -52,8 +85,8 @@ namespace PizzaAppp
         /// <param name="e"></param>
         private void Menu_Dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // cartData.Add(cartList[Menu_Dg.SelectedIndex]);
-
+            ShoppingCart newItem = new ShoppingCart((menuData[Menu_Dg.SelectedIndex].Name).ToString(), (menuData[Menu_Dg.SelectedIndex].Price));
+            cartData.Add(newItem);
 
         }
     }

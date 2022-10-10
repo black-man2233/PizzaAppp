@@ -33,12 +33,6 @@
         </Style>
     </Window.Resources>
 
-    <Window.Effect>
-        <DropShadowEffect BlurRadius="5"
-                          Opacity=".5"
-                          ShadowDepth="3" />
-    </Window.Effect>
-
     <!--Body of the software-->
     <Grid Background="#000" Margin="4">
         <!--Definere antal af de horizontale rækker-->
@@ -94,7 +88,7 @@
                  CanUserResizeRows="False"
                  CanUserReorderColumns="False" 
                  RowHeight="35"
-                 
+                 ItemsSource="{Binding}"
                   Margin="1,0,0,20"
                   MouseDoubleClick="Menu_Dg_MouseDoubleClick">
             <DataGrid.Resources>
@@ -111,27 +105,27 @@
 
         <!--Indkæbskurvens ListBoxen-->
         <DataGrid Name="Cart_Dg"   
-                 Grid.Row="1"
-                 Grid.Column="2"
-                 FontSize="20"
-                 Height="Auto" 
-                 Margin="0,0,0,59" 
-                 Grid.RowSpan="2"
-                 RowHeight="35"
+                  Grid.Row="1"
+                  Grid.Column="2"
+                  FontSize="20"
+                  Height="Auto" 
+                  Margin="0,0,0,59" 
+                  Grid.RowSpan="2"
+                  RowHeight="35" 
                  
-                 AutoGenerateColumns="True" 
-                 IsReadOnly="False"
-                 CanUserAddRows="False"
-                 CanUserDeleteRows="True"
-                 CanUserResizeColumns="False"
-                 CanUserResizeRows="False"
-                 CanUserReorderColumns="False" 
+                  AutoGenerateColumns="True" 
+                  IsReadOnly="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="True"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserReorderColumns="False" 
                   >
         </DataGrid>
 
         <!--Den samlede pris af indkøbskruvens indhold-->
         <Label Name="TotalPrice_lb"
-               Content="Pris i alt"
+               Content="Pris i alt: "
                FontFamily="Arial"
                FontSize=" 30"
                FontWeight="DemiBold"
