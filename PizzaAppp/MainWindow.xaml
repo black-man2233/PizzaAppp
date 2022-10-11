@@ -6,13 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaAppp"
         mc:Ignorable="d"
-        Title="Home" Height="800" Width="1040"
-       Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
+        Title="Home" 
+    
+        Height="800" 
+        Width="1040"
+        Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
         Background="#d9b030"
-     BorderBrush="#FF3B5998"
-    ResizeMode="NoResize"
-                BorderThickness=".5"
+        BorderBrush="#FF3B5998"
+        ResizeMode="NoResize"
+        BorderThickness=".5"
         WindowStartupLocation="CenterScreen">
+    
     <Window.Resources>
         <!--Styuling everybutton on the mainPage-->
         <Style TargetType="Button">
@@ -104,15 +108,16 @@
         </DataGrid>
 
         <!--Indkæbskurvens ListBoxen-->
-        <DataGrid Name="Cart_Dg"   
+        <DataGrid Name="Cart_Dg"
                   Grid.Row="1"
                   Grid.Column="2"
                   FontSize="20"
                   Height="Auto" 
                   Margin="0,0,0,59" 
                   Grid.RowSpan="2"
-                  RowHeight="35" 
-                 
+                  RowHeight="35"
+                  
+                  MouseDoubleClick="Cart_Dg_MouseDoubleClick"
                   AutoGenerateColumns="True" 
                   IsReadOnly="False"
                   CanUserAddRows="False"

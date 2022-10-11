@@ -5,8 +5,137 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaAppp"
         mc:Ignorable="d"
-        Title="Modify your Pizza" Height="450" Width="800">
-    <Grid>
         
+        Title="Customize the Pizza"
+        Height="800" 
+        Width="1040"
+        Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
+        Background="#d9b030"
+        BorderBrush="#FF3B5998"
+        ResizeMode="NoResize"
+        BorderThickness=".5"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!--Styuling everybutton on the mainPage-->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="102"
+                            Background="#e1b623"
+                            BorderThickness="1">
+                            <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="{TemplateBinding Padding}" ></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Foreground"
+                    Value="#e1b623"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+            <Setter Property="FontSize"
+                    Value="40"/>
+
+        </Style>
+    </Window.Resources>
+
+    <!--Body of the software-->
+    <Grid  Background="#000" Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="1"
+               FontSize="40"
+               HorizontalContentAlignment="Center"
+               FontWeight="Bold">
+            <Underline>
+
+                Modificere din Pizza
+            </Underline>
+        </Label>
+
+        <ListBox Grid.Row="1"
+                 Grid.RowSpan="2">
+            
+        </ListBox>
+
+
+        <TextBlock Name="PzInfo_Lb"
+               Grid.Column="1"
+                   FontSize="40"
+                   Foreground="Wheat"
+                   FontWeight="Bold"
+                   Background="#223"
+                   TextTrimming="WordEllipsis"
+                   TextWrapping="Wrap"
+                   Padding="22"
+                   HorizontalAlignment="Center" Width="407" Margin="0,86,0,172" Grid.RowSpan="3"
+        >
+            
+            "Lorem ipsum dolor sit amet consectetur adipiRepudiandae saepe eveniet doloribus, atque rem odi expedita?
+
+        </TextBlock>
+
+        <Label Name="YourChosen_Lb"
+            Grid.Row="0"
+               Grid.Column="2"
+               HorizontalContentAlignment="Center"
+               VerticalAlignment="Bottom">
+            Dine Udvalgt
+        </Label>
+
+        <TextBlock Name="ChoseItems_Tb"
+                   Grid.Column="2"
+                   Grid.Row="1"
+                   FontSize="40"
+                   Foreground="Wheat"
+                   FontWeight="Bold"
+                   Background="#223"
+                   TextTrimming="WordEllipsis"
+                   TextWrapping="Wrap"
+                   Padding="22"
+                   Width="312"
+        >
+            Chosen Items Shows <LineBreak/> here with their prices
+
+        </TextBlock>
+
+
+        <TextBlock Grid.Row="2"
+                 Grid.Column="2"
+                 TextWrapping="Wrap"
+                 FontWeight="{Binding FontWeight, ElementName=YourChosen_Lb}"
+                 FontSize="{Binding FontSize ,ElementName=PzInfo_Lb}"
+                 Foreground="{Binding Foreground, ElementName=YourChosen_Lb}"
+                   Background="{Binding Background, ElementName=ChoseItems_Tb}"
+                 
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   MinHeight="160">
+            Total Pris is
+        </TextBlock>
+
+
+
+
+
     </Grid>
 </Window>

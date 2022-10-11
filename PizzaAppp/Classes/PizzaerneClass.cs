@@ -18,7 +18,7 @@ namespace PizzaAppp.Classes
         }
 
         //propertien til pizza navnet
-        private string _name;
+        private string? _name;
         public string Name
         {
             get { return _name; }
@@ -43,7 +43,7 @@ namespace PizzaAppp.Classes
         }
 
         //it updates data, so the datagrid gets the latest update
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string PropertyNavn)
         {
             if (PropertyChanged != null)

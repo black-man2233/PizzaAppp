@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PizzaAppp.Classes;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace PizzaAppp
@@ -21,12 +23,11 @@ namespace PizzaAppp
             MenuAndCart();
         }
 
-
         //stigen til Pizza.Json
-        static string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaAppp\Classes\Pizzas.json");
+        private static string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaAppp\Classes\Pizzas.json");
 
         // konverter JSON string til liste med Pizza 
-        ObservableCollection<PizzaerneMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaerneMenu>>(jsonText);
+        public ObservableCollection<PizzaerneMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaerneMenu>>(jsonText);
 
         //lisen som husker på de vaglte pizzaere
         ObservableCollection<ShoppingCart> cartData = new ObservableCollection<ShoppingCart>();
@@ -59,24 +60,44 @@ namespace PizzaAppp
             Menu_Dg.ItemsSource = menuData;
             Cart_Dg.ItemsSource = cartData;
 
+            TotPrice();
+
+
         }
 
-        void TotPrice()
+        /// <summary>
+        /// Calcutates the total price of all items in the shopping cart
+        /// </summary>
+        /// <returns></returns>
+        public void TotPrice()
         {
-            for (int i = 0; i < menuData.Count - 1; i++)
+            List<int> allPrices = new List<int>();
+            if (cartData.Count > 0)
             {
-                int total = Sum(menuData[i].Price);
-            }
+                for (int i = 0; i < cartData.Count; i++)
+                {
+                    allPrices.Add(cartData[i].Price);
+                }
 
-            foreach (var item in menuData[i].Price)
+                TotalPrice_lb.Content = $"Pris i alt er {allPrices.Sum()} kr.";
+
+
+            }
+            else
             {
+                TotalPrice_lb.Content = $"Pris i alt er {allPrices.Sum()} kr.";
 
             }
-
-
-
         }
 
+        /// <summary>
+        /// Adds the Selected item from the Menu to the Cart
+        /// </summary>
+        void AddToCart()
+        {
+            ShoppingCart newItem = new ShoppingCart((menuData[Menu_Dg.SelectedIndex].Name).ToString(), (menuData[Menu_Dg.SelectedIndex].Price));
+            cartData.Add(newItem);
+        }
 
         /// <summary>
         /// Double trykker på en item fra Menuen og bliver tilføjet til indkøbskurv
@@ -85,8 +106,21 @@ namespace PizzaAppp
         /// <param name="e"></param>
         private void Menu_Dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ShoppingCart newItem = new ShoppingCart((menuData[Menu_Dg.SelectedIndex].Name).ToString(), (menuData[Menu_Dg.SelectedIndex].Price));
-            cartData.Add(newItem);
+            AddToCart();
+            TotPrice();
+        }
+
+
+        /// <summary>
+        /// Opens up The customazation window for the current pizza
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cart_Dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ModifyPizzaWindow customizeThisPizza = new ModifyPizzaWindow();
+
+            customizeThisPizza.ShowDialog();
 
         }
     }

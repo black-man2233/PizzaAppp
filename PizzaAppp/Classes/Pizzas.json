@@ -2,31 +2,103 @@
   {
     "id": "1",
     "name": "Margherita",
-    "price": "76"
+    "price": "76",
+    "Toppings": [
+      {
+        "id": "1",
+        "name": "Tomato",
+        "price": "0"
+      },
+      {
+        "id": "2",
+        "name": "Mozzarella",
+        "price": "0"
+      }
+    ]
   },
   {
     "id": "2",
     "name": "Vesuvio",
-    "price": "3"
+    "price": "3",
+    "Toppings": [
+      {
+        "id": "1",
+        "name": "Tomato",
+        "price": "0"
+      },
+      {
+        "id": "2",
+        "name": "Mozzarella",
+        "price": "0"
+      }
+    ]
   },
   {
     "id": "3",
     "name": "Capricciosa",
-    "price": "5"
+    "price": "5",
+    "Toppings": [
+      {
+        "id": "1",
+        "name": "Tomato",
+        "price": "0"
+      },
+      {
+        "id": "2",
+        "name": "Mozzarella",
+        "price": "0"
+      }
+    ]
   },
   {
     "id": "4",
     "name": "Hawaii",
-    "price": "84"
+    "price": "84",
+    "Toppings": [
+      {
+        "id": "1",
+        "name": "Tomato",
+        "price": "0"
+      },
+      {
+        "id": "2",
+        "name": "Mozzarella",
+        "price": "0"
+      }
+    ]
   },
   {
     "id": "5",
     "name": "Quatro stagioni",
-    "price": "12"
+    "price": "12",
+    "Toppings": [
+      {
+        "id": "1",
+        "name": "Tomato",
+        "price": "0"
+      },
+      {
+        "id": "2",
+        "name": "Mozzarella",
+        "price": "0"
+      }
+    ]
   },
   {
     "id": "6",
     "name": "Pepperoni",
-    "price": "3"
+    "price": "3",
+    "Toppings": [
+      {
+        "id": "1",
+        "name": "Tomato",
+        "price": "0"
+      },
+      {
+        "id": "2",
+        "name": "Mozzarella",
+        "price": "0"
+      }
+    ]
   }
 ]
