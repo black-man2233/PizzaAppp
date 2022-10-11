@@ -100,9 +100,6 @@ namespace PizzaAppp
             ShoppingCart newItem = new ShoppingCart((menuData[Menu_Dg.SelectedIndex].Name).ToString(), (menuData[Menu_Dg.SelectedIndex].Price));
             cartData.Add(newItem);
 
-
-
-            //menuData[1].Toppings[2].
         }
 
         /// <summary>

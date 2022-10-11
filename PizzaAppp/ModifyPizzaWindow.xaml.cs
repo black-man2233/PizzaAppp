@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using PizzaAppp.Classes;
+using System.Windows;
 
 namespace PizzaAppp
 {
@@ -15,6 +16,8 @@ namespace PizzaAppp
         void ToppingLoader()
         {
 
+            Toppings newItem = new Toppings();
+            //cartData.Add(newItem);
 
         }
 
