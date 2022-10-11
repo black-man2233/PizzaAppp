@@ -21,13 +21,15 @@ namespace PizzaAppp
             IdGenerator();
             //udfylder gridene op med listen af pizzaer
             MenuAndCart();
+
+
         }
 
         //stigen til Pizza.Json
         private static string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaAppp\Classes\Pizzas.json");
 
         // konverter JSON string til liste med Pizza 
-        public ObservableCollection<PizzaerneMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaerneMenu>>(jsonText);
+        public static ObservableCollection<PizzaerneMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaerneMenu>>(jsonText);
 
         //lisen som husker på de vaglte pizzaere
         ObservableCollection<ShoppingCart> cartData = new ObservableCollection<ShoppingCart>();
@@ -97,6 +99,10 @@ namespace PizzaAppp
         {
             ShoppingCart newItem = new ShoppingCart((menuData[Menu_Dg.SelectedIndex].Name).ToString(), (menuData[Menu_Dg.SelectedIndex].Price));
             cartData.Add(newItem);
+
+
+
+            //menuData[1].Toppings[2].
         }
 
         /// <summary>
@@ -116,7 +122,7 @@ namespace PizzaAppp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Cart_Dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void Cart_Dg_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ModifyPizzaWindow customizeThisPizza = new ModifyPizzaWindow();
 

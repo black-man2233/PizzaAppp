@@ -11,5 +11,12 @@ namespace PizzaAppp
         {
             InitializeComponent();
         }
+
+        void ToppingLoader()
+        {
+
+
+        }
+
     }
 }

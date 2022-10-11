@@ -119,9 +119,9 @@
                   
                   MouseDoubleClick="Cart_Dg_MouseDoubleClick"
                   AutoGenerateColumns="True" 
-                  IsReadOnly="False"
+                  IsReadOnly="True"
                   CanUserAddRows="False"
-                  CanUserDeleteRows="True"
+                  CanUserDeleteRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
                   CanUserReorderColumns="False" 

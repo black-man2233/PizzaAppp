@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PizzaAppp.Classes
 {
@@ -41,6 +42,9 @@ namespace PizzaAppp.Classes
                 OnPropertyChanged("Price");
             }
         }
+
+        public ObservableCollection<Toppings> Toppings { get; set; }
+
 
         //it updates data, so the datagrid gets the latest update
         public event PropertyChangedEventHandler? PropertyChanged;
