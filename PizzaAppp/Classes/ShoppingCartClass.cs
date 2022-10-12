@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PizzaAppp.Classes
 
@@ -33,18 +34,8 @@ namespace PizzaAppp.Classes
 
         }
 
-        //propertin til Pris i alt
-        private int _totalPrice;
+        public ObservableCollection<Toppings> Toppings;
 
-        private int TotalPrice
-        {
-            get { return _totalPrice; }
-            set
-            {
-                _totalPrice = value;
-                OnPropertyChanged("TotalPrice");
-            }
-        }
 
 
 
@@ -64,6 +55,19 @@ namespace PizzaAppp.Classes
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
             }
         }
+
+        ////propertin til Pris i alt
+        //private int _totalPrice;
+
+        //private int TotalPrice
+        //{
+        //    get { return _totalPrice; }
+        //    set
+        //    {
+        //        _totalPrice = value;
+        //        OnPropertyChanged("TotalPrice");
+        //    }
+        //}
 
 
     }

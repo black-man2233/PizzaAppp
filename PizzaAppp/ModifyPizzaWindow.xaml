@@ -44,6 +44,16 @@
                     Value="40"/>
 
         </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground"
+                    Value="#e1b623"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+            <Setter Property="FontSize"
+                    Value="40"/>
+
+        </Style>
     </Window.Resources>
 
     <!--Body of the software-->
@@ -72,10 +82,25 @@
             </Underline>
         </Label>
 
-        <ListBox x:Name="Toppings_Lb" Grid.Row="1"
-                 Grid.RowSpan="2">
-            
+        <ListBox Name="Toppings_Lb" 
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Grid.RowSpan="2"
+                 Background="#21f"
+                 >
+
+            <CheckBox Name="CheckListen"
+                      Grid.Column="0"
+                      Grid.Row="1"
+                      Grid.RowSpan="2" 
+                      
+                      Width="304"
+                      >
+                Toppings comes here
+            </CheckBox>
+
         </ListBox>
+
 
 
         <TextBlock Name="PzInfo_Lb"

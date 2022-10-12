@@ -13,6 +13,7 @@ namespace PizzaAppp
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
 
@@ -21,6 +22,10 @@ namespace PizzaAppp
             IdGenerator();
             //udfylder gridene op med listen af pizzaer
             MenuAndCart();
+
+
+            GetCartDg = Cart_Dg;
+
 
 
         }
@@ -32,7 +37,7 @@ namespace PizzaAppp
         public static ObservableCollection<PizzaerneMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaerneMenu>>(jsonText);
 
         //lisen som husker på de vaglte pizzaere
-        ObservableCollection<ShoppingCart> cartData = new ObservableCollection<ShoppingCart>();
+        public static ObservableCollection<ShoppingCart> cartData = new ObservableCollection<ShoppingCart>();
 
 
         /// <summary>
@@ -61,6 +66,7 @@ namespace PizzaAppp
             Cart_Dg.Items.Clear();
             Menu_Dg.ItemsSource = menuData;
             Cart_Dg.ItemsSource = cartData;
+
 
             TotPrice();
 
@@ -124,6 +130,8 @@ namespace PizzaAppp
             ModifyPizzaWindow customizeThisPizza = new ModifyPizzaWindow();
 
             customizeThisPizza.ShowDialog();
+
+
 
         }
     }
