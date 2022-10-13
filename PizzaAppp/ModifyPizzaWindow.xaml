@@ -54,25 +54,29 @@
                     Value="40"/>
 
         </Style>
+
     </Window.Resources>
 
     <!--Body of the software-->
     <Grid  Background="#000" Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1.3"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0"
-               Grid.Column="1"
+               Grid.Column="2"
                FontSize="40"
                HorizontalContentAlignment="Center"
                FontWeight="Bold">
@@ -85,8 +89,9 @@
         <ListBox Name="Toppings_Lb" 
                  Grid.Row="1"
                  Grid.Column="0"
-                 Grid.RowSpan="2"
+                 Grid.RowSpan="3"
                  Background="#21f"
+
                  >
 
             <CheckBox Name="CheckListen"
@@ -94,7 +99,6 @@
                       Grid.Row="1"
                       Grid.RowSpan="2" 
                       
-                      Width="304"
                       >
                 Toppings comes here
             </CheckBox>
@@ -104,7 +108,7 @@
 
 
         <TextBlock Name="PzInfo_Lb"
-               Grid.Column="1"
+               Grid.Column="4"
                    FontSize="40"
                    Foreground="Wheat"
                    FontWeight="Bold"
@@ -112,7 +116,7 @@
                    TextTrimming="WordEllipsis"
                    TextWrapping="Wrap"
                    Padding="22"
-                   HorizontalAlignment="Center" Width="407" Margin="0,86,0,172" Grid.RowSpan="3"
+                   Grid.Row="2"                   HorizontalAlignment="Center" 
         >
             
             "Lorem ipsum dolor sit amet consectetur adipiRepudiandae saepe eveniet doloribus, atque rem odi expedita?
@@ -121,14 +125,14 @@
 
         <Label Name="YourChosen_Lb"
             Grid.Row="0"
-               Grid.Column="2"
+               Grid.Column="4"
                HorizontalContentAlignment="Center"
                VerticalAlignment="Bottom">
             Dine Udvalgt
         </Label>
 
         <TextBlock Name="ChoseItems_Tb"
-                   Grid.Column="2"
+                   Grid.Column="4"
                    Grid.Row="1"
                    FontSize="40"
                    Foreground="Wheat"
@@ -144,8 +148,9 @@
         </TextBlock>
 
 
-        <TextBlock Grid.Row="2"
-                 Grid.Column="2"
+        <TextBlock Name="TotalPris_Tb"
+            Grid.Row="4"
+                 Grid.Column="4"
                  TextWrapping="Wrap"
                  FontWeight="{Binding FontWeight, ElementName=YourChosen_Lb}"
                  FontSize="{Binding FontSize ,ElementName=PzInfo_Lb}"
@@ -153,10 +158,12 @@
                    Background="{Binding Background, ElementName=ChoseItems_Tb}"
                  
                    TextAlignment="Center"
-                   VerticalAlignment="Center"
-                   MinHeight="160">
-            Total Pris is
-        </TextBlock>
+                   VerticalAlignment="Top"
+                   MinHeight="160" Margin="498,1032,-498,0">
+        </TextBlock>            
+        <Button Name="BackButton"
+                Grid.Column="0"
+                Grid.Row="0" Click="BackButton_Click"/>
 
 
 

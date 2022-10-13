@@ -35,6 +35,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        
     </Window.Resources>
 
     <!--Body of the software-->
@@ -92,7 +94,6 @@
                  CanUserResizeRows="False"
                  CanUserReorderColumns="False" 
                  RowHeight="35"
-                 ItemsSource="{Binding}"
                   Margin="1,0,0,20"
                   MouseDoubleClick="Menu_Dg_MouseDoubleClick">
             <DataGrid.Resources>
@@ -124,7 +125,7 @@
                   CanUserDeleteRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"
-                  CanUserReorderColumns="False" 
+                  CanUserReorderColumns="False"  
                   >
         </DataGrid>
 

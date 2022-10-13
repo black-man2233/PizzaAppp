@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PizzaAppp
 {
@@ -13,7 +14,6 @@ namespace PizzaAppp
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
 
@@ -22,12 +22,6 @@ namespace PizzaAppp
             IdGenerator();
             //udfylder gridene op med listen af pizzaer
             MenuAndCart();
-
-
-            GetCartDg = Cart_Dg;
-
-
-
         }
 
         //stigen til Pizza.Json
@@ -39,6 +33,8 @@ namespace PizzaAppp
         //lisen som husker på de vaglte pizzaere
         public static ObservableCollection<ShoppingCart> cartData = new ObservableCollection<ShoppingCart>();
 
+        //listen med alle priser
+        List<int> allPrices = new List<int>();
 
         /// <summary>
         /// Generates an Id number for evey pizza on the menu
@@ -79,7 +75,6 @@ namespace PizzaAppp
         /// <returns></returns>
         public void TotPrice()
         {
-            List<int> allPrices = new List<int>();
             if (cartData.Count > 0)
             {
                 for (int i = 0; i < cartData.Count; i++)
@@ -88,7 +83,6 @@ namespace PizzaAppp
                 }
 
                 TotalPrice_lb.Content = $"Pris i alt er {allPrices.Sum()} kr.";
-
 
             }
             else
@@ -119,7 +113,6 @@ namespace PizzaAppp
             TotPrice();
         }
 
-
         /// <summary>
         /// Opens up The customazation window for the current pizza
         /// </summary>
@@ -131,7 +124,26 @@ namespace PizzaAppp
 
             customizeThisPizza.ShowDialog();
 
+            customizeThisPizza.Toppings_Lb.Items.Clear();
 
+
+        }
+
+        /// <summary>
+        /// Creates Checkboxes according to the amount of toppings needed for the selected pizza from the cart.
+        /// </summary>
+        void ToppingLoader()
+        {
+            CheckBox _listBox = new CheckBox();
+
+            var spi = Cart_Dg.SelectedIndex;
+
+
+            for (int i = 0; i < menuData[spi].Id; i++)
+            {
+                CheckBox tpChBox = new CheckBox();
+                tpChBox.Content = $"{spi}";
+            }
 
         }
     }
