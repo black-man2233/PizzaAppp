@@ -6,21 +6,52 @@
 
     public class Toppings
     {
-        private string _topName;
+        //prorpertie for id
+        private int _id;
 
-        public string TopName
+        public int Id
         {
-            get { return _topName; }
-            set { _topName = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
-        private int _topPrice;
 
-        public int TopPrice
+        //propertie for the name
+        private string _name;
+
+        public string Name
         {
-            get { return _topPrice; }
-            set { _topPrice = value; }
+            get { return _name; }
+            set { _name = value; }
         }
+
+
+        //propertie for the price
+        private int _price;
+
+        public int Price
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
+
+
+
+        //private string _topName;
+
+        //public string TopName
+        //{
+        //    get { return _topName; }
+        //    set { _topName = value; }
+        //}
+
+        //private int _topPrice;
+
+        //public int TopPrice
+        //{
+        //    get { return _topPrice; }
+        //    set { _topPrice = value; }
+        //}
 
 
 

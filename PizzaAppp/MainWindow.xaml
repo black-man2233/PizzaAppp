@@ -16,7 +16,7 @@
         ResizeMode="NoResize"
         BorderThickness=".5"
         WindowStartupLocation="CenterScreen">
-    
+
     <Window.Resources>
         <!--Styuling everybutton on the mainPage-->
         <Style TargetType="Button">
@@ -36,7 +36,7 @@
             </Setter>
         </Style>
 
-        
+
     </Window.Resources>
 
     <!--Body of the software-->
@@ -88,11 +88,12 @@
                  FontSize="20"
                  AutoGenerateColumns="True" 
                  IsReadOnly="True"
+                  CanUserSortColumns="False"
                  CanUserAddRows="False"
                  CanUserDeleteRows="False"
-                 CanUserResizeColumns="False"
-                 CanUserResizeRows="False"
-                 CanUserReorderColumns="False" 
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"     
+                  CanUserReorderColumns="False" 
                  RowHeight="35"
                   Margin="1,0,0,20"
                   MouseDoubleClick="Menu_Dg_MouseDoubleClick">
@@ -117,15 +118,16 @@
                   Margin="0,0,0,59" 
                   Grid.RowSpan="2"
                   RowHeight="35"
-                  
                   MouseDoubleClick="Cart_Dg_MouseDoubleClick"
+                
                   AutoGenerateColumns="True" 
-                  IsReadOnly="True"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
-                  CanUserReorderColumns="False"  
+                 IsReadOnly="True"
+                  CanUserSortColumns="False"
+                 CanUserAddRows="False"
+                 CanUserDeleteRows="False"
+                 CanUserResizeColumns="False"
+                 CanUserResizeRows="False"
+                  
                   >
         </DataGrid>
 

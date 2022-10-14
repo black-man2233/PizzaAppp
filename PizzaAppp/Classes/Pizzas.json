@@ -1,103 +1,98 @@
 ﻿[
   {
-    "id": "1",
+    "id": 1,
     "name": "Margherita",
     "price": "76",
     "Toppings": [
       {
-        "id": "1",
+        "id": 1,
         "name": "Tomato",
-        "price": "0"
-      },
-      {
-        "id": "2",
-        "name": "Mozzarella",
-        "price": "0"
+        "price": "1"
       }
     ]
   },
   {
-    "id": "2",
+    "id": 2,
     "name": "Vesuvio",
     "price": "3",
     "Toppings": [
       {
-        "id": "1",
+        "id": 1,
         "name": "Tomato",
-        "price": "0"
+        "price": "2"
       },
       {
-        "id": "2",
+        "id": 2,
         "name": "Mozzarella",
-        "price": "0"
+        "price": "3"
       }
     ]
   },
   {
-    "id": "3",
+    "id": 3,
     "name": "Capricciosa",
     "price": "5",
     "Toppings": [
       {
-        "id": "1",
+        "id": 1,
         "name": "Tomato",
-        "price": "0"
+        "price": "4"
       },
       {
-        "id": "2",
+        "id": 2,
         "name": "Mozzarella",
-        "price": "0"
+        "price": "5"
       }
     ]
   },
   {
-    "id": "4",
+    "id": 4,
     "name": "Hawaii",
-    "price": "84",
+    "price": 84,
     "Toppings": [
       {
-        "id": "1",
+        "id": 1,
         "name": "Tomato",
-        "price": "0"
+        "price": 0
       },
       {
-        "id": "2",
+        "id": 2,
         "name": "Mozzarella",
-        "price": "0"
+        "price": 0
       }
     ]
   },
   {
-    "id": "5",
+    "id": 5,
     "name": "Quatro stagioni",
     "price": "12",
     "Toppings": [
       {
-        "id": "1",
+        "id": 1,
         "name": "Tomato",
-        "price": "0"
+        "price": "20"
       },
       {
         "id": "2",
         "name": "Mozzarella",
-        "price": "0"
+        "price": "20"
       }
     ]
   },
   {
-    "id": "6",
+    "id": 6,
     "name": "Pepperoni",
-    "price": "3",
+    "price": 3,
     "Toppings": [
       {
-        "id": "1",
+        "id": 1,
         "name": "Tomato",
-        "price": "0"
+        "price": "20"
       },
       {
-        "id": "2",
+        "id": 2,
         "name": "Mozzarella",
-        "price": "0"
+        "price": "20"
       }
     ]
   }

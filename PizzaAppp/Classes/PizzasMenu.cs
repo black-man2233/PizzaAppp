@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace PizzaAppp.Classes
 {
-    public class PizzaerneMenu : INotifyPropertyChanged
+    public class PizzasMenu : INotifyPropertyChanged
     {
         //propertien til Pizzaes ID
         private int _id;
@@ -43,7 +43,11 @@ namespace PizzaAppp.Classes
             }
         }
 
-        public ObservableCollection<Toppings> Toppings { get; set; }
+        public ObservableCollection<Toppings> Toppings
+        {
+            get;
+            set;
+        }
 
 
         //it updates data, so the datagrid gets the latest update

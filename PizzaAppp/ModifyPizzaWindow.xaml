@@ -47,7 +47,7 @@
 
         <Style TargetType="CheckBox">
             <Setter Property="Foreground"
-                    Value="#e1b623"/>
+                    Value="White"/>
             <Setter Property="FontWeight"
                     Value="Bold"/>
             <Setter Property="FontSize"
@@ -90,7 +90,7 @@
                  Grid.Row="1"
                  Grid.Column="0"
                  Grid.RowSpan="3"
-                 Background="#21f"
+                 Background="Transparent"
 
                  >
 
@@ -98,9 +98,10 @@
                       Grid.Column="0"
                       Grid.Row="1"
                       Grid.RowSpan="2" 
-                      
+                    Width="300"
                       >
-                Toppings comes here
+                <TextBlock TextWrapping="Wrap" Width="285" >
+                </TextBlock>
             </CheckBox>
 
         </ListBox>
@@ -108,7 +109,7 @@
 
 
         <TextBlock Name="PzInfo_Lb"
-               Grid.Column="4"
+               Grid.Column="2"
                    FontSize="40"
                    Foreground="Wheat"
                    FontWeight="Bold"
@@ -133,7 +134,7 @@
 
         <TextBlock Name="ChoseItems_Tb"
                    Grid.Column="4"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    FontSize="40"
                    Foreground="Wheat"
                    FontWeight="Bold"
@@ -149,7 +150,7 @@
 
 
         <TextBlock Name="TotalPris_Tb"
-            Grid.Row="4"
+            Grid.Row="3"
                  Grid.Column="4"
                  TextWrapping="Wrap"
                  FontWeight="{Binding FontWeight, ElementName=YourChosen_Lb}"
@@ -158,12 +159,19 @@
                    Background="{Binding Background, ElementName=ChoseItems_Tb}"
                  
                    TextAlignment="Center"
-                   VerticalAlignment="Top"
-                   MinHeight="160" Margin="498,1032,-498,0">
-        </TextBlock>            
+     
+                   >
+        </TextBlock>
+
         <Button Name="BackButton"
-                Grid.Column="0"
-                Grid.Row="0" Click="BackButton_Click"/>
+                Width="100" Click="BackButton_Click">
+
+            <Image Grid.Column="0"
+                Grid.Row="0"
+                Source="https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-Back-arrow-flatarticons-blue-flatarticons.png"
+               Width="Auto" 
+               />
+        </Button>
 
 
 
