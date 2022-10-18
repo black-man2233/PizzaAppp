@@ -35,23 +35,13 @@
             set { _price = value; }
         }
 
+        public Toppings(string name, int price)
+        {
+            this._name = name;
+            this._price = price;
 
+        }
 
-        //private string _topName;
-
-        //public string TopName
-        //{
-        //    get { return _topName; }
-        //    set { _topName = value; }
-        //}
-
-        //private int _topPrice;
-
-        //public int TopPrice
-        //{
-        //    get { return _topPrice; }
-        //    set { _topPrice = value; }
-        //}
 
 
 

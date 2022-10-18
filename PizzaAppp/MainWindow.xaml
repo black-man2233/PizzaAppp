@@ -54,6 +54,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!--Logoen til appen-->
@@ -83,8 +84,8 @@
         <!--Menukortets ListBoxen-->
         <DataGrid Name="Menu_Dg"
                  Grid.Row="1"
-                 Grid.RowSpan="3"
-                 
+                 Grid.RowSpan="3"               
+                         
                  FontSize="20"
                  AutoGenerateColumns="True" 
                  IsReadOnly="True"
@@ -95,8 +96,10 @@
                   CanUserResizeRows="False"     
                   CanUserReorderColumns="False" 
                  RowHeight="35"
-                  Margin="1,0,0,20"
-                  MouseDoubleClick="Menu_Dg_MouseDoubleClick">
+                  
+            
+                  MouseDoubleClick="Menu_Dg_MouseDoubleClick" Background="Black" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="Black">
+
             <DataGrid.Resources>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers>
@@ -105,9 +108,12 @@
                         </Trigger>
                     </Style.Triggers>
                 </Style>
+
             </DataGrid.Resources>
 
         </DataGrid>
+
+
 
         <!--Indkæbskurvens ListBoxen-->
         <DataGrid Name="Cart_Dg"
@@ -115,9 +121,10 @@
                   Grid.Column="2"
                   FontSize="20"
                   Height="Auto" 
-                  Margin="0,0,0,59" 
                   Grid.RowSpan="2"
                   RowHeight="35"
+                  Background="Black"
+                  
                   MouseDoubleClick="Cart_Dg_MouseDoubleClick"
                 
                   AutoGenerateColumns="True" 
@@ -126,43 +133,32 @@
                  CanUserAddRows="False"
                  CanUserDeleteRows="False"
                  CanUserResizeColumns="False"
-                 CanUserResizeRows="False"
+                 CanUserResizeRows="False" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                   
                   >
         </DataGrid>
 
         <!--Den samlede pris af indkøbskruvens indhold-->
-        <Label Name="TotalPrice_lb"
+        <Label Name="TpHome"
                Content="Pris i alt: "
                FontFamily="Arial"
                FontSize=" 30"
                FontWeight="DemiBold"
                Grid.Column="2"
-               Grid.Row="2"
+               Grid.Row="3"
                Foreground="#e1b623"
                HorizontalContentAlignment="Right"
-               VerticalContentAlignment="Bottom"/>
+               VerticalContentAlignment="Bottom"
+               />
 
-        <!--Tilføje til indkøbskurv knappen-->
-        <!--<Button Name="AddToBasket_bt"
-                Content="Tilføj"
-                FontFamily="Arial"
-                FontSize=" 33"
-                FontWeight="DemiBold"
-                Width="211"
-                Height="112"
-                Grid.Column="1"
-                Grid.Row="2"
-                Margin="23"/>-->
 
-        <!--Knappen der overføre til betalinges vindue-->
         <Button Name="ToPayment_bt"
                 Content="Til Betaling"
                 FontFamily="Arial"
                 FontSize=" 30"
                 FontWeight="DemiBold"
                 Grid.Column="2"
-                Grid.Row="3"
+                Grid.Row="4"
                 Margin="23"/>
 
 
