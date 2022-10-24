@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Images\Icons\" />
-    <Folder Include="Images\Gif\" />
-    <Folder Include="Images\SimpleImages\" />
-    <Folder Include="Videos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
   </ItemGroup>
 

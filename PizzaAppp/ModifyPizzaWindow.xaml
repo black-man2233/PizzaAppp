@@ -6,12 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaAppp"
         mc:Ignorable="d"
-        
         Title="Customize the Pizza"
         Height="800" 
         Width="1040"
         Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
-        Background="#d9b030"
+        Background="Black"
         BorderBrush="#FF3B5998"
         ResizeMode="NoResize"
         BorderThickness=".5"
@@ -53,144 +52,118 @@
                     Value="Bold"/>
             <Setter Property="FontSize"
                     Value="30"/>
+            <Setter Property="Width"
+                    Value="300"/>
 
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Foreground" Value="#a1b623"/>
                 </Trigger>
-
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="#e1b623"/>
                 </Trigger>
             </Style.Triggers>
+
+            <Style.Resources  >
+
+            </Style.Resources>
+
+
 
         </Style>
 
     </Window.Resources>
 
     <!--Body of the software-->
-    <Grid  Background="#000" Margin="4">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="1.3*"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1.3"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
+    <StackPanel>
 
-        <Label Grid.Row="0"
-               Grid.Column="2"
-               FontSize="40"
-               HorizontalContentAlignment="Center"
-               FontWeight="Bold">
-            <Underline>
+        <!--de øverste elementer-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-                Modificere din Pizza
-            </Underline>
-        </Label>
-
-        <ListView Name="Toppings_Lb" 
-                 Grid.Row="1"
-                 Grid.Column="0"
-                 Grid.RowSpan="3"
-                 Background="Transparent"
-                  
-                  ItemsSource="{Binding ElementName= UsedToppings}"
-
-                 >
-
-            <CheckBox Name="CheckListen"
-                      Grid.Column="0"
-                      Grid.Row="1"
-                      Grid.RowSpan="2" 
-                    Width="300"
-                      
-                      >
-
-            </CheckBox>
-
-        </ListView>
-
-
-
-        <TextBlock Name="PzInfo_Lb"
-               Grid.Column="2"
-                   FontSize="40"
-                   Foreground="Wheat"
-                   FontWeight="Bold"
-                   Background="#223"
-                   TextTrimming="WordEllipsis"
-                   TextWrapping="Wrap"
-                   Padding="22"
-                   Grid.Row="2"                   HorizontalAlignment="Center" 
-        >
-            
-            "Lorem ipsum dolor sit amet consectetur adipiRepudiandae saepe eveniet doloribus, atque rem odi expedita?
-
-        </TextBlock>
-
-        <Label Name="YourChosen_Lb"
-            Grid.Row="0"
-               Grid.Column="4"
-               HorizontalContentAlignment="Center"
-               VerticalAlignment="Bottom">
-            Dine Udvalgt
-        </Label>
-
-        <TextBlock Name="ChoseItems_Tb"
-                   Grid.Column="4"
-                   Grid.Row="2"
-                   FontSize="40"
-                   Foreground="Wheat"
-                   FontWeight="Bold"
-                   Background="#223"
-                   TextTrimming="WordEllipsis"
-                   TextWrapping="Wrap"
-                   Padding="22"
-                   Width="312"
-        >
-            Chosen Items Shows <LineBreak/> here with their prices
-
-        </TextBlock>
-
-
-        <TextBlock Name="TotalPris_Tb"
-            Grid.Row="3"
-                 Grid.Column="4"
-                 TextWrapping="Wrap"
-                 FontWeight="{Binding FontWeight, ElementName=YourChosen_Lb}"
-                 FontSize="{Binding FontSize ,ElementName=PzInfo_Lb}"
-                 Foreground="{Binding Foreground, ElementName=YourChosen_Lb}"
-                   Background="{Binding Background, ElementName=ChoseItems_Tb}"
-                  
-                   TextAlignment="Right"
-                   >
-        </TextBlock>
-
-        <Button Name="BackButton"
+            <Button Name="BackButton"
+                    HorizontalAlignment="Left"
                 Width="Auto"
                 Height="Auto"
                 Background="AliceBlue"
                 Click="BackButton_Click">
 
-            <Image Grid.Column="0"
+                <Image Grid.Column="0"
                 Grid.Row="0"
                 Source="https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-Back-arrow-flatarticons-blue-flatarticons.png"
-               Width="Auto" 
+               Width="182" Height="79" 
                />
-        </Button>
+            </Button
+>
+
+            <Label FontSize="40"
+               FontWeight="Bold">
+                <Underline>
+                    Modificere din Pizza
+                </Underline>
+            </Label>
+
+        </StackPanel>
+
+        <!--Pizzas Beskrivelse-->
+        <StackPanel>
+
+            <TextBlock Name="PDesc_Tb"
+                       Grid.Column="2"
+                       FontSize="40"
+                       Foreground="Wheat"
+                       FontWeight="Bold"
+                       Background="#223"
+                       TextTrimming="WordEllipsis"
+                       TextWrapping="Wrap"
+                       Padding="22"
+                       Grid.Row="2">
+            </TextBlock>
+        </StackPanel>
+
+        <!--Toppings liste og udvalgte-->
+        <StackPanel>
+
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="500">
+                <ListBox Width="400">
+                    <CheckBox Content="sw" FontSize="33" Foreground="Red"></CheckBox>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right" >
+
+                <Label Name="YourChosen_Lb"
+                       HorizontalContentAlignment="Center">
+                    Dine Udvalgt
+                </Label>
+
+                <TextBlock Name="ChoseItems_Tb"
+                           Grid.Column="4"
+                           Grid.Row="2"
+                           FontSize="40"
+                           Foreground="Wheat"
+                           FontWeight="Bold"
+                           Background="#223"
+                           TextTrimming="WordEllipsis"
+                           TextWrapping="Wrap"
+                           Padding="22"
+                           Width="312">
+                    Chosen Items Shows <LineBreak/> here with their prices
+                </TextBlock>
+                <TextBlock Name="TotalPris_Tb"
+                           TextWrapping="Wrap"
+                           FontWeight="{Binding FontWeight, ElementName=YourChosen_Lb}"
+                           FontSize="{Binding FontSize ,ElementName=PzInfo_Lb}"
+                           Foreground="{Binding Foreground, ElementName=YourChosen_Lb}"
+                           Background="{Binding Background, ElementName=ChoseItems_Tb}"
+                           TextAlignment="Right"
+                           Text="I Alt: "
+                   >
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
 
 
+    </StackPanel>
 
-
-
-    </Grid>
 </Window>

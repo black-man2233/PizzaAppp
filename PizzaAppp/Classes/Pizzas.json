@@ -3,21 +3,27 @@
     "id": 1,
     "name": "Margherita",
     "price": "76",
+    "description": "This",
     "Toppings": [
       {
         "id": 1,
         "name": "TomatSauce",
-        "price": "5"
+        "price": "5",
+        "selected": true
       },
       {
         "id": 2,
         "name": "Ost",
-        "price": "4"
+        "price": "4",
+        "selected": true
+
       },
       {
         "id": 3,
         "name": "Oregano",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       }
     ]
   },
@@ -29,24 +35,33 @@
       {
         "id": 1,
         "name": "TomatSauce",
-        "price": "5"
+        "price": "5",
+        "selected": true
+
       },
       {
         "id": 2,
         "name": "Ost",
-        "price": "4"
+        "price": "4",
+        "selected": true
+
       },
       {
         "id": 3,
         "name": "Oregano",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 4,
         "name": "Skinke",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       }
-    ]
+    ],
+    "description": "This is Pizza 2"
   },
   {
     "id": 3,
@@ -56,29 +71,40 @@
       {
         "id": 1,
         "name": "TomatSauce",
-        "price": "5"
+        "price": "5",
+        "selected": true
+
       },
       {
         "id": 2,
         "name": "Ost",
-        "price": "4"
+        "price": "4",
+        "selected": true
+
       },
       {
         "id": 3,
         "name": "Oregano",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 4,
         "name": "Skinke",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 5,
         "name": "Champignon",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       }
-    ]
+    ],
+    "description": "This is Pizza 1"
   },
   {
     "id": 4,
@@ -88,29 +114,40 @@
       {
         "id": 1,
         "name": "TomatSauce",
-        "price": "5"
+        "price": "5",
+        "selected": true
+
       },
       {
         "id": 2,
         "name": "Ost",
-        "price": "4"
+        "price": "4",
+        "selected": true
+
       },
       {
         "id": 3,
         "name": "Oregano",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 4,
         "name": "Skinke",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 5,
         "name": "Annas",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       }
-    ]
+    ],
+    "description": "This is Pizza 4"
   },
   {
     "id": 5,
@@ -120,29 +157,40 @@
       {
         "id": 1,
         "name": "TomatSauce",
-        "price": "5"
+        "price": "5",
+        "selected": true
+
       },
       {
         "id": 2,
         "name": "Ost",
-        "price": "4"
+        "price": "4",
+        "selected": true
+
       },
       {
         "id": 3,
         "name": "Oregano",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 4,
         "name": "Skinke",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       },
       {
         "id": 5,
         "name": "Bacon",
-        "price": "1"
+        "price": "1",
+        "selected": true
+
       }
-    ]
+    ],
+    "description": "This is Pizza 1"
   },
   {
     "id": 6,
@@ -169,6 +217,7 @@
         "name": "Pepperoni",
         "price": "1"
       }
-    ]
+    ],
+    "description": "This is Pizza 6"
   }
 ]

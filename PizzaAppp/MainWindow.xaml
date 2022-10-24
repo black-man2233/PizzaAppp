@@ -35,8 +35,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
     </Window.Resources>
 
     <!--Body of the software-->
@@ -84,10 +82,10 @@
         <!--Menukortets ListBoxen-->
         <DataGrid Name="Menu_Dg"
                  Grid.Row="1"
-                 Grid.RowSpan="3"               
-                         
-                 FontSize="20"
-                 AutoGenerateColumns="True" 
+                 Grid.RowSpan="3"                  FontSize="20"
+                 AutoGenerateColumns="True"
+                  FrozenColumnCount="2"
+                  
                  IsReadOnly="True"
                   CanUserSortColumns="False"
                  CanUserAddRows="False"
@@ -97,8 +95,9 @@
                   CanUserReorderColumns="False" 
                  RowHeight="35"
                   
-            
-                  MouseDoubleClick="Menu_Dg_MouseDoubleClick" Background="Black" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="Black">
+                   
+                  Background="Black"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="Black" >
 
             <DataGrid.Resources>
                 <Style TargetType="DataGridCell">
@@ -114,6 +113,42 @@
         </DataGrid>
 
 
+        <!--tilføjer den valgte item til indkøbskurven det valgte item fra indkøbskurven-->
+        <Button Name="Add_btn"
+                Grid.Column="0"
+                Grid.Row="4"
+                Content="Tilføj"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Click="Add_btn_Click"
+                Margin="23">
+
+        </Button>
+
+        <!--slet det valgte item fra indkøbskurven-->
+        <Button Name="Delete_btn"
+                Grid.Column="1"
+                Grid.Row="4"
+                Content="Slet"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Click="Delete_btn_Click"
+                Margin="23">
+
+        </Button>
+
+        <!--Redigere denne pizza-->
+        <Button Name="Edit_btn"
+                Grid.Column="1"
+                Grid.Row="3"
+                Content="Redigere"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Click="Edit_btn_Click"
+                Margin="23">
+
+        </Button>  
+        
 
         <!--Indkæbskurvens ListBoxen-->
         <DataGrid Name="Cart_Dg"
@@ -139,28 +174,23 @@
         </DataGrid>
 
         <!--Den samlede pris af indkøbskruvens indhold-->
-        <Label Name="TpHome"
-               Content="Pris i alt: "
+        <TextBlock Name="TpHome"
                FontFamily="Arial"
                FontSize=" 30"
                FontWeight="DemiBold"
                Grid.Column="2"
                Grid.Row="3"
-               Foreground="#e1b623"
-               HorizontalContentAlignment="Right"
-               VerticalContentAlignment="Bottom"
+               Foreground="#e1b623" Text="{Binding totPrice }" 
                />
 
 
         <Button Name="ToPayment_bt"
                 Content="Til Betaling"
                 FontFamily="Arial"
-                FontSize=" 30"
+                FontSize="30"
                 FontWeight="DemiBold"
                 Grid.Column="2"
                 Grid.Row="4"
                 Margin="23"/>
-
-
     </Grid>
 </Window>  

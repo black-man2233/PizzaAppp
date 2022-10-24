@@ -43,6 +43,15 @@ namespace PizzaAppp.Classes
             }
         }
 
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            private set { _description = value; }
+        }
+
+
         public ObservableCollection<Toppings> Toppings
         {
             get;
