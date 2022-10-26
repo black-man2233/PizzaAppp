@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaAppp"
+    
+    
         mc:Ignorable="d"
         Title="Home" 
     
@@ -81,35 +83,46 @@
 
         <!--Menukortets ListBoxen-->
         <DataGrid Name="Menu_Dg"
-                 Grid.Row="1"
-                 Grid.RowSpan="3"                  FontSize="20"
-                 AutoGenerateColumns="True"
-                  FrozenColumnCount="2"
+                  Grid.Row="1"
+                  Grid.RowSpan="3"                  
+                  RowHeight="35"                  
+                  FontSize="20"
+                  BorderBrush="{x:Null}"
                   
-                 IsReadOnly="True"
+                  ItemsSource="{Binding MenuData}"
+
+                  IsReadOnly="True"
                   CanUserSortColumns="False"
-                 CanUserAddRows="False"
-                 CanUserDeleteRows="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False"     
                   CanUserReorderColumns="False" 
-                 RowHeight="35"
-                  
-                   
-                  Background="Black"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="Black" >
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                  AutoGenerateColumns="False" 
+                  AlternatingRowBackground="Transparent" 
+                  RowBackground="Transparent" 
+                  Foreground="#FFE1B623"
+                  Background="Transparent"
+                  >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Foreground="#e1b623" Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Foreground="#e1b623" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn  Foreground="#e1b623" Header="Price" Binding="{Binding Price}"/>
+            </DataGrid.Columns>
 
             <DataGrid.Resources>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#e1b623" />
+                            <Setter Property="Background" Value="Blue" />
                         </Trigger>
+                        <Trigger Property="FontFamily" Value="Bold"/>
+
                     </Style.Triggers>
                 </Style>
-
             </DataGrid.Resources>
-
         </DataGrid>
 
 
