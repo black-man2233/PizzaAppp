@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace PizzaAppp.Classes
+namespace PizzaApp_WPF.Class
 {
-    public class PizzasMenu : INotifyPropertyChanged
+
+    public class PizzaType : INotifyPropertyChanged
     {
+
         //propertien til Pizzaes ID
         private int _id;
         public int Id
@@ -20,7 +22,7 @@ namespace PizzaAppp.Classes
 
         //propertien til pizza navnet
         private string? _name;
-        public string Name
+        public string? Name
         {
             get { return _name; }
             set
@@ -43,16 +45,16 @@ namespace PizzaAppp.Classes
             }
         }
 
-        private string _description;
+        private string? _description;
 
-        public string Description
+        public string? Description
         {
             get { return _description; }
             private set { _description = value; }
         }
 
 
-        public ObservableCollection<Toppings> Toppings
+        public ObservableCollection<Toppings>? Toppings
         {
             get;
             set;
@@ -72,5 +74,3 @@ namespace PizzaAppp.Classes
     }
 
 }
-
-

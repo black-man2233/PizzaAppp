@@ -10,11 +10,12 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Database\Pizzas.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <None Update="Database\Items.json">
+      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
 

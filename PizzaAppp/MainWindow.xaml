@@ -1,25 +1,25 @@
 ﻿<Window 
     x:Class="PizzaAppp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PizzaAppp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:PizzaAppp"
+    xmlns:viewmodel ="clr-namespace:PizzaAppp.ViewModels"
+    mc:Ignorable="d"
+    Title="Home" 
     
-    
-        mc:Ignorable="d"
-        Title="Home" 
-    
-        Height="800" 
-        Width="1040"
-        Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
-        Background="#d9b030"
-        BorderBrush="#FF3B5998"
-        ResizeMode="NoResize"
-        BorderThickness=".5"
-        WindowStartupLocation="CenterScreen">
+    Height="800" 
+    Width="1040"
+    Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
+    Background="#d9b030"
+    BorderBrush="#FF3B5998"
+    ResizeMode="NoResize"
+    BorderThickness=".5"
+    WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
+        <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
         <!--Styuling everybutton on the mainPage-->
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -40,7 +40,7 @@
     </Window.Resources>
 
     <!--Body of the software-->
-    <Grid Background="#000" Margin="4">
+    <Grid Background="#000" Margin="4" DataContext="{Binding Source={StaticResource vm}}">
         <!--Definere antal af de horizontale rækker-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -89,7 +89,7 @@
                   FontSize="20"
                   BorderBrush="{x:Null}"
                   
-                  ItemsSource="{Binding MenuData}"
+                  ItemsSource="{Binding Menu}"
 
                   IsReadOnly="True"
                   CanUserSortColumns="False"

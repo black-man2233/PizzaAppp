@@ -1,24 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.IO;
 
 namespace PizzaAppp.Classes
 {
-    public static class MenuJsonToList
+    public partial class MenuJsonToList : ObservableObject
     {
         //stigen til Pizza.Json
         private static readonly string jsonText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaApp\PizzaAppp\Database\Pizzas.json");
 
         // konverter JSON string til liste med Pizza 
-        private static ObservableCollection<PizzasMenu> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzasMenu>>(jsonText);
+        //[ObservableProperty]
+        public static ObservableCollection<PizzaType> menuData = JsonConvert.DeserializeObject<ObservableCollection<PizzaType>>(jsonText);
 
-        public static ObservableCollection<PizzasMenu> MenuData
-        {
-            get
-            {
-                return menuData;
-            }
-            private set {; }
-        }
     }
 }

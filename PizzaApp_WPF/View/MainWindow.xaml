@@ -1,0 +1,294 @@
+﻿<Window x:Class="PizzaApp_WPF.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PizzaApp_WPF.View"
+        xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
+        xmlns:model="clr-namespace:PizzaApp_WPF.Model"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        
+        Height="800" 
+        Width="1040"
+        Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
+        ResizeMode="NoResize"
+        BorderThickness=".5"
+        >
+    <Window.Resources>
+        <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
+        <model:CartModel x:Key="cm"></model:CartModel>
+        <model:MenuModel x:Key="mm"></model:MenuModel>
+    </Window.Resources>
+
+
+    <Grid Background="Black" DataContext="{Binding Source={StaticResource vm}}">
+
+        <!--Definere antal af de horizontale rækker-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Definere antal af de vertikale rækker-->
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Logoen til appen-->
+        <Image Name="Logo"
+                Source="https://sason.dk/image/272" 
+               VerticalAlignment="Center"
+               Height="184"
+               Grid.Column="1">
+
+
+            <Image.Effect>
+                <BlurEffect Radius="22"/>
+            </Image.Effect>
+        </Image>
+
+        <!--Menu kortets label-->
+        <Label Content="Menu"
+               Foreground="#FFF"
+               FontSize="35"
+               FontFamily="Arial Black"
+               VerticalContentAlignment="Bottom"
+               />
+
+        <!--Indkøbskurv label-->
+        <Label Content="Indkøbskurv"
+               Foreground="#FFF"
+               FontSize="35"
+               FontFamily="Arial Black"
+               VerticalContentAlignment="Bottom"
+                       Grid.Column="2"
+               />
+
+        <!--Menukortets ListBoxen-->
+        <DataGrid Grid.Row="1" Grid.RowSpan="2" RowHeight="35"                  
+                  FontSize="25"
+                  
+                  ItemsSource="{Binding menuData}"
+                  
+                  
+                  IsReadOnly="True"
+                  CanUserSortColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"     
+                  CanUserReorderColumns="False" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                  AutoGenerateColumns="False" 
+                  
+                  BorderBrush="#181818"
+                  AlternatingRowBackground="#181818" 
+                  RowBackground="#181818" 
+                  Foreground="#121212"
+                  Background="#181818" 
+                  SelectedIndex="{Binding SelectedIndex }"
+                  >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Foreground="#fff" Header="Price" Binding="{Binding Price}">
+
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#404040" />
+                        </Trigger>
+                        <Trigger Property="FontFamily" Value="Bold"/>
+                        <Trigger Property="BorderBrush" Value="Transparent"/>
+
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            
+
+        </DataGrid>
+
+
+        <DataGrid Grid.Row="3"
+                  Grid.RowSpan="3"                  
+                  RowHeight="35"                  
+                  FontSize="20"
+                  BorderBrush="#181818"
+                  
+                  ItemsSource="{Binding Drinks}"
+
+                  IsReadOnly="True"
+                  CanUserSortColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"     
+                  CanUserReorderColumns="False" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                  AutoGenerateColumns="False" 
+                  AlternatingRowBackground="#181818" 
+                  RowBackground="#181818" 
+                  Foreground="#121212"
+                  Background="#181818"
+                  
+                  >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Foreground="#fff" Header="Price" Binding="{Binding Price}">
+
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#404040" />
+                        </Trigger>
+                        <Trigger Property="FontFamily" Value="Bold"/>
+                        <Trigger Property="BorderBrush" Value="Transparent"/>
+
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+
+
+
+        <!--tilføjer den valgte item til indkøbskurven det valgte item fra indkøbskurven-->
+        <Button Name="Add_btn"
+                Grid.Column="1"
+                Grid.Row="2"
+                Content="Tilføj"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Margin="23"
+                Width="200"
+                Height="100"
+                Background="#181818"
+                Foreground="WhiteSmoke"
+                Command="{Binding AddToCartCommand}" 
+                
+                />
+
+        <!--slet det valgte item fra indkøbskurven-->
+        <Button Name="Delete_btn"
+                Grid.Column="1"
+                Grid.Row="4"
+                Content="Slet"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Margin="23"
+                Width="200"
+                Height="100"
+                Background="#181818"
+                Foreground="WhiteSmoke"
+                >
+
+        </Button>
+
+        <!--Redigere denne pizza-->
+        <Button Name="Edit_btn"
+                Grid.Column="1"
+                Grid.Row="3"
+                Content="Redigere"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Margin="23"
+                Width="200"
+                Height="100"
+                Background="#181818"
+                Foreground="WhiteSmoke"
+                >
+        </Button>
+
+
+        <!--Indkæbskurvens ListBoxen-->
+        <DataGrid Name="Cart_Dg"
+                  Grid.Row="1"
+                  Grid.Column="2"
+                  FontSize="20"
+                  Height="Auto" 
+                  Grid.RowSpan="2"
+                  RowHeight="35"
+                  
+                  ItemsSource="{Binding CartData}"
+                
+                  AutoGenerateColumns="True" 
+                 IsReadOnly="True"
+                  CanUserSortColumns="False"
+                 CanUserAddRows="False"
+                 CanUserDeleteRows="False"
+                 CanUserResizeColumns="False"
+                 CanUserResizeRows="False" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                  
+                  
+                  BorderBrush="#181818"
+                  AlternatingRowBackground="#181818" 
+                  RowBackground="#181818" 
+                  Foreground="#121212"
+                  Background="#181818">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn  Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Foreground="#fff" Header="Price" Binding="{Binding Price}">
+
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#404040" />
+                        </Trigger>
+                        <Trigger Property="FontFamily" Value="Bold"/>
+                        <Trigger Property="BorderBrush" Value="Transparent"/>
+
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+        </DataGrid>
+
+        <!--Den samlede pris af indkøbskruvens indhold-->
+        <TextBlock Name="TpHome"
+               FontFamily="Arial"
+               FontSize=" 30"
+               FontWeight="DemiBold"
+               Grid.Column="2"
+               Grid.Row="3"
+               Foreground="#FFF" Text="{Binding totalPrice }" 
+               />
+
+
+        <Button Name="ToPayment_bt"
+                Content="Til Betaling"
+                FontFamily="Arial"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Grid.Column="2"
+                Grid.Row="4"
+                Margin="23"
+                Width="200"
+                Height="100"
+                Background="#181818"
+                Foreground="WhiteSmoke"
+                />
+
+    </Grid>
+</Window>

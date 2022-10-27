@@ -3,7 +3,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using static PizzaAppp.Classes.MenuJsonToList;
 
 namespace PizzaAppp
 {
@@ -17,14 +16,14 @@ namespace PizzaAppp
         public MainWindow()
         {
             InitializeComponent();
-            Menu_Dg.ItemsSource = MenuJsonToList.MenuData;
-            Cart_Dg.Items.Clear();
-            Cart_Dg.ItemsSource = cartData;
+            //Menu_Dg.ItemsSource = MenuJsonToList.MenuData;
+            //Cart_Dg.Items.Clear();
+            //Cart_Dg.ItemsSource = cartData;
 
         }
 
         //cart list
-        public static ObservableCollection<PizzasMenu> cartData = new ObservableCollection<PizzasMenu>();
+        public static ObservableCollection<PizzaType> cartData = new ObservableCollection<PizzaType>();
 
         //used to send get the index of the selected index from the cart
         public static int IndexOfSelctedInCart;
@@ -49,7 +48,7 @@ namespace PizzaAppp
             ModifyPizzaWindow modifypizzawindow = new ModifyPizzaWindow();
             modifypizzawindow.ShowDialog();
 
-            MessageBox.Show(cartData[0].Description.ToString());
+            MessageBox.Show($"{cartData[0].Description}");
 
 
         }
@@ -64,7 +63,7 @@ namespace PizzaAppp
         private void Delete_btn_Click(object sender, RoutedEventArgs e) => cartData.Remove(cartData[Cart_Dg.SelectedIndex]);
 
         //add to the cart btn
-        private void Add_btn_Click(object sender, RoutedEventArgs e) => cartData.Add(MenuData[Menu_Dg.SelectedIndex]);
+        private void Add_btn_Click(object sender, RoutedEventArgs e) => cartData.Add(MenuJsonToList.menuList[Menu_Dg.SelectedIndex]);
 
         //updates data
         public event PropertyChangedEventHandler? PropertyChanged;
