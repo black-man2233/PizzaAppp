@@ -53,7 +53,6 @@ namespace PizzaApp_WPF.Class
             private set { _description = value; }
         }
 
-
         public ObservableCollection<Toppings>? Toppings
         {
             get;

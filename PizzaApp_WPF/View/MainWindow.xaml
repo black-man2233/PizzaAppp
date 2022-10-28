@@ -72,9 +72,10 @@
 
         <!--Menukortets ListBoxen-->
         <DataGrid Grid.Row="1" Grid.RowSpan="2" RowHeight="35"                  
-                  FontSize="25"
+                  FontSize="23"
                   
                   ItemsSource="{Binding menuData}"
+                  SelectedIndex="{Binding MenuSelectedIndex}"
                   
                   
                   IsReadOnly="True"
@@ -92,7 +93,6 @@
                   RowBackground="#181818" 
                   Foreground="#121212"
                   Background="#181818" 
-                  SelectedIndex="{Binding SelectedIndex }"
                   >
 
             <DataGrid.Columns>
@@ -170,7 +170,7 @@
         <!--tilføjer den valgte item til indkøbskurven det valgte item fra indkøbskurven-->
         <Button Name="Add_btn"
                 Grid.Column="1"
-                Grid.Row="2"
+                Grid.Row="1"
                 Content="Tilføj"
                 FontSize="30"
                 FontWeight="DemiBold"
@@ -186,7 +186,7 @@
         <!--slet det valgte item fra indkøbskurven-->
         <Button Name="Delete_btn"
                 Grid.Column="1"
-                Grid.Row="4"
+                Grid.Row="2"
                 Content="Slet"
                 FontSize="30"
                 FontWeight="DemiBold"
@@ -195,6 +195,7 @@
                 Height="100"
                 Background="#181818"
                 Foreground="WhiteSmoke"
+                Command="{Binding DeleteCommand}"
                 >
 
         </Button>
@@ -211,6 +212,7 @@
                 Height="100"
                 Background="#181818"
                 Foreground="WhiteSmoke"
+                Command="{Binding EditCommand}"
                 >
         </Button>
 
@@ -219,14 +221,17 @@
         <DataGrid Name="Cart_Dg"
                   Grid.Row="1"
                   Grid.Column="2"
-                  FontSize="20"
+                  FontSize="23"
                   Height="Auto" 
                   Grid.RowSpan="2"
                   RowHeight="35"
+                                    
+                  ItemsSource="{Binding cartData}"
                   
-                  ItemsSource="{Binding CartData}"
-                
-                  AutoGenerateColumns="True" 
+                  SelectedIndex="{Binding CartSelectedIndex}"
+                  
+                  
+                  AutoGenerateColumns="False" 
                  IsReadOnly="True"
                   CanUserSortColumns="False"
                  CanUserAddRows="False"
@@ -245,9 +250,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn  Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Foreground="#fff" Header="Price" Binding="{Binding Price}">
-
-                </DataGridTextColumn>
+                <DataGridTextColumn Foreground="#fff" Header="Price" Binding="{Binding Price}"/>
             </DataGrid.Columns>
 
             <DataGrid.Resources>

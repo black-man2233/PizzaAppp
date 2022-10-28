@@ -8,7 +8,7 @@ namespace PizzaAppp.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        ObservableCollection<PizzaType> menu = PizzaAppp.Classes.MenuJsonToList.menuList;
+        ObservableCollection<PizzaType> menu = PizzaAppp.Classes.MenuJsonToList.menuData;
 
     }
 }
