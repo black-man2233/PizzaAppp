@@ -19,6 +19,7 @@
         <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
         <model:CartModel x:Key="cm"></model:CartModel>
         <model:MenuModel x:Key="mm"></model:MenuModel>
+        <model:TotalPriceCalculator x:Key="tp"></model:TotalPriceCalculator>
     </Window.Resources>
 
 
@@ -114,7 +115,7 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
-            
+
 
         </DataGrid>
 
@@ -166,7 +167,6 @@
         </DataGrid>
 
 
-
         <!--tilføjer den valgte item til indkøbskurven det valgte item fra indkøbskurven-->
         <Button Name="Add_btn"
                 Grid.Column="1"
@@ -179,8 +179,7 @@
                 Height="100"
                 Background="#181818"
                 Foreground="WhiteSmoke"
-                Command="{Binding AddToCartCommand}" 
-                
+                Command="{Binding AddToCartCommand}"
                 />
 
         <!--slet det valgte item fra indkøbskurven-->
@@ -195,11 +194,7 @@
                 Height="100"
                 Background="#181818"
                 Foreground="WhiteSmoke"
-                Command="{Binding DeleteCommand}"
-                >
-
-        </Button>
-
+/>
         <!--Redigere denne pizza-->
         <Button Name="Edit_btn"
                 Grid.Column="1"
@@ -211,11 +206,7 @@
                 Width="200"
                 Height="100"
                 Background="#181818"
-                Foreground="WhiteSmoke"
-                Command="{Binding EditCommand}"
-                >
-        </Button>
-
+                Foreground="WhiteSmoke"/>
 
         <!--Indkæbskurvens ListBoxen-->
         <DataGrid Name="Cart_Dg"
@@ -272,10 +263,13 @@
         <TextBlock Name="TpHome"
                FontFamily="Arial"
                FontSize=" 30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   
                FontWeight="DemiBold"
                Grid.Column="2"
                Grid.Row="3"
-               Foreground="#FFF" Text="{Binding totalPrice }" 
+               Foreground="#FFF" Text="{Binding TotalPriceString, Source={StaticResource tp}}" 
                />
 
 

@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Margherita",
     "price": "76",
-    "description": "This",
+    "Description": "This",
     "Toppings": [
       {
         "id": 1,
@@ -61,7 +61,7 @@
 
       }
     ],
-    "description": "This is Pizza 2"
+    "Description": "This is Pizza 2"
   },
   {
     "id": 3,
@@ -104,7 +104,7 @@
 
       }
     ],
-    "description": "This is Pizza 1"
+    "Description": "This is Pizza 1"
   },
   {
     "id": 4,
@@ -147,7 +147,7 @@
 
       }
     ],
-    "description": "This is Pizza 4"
+    "Description": "This is Pizza 4"
   },
   {
     "id": 5,
@@ -190,6 +190,6 @@
 
       }
     ],
-    "description": "This is Pizza 1"
+    "Description": "This is Pizza 1"
   }
 ]

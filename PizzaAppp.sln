@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaAppp", "PizzaAppp\PizzaAppp.csproj", "{D62D1E28-826F-4783-AF8C-76A86F9552D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaApp_WPF", "PizzaApp_WPF\PizzaApp_WPF.csproj", "{6833FE65-BC64-452B-8375-7400440BEFDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaApp_WPF", "PizzaApp_WPF\PizzaApp_WPF.csproj", "{6833FE65-BC64-452B-8375-7400440BEFDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A126E06-FC2B-4E92-B19D-EB47E23C749F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

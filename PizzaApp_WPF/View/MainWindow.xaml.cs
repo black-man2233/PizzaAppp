@@ -10,7 +10,6 @@ namespace PizzaApp_WPF.View
         public MainWindow()
         {
             InitializeComponent();
-            var a = this.DataContext;
         }
 
     }

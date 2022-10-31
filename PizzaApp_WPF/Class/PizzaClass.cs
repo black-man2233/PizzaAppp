@@ -50,7 +50,7 @@ namespace PizzaApp_WPF.Class
         public string? Description
         {
             get { return _description; }
-            private set { _description = value; }
+            set { _description = value; }
         }
 
         public ObservableCollection<Toppings>? Toppings

@@ -15,5 +15,9 @@ namespace PizzaApp_WPF.Model
 			set { _menuList = value; }
 		}
 
+
+
+
+
 	}
 }

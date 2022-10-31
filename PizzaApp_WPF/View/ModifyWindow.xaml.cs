@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace PizzaApp_WPF.View
 {
     /// <summary>
-    /// Interaction logic for EditWindow.xaml
+    /// Interaction logic for ModifyWindow.xaml
     /// </summary>
-    public partial class EditWindow : Window
+    public partial class ModifyWindow : Window
     {
-        public EditWindow()
+        public ModifyWindow()
         {
             InitializeComponent();
         }

@@ -1,38 +1,39 @@
 ﻿using PizzaApp_WPF.Class;
-using Prism.Commands;
+using PizzaApp_WPF.Model;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
+using System.ComponentModel;
 
 namespace PizzaApp_WPF.ViewModel
 {
-    public class ModifyViewModel
-    {
-        public static int AmountofCheckBoxes;
-        public static string PizzaDeScription;
-
-        public ObservableCollection<Toppings>? Toppings { get; set; }
-        public ObservableCollection<Toppings>? SelectedToppins { get; set; }
-
-
-        public ModifyViewModel()
-        {
-            BackCommand = new DelegateCommand(backAction);
-        }
-
-        //Buttons
-        public ICommand BackCommand { get; set; }
-        void backAction()
-        {
-            Toppings.Clear();
-            SelectedToppins.Clear();
-        }
+#pragma warning disable
+	public class ModifyViewModel : INotifyPropertyChanged
+	{
+		//all toppings
+		private static ObservableCollection<Toppings> _toppings = PizzaListModel.ItemsList[1].Toppings;
+		public ObservableCollection<Toppings> Toppings
+		{
+			get
+			{
+				return _toppings;
+			}
+			set
+			{
+				_toppings = value;
+				OnPropertyChanged("Toppings");
+			}
+		}
 
 
+		//it updates data, so the datagrid gets the latest update
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void OnPropertyChanged(string PropertyNavn)
+		{
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
+			}
+		}
 
 
-
-
-
-
-    }
+	}
 }
