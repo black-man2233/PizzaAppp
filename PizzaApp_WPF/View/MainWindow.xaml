@@ -7,6 +7,8 @@
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
         xmlns:model="clr-namespace:PizzaApp_WPF.Model"
         mc:Ignorable="d"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+
         WindowStartupLocation="CenterScreen"
         
         Height="800" 
@@ -17,9 +19,6 @@
         >
     <Window.Resources>
         <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
-        <model:CartModel x:Key="cm"></model:CartModel>
-        <model:MenuModel x:Key="mm"></model:MenuModel>
-        <model:TotalPriceCalculator x:Key="tp"></model:TotalPriceCalculator>
     </Window.Resources>
 
 
@@ -41,17 +40,31 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <!--Logoen til appen-->
-        <Image Name="Logo"
-                Source="https://sason.dk/image/272" 
+        <!--Logoen til appen -->
+        <Image Source="https://media4.giphy.com/media/vXufyZ1LxgV6iQ4jfO/giphy.gif"
+  
                VerticalAlignment="Center"
-               Height="184"
-               Grid.Column="1">
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Grid.Row="0"
+               Grid.RowSpan="5"
+               >
 
 
             <Image.Effect>
-                <BlurEffect Radius="22"/>
+                <BlurEffect Radius="50"/>
             </Image.Effect>
+        </Image>
+        <Image Source="file:///C:/Users/Kevin/source/repos/PizzaAppp/PizzaApp_WPF/Image/LOGO.png" 
+               VerticalAlignment="Center"
+               Grid.Column="1"
+               Grid.Row="0"
+               >
+
+            <Image.Effect>
+                <BlurEffect Radius="0"/>
+            </Image.Effect>
+                
         </Image>
 
         <!--Menu kortets label-->
@@ -72,29 +85,9 @@
                />
 
         <!--Menukortets ListBoxen-->
-        <DataGrid Grid.Row="1" Grid.RowSpan="2" RowHeight="35"                  
-                  FontSize="23"
-                  
-                  ItemsSource="{Binding menuData}"
+        <DataGrid ItemsSource="{Binding MenuList}"
                   SelectedIndex="{Binding MenuSelectedIndex}"
-                  
-                  
-                  IsReadOnly="True"
-                  CanUserSortColumns="False"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"     
-                  CanUserReorderColumns="False" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                  AutoGenerateColumns="False" 
-                  
-                  BorderBrush="#181818"
-                  AlternatingRowBackground="#181818" 
-                  RowBackground="#181818" 
-                  Foreground="#121212"
-                  Background="#181818" 
-                  >
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
@@ -115,56 +108,28 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
-
-
         </DataGrid>
 
 
-        <DataGrid Grid.Row="3"
+        <ListBox Grid.Row="3"
                   Grid.RowSpan="3"                  
-                  RowHeight="35"                  
                   FontSize="20"
                   BorderBrush="#181818"
-                  
-                  ItemsSource="{Binding Drinks}"
-
-                  IsReadOnly="True"
-                  CanUserSortColumns="False"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"     
-                  CanUserReorderColumns="False" 
+                 
+                  ItemsSource="{Binding Toppings}"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                  AutoGenerateColumns="False" 
-                  AlternatingRowBackground="#181818" 
-                  RowBackground="#181818" 
                   Foreground="#121212"
-                  Background="#181818"
-                  
-                  >
+                  Background="#181818" >
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
-                <DataGridTextColumn Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Foreground="#fff" Header="Price" Binding="{Binding Price}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Width="300" ForceCursor="True">
+                        <Label Content="{Binding Path=Name}" Foreground="White" FontSize="40"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
 
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-
-            <DataGrid.Resources>
-                <Style TargetType="DataGridCell">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#404040" />
-                        </Trigger>
-                        <Trigger Property="FontFamily" Value="Bold"/>
-                        <Trigger Property="BorderBrush" Value="Transparent"/>
-
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Resources>
-        </DataGrid>
+        </ListBox>
 
 
         <!--tilføjer den valgte item til indkøbskurven det valgte item fra indkøbskurven-->
@@ -194,6 +159,7 @@
                 Height="100"
                 Background="#181818"
                 Foreground="WhiteSmoke"
+                Command="{Binding DeleteCommand}"
 />
         <!--Redigere denne pizza-->
         <Button Name="Edit_btn"
@@ -206,7 +172,8 @@
                 Width="200"
                 Height="100"
                 Background="#181818"
-                Foreground="WhiteSmoke"/>
+                Foreground="WhiteSmoke"
+                Command="{Binding EditCommand}"/>
 
         <!--Indkæbskurvens ListBoxen-->
         <DataGrid Name="Cart_Dg"
@@ -217,7 +184,7 @@
                   Grid.RowSpan="2"
                   RowHeight="35"
                                     
-                  ItemsSource="{Binding cartData}"
+                  ItemsSource="{Binding CartList}"
                   
                   SelectedIndex="{Binding CartSelectedIndex}"
                   
@@ -269,11 +236,11 @@
                FontWeight="DemiBold"
                Grid.Column="2"
                Grid.Row="3"
-               Foreground="#FFF" Text="{Binding TotalPriceString, Source={StaticResource tp}}" 
+               Foreground="#FFF" Text="Total Kommer Snart" 
                />
 
 
-        <Button Name="ToPayment_bt"
+        <Button Name="ToPayment_bt" 
                 Content="Til Betaling"
                 FontFamily="Arial"
                 FontSize="30"

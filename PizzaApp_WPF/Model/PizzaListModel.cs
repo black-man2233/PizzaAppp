@@ -11,7 +11,7 @@ namespace PizzaApp_WPF.Model
         private static readonly string jsonText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\Items.json");
 
         // konverter JSON string til liste med Pizza 
-        private static ObservableCollection<PizzaType> itemsList = JsonConvert.DeserializeObject<ObservableCollection<PizzaType>>(jsonText);
+        private protected static ObservableCollection<PizzaType> itemsList = JsonConvert.DeserializeObject<ObservableCollection<PizzaType>>(jsonText);
         public static ObservableCollection<PizzaType> ItemsList { get => itemsList; set => itemsList = value; }
 
 

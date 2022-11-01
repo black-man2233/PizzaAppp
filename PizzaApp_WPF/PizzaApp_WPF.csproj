@@ -17,6 +17,15 @@
     <None Update="Database\Items.json">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Image\accept.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Image\Deny.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Image\Remove_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
