@@ -10,7 +10,6 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
 
         WindowStartupLocation="CenterScreen"
-        
         Height="800" 
         Width="1040"
         Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"

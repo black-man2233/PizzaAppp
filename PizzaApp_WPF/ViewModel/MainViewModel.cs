@@ -41,43 +41,28 @@ namespace PizzaApp_WPF.ViewModel
             }
         }  //selectedindex from Cart
 
-        public ObservableCollection<Toppings> Toppings
-        {
-            get { return _menuList[MenuSelectedIndex].Toppings; }
-            set { OnPropertyChanged("Drinks"); }
-        }
 
         public MainViewModel()
         {
+            _cartList.Add(_menuList[0]);
+            _cartList.Add(_menuList[4]);
+
             AddToCartCommand = new DelegateCommand(Add);
             EditCommand = new DelegateCommand(Edit);
             DeleteCommand = new DelegateCommand(Delete);
         }
 
+
+
         //Buttons prop
-
-
         public ICommand EditCommand { get; set; } //Edit Button 
-        private static ObservableCollection<Toppings?> _editThisPizza;
-        public static ObservableCollection<Toppings> EditThisPizza
-        {
-            get
-            {
-                return _editThisPizza;
-            }
-            set
-            {
-                _editThisPizza = value;
-            }
-        }
-
         private void Edit()
         {
             try
             {
-                EditThisPizza = _cartList[CartSelectedIndex].Toppings;
-                View.ModifyWindow modify = new();
-                modify.Show();
+
+                View.ModifyWindow modifyWindow = new View.ModifyWindow();
+                modifyWindow.ShowDialog();
             }
             catch (Exception)
             {
