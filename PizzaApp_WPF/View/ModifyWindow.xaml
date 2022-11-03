@@ -8,20 +8,20 @@
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
         mc:Ignorable="d"
         Title="Customize the Pizza"
-        Height="800" 
-        Width="1040"
+        Height="730" 
+        Width="960"
         Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
         Background="Black"
         BorderBrush="#FF3B5998"
         ResizeMode="NoResize"
         BorderThickness=".5"
         WindowStartupLocation="CenterScreen">
-    
+
     <Window.Resources>
         <viewmodel:ModifyViewModel x:Key="vm"></viewmodel:ModifyViewModel>
     </Window.Resources>
-        
-    <Grid DataContext="{Binding Source={StaticResource vm}}">
+
+    <Grid DataContext="{Binding Source={StaticResource vm}}" >
         <!--Definere antal af de horizontale rækker-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -51,12 +51,29 @@
 
         <TextBlock Text="{Binding PizzaDescription}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" FontSize="25" Foreground="Wheat" FontWeight="Bold" Background="#181818" TextWrapping="Wrap" TextTrimming="None" Width="Auto">
         </TextBlock>
-        
-        <ListBox Margin="20" ItemsSource="{Binding Toppings}"  Background="Transparent" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
+
+        <ListBox ItemsSource="{Binding Toppings}" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Width="300">
-                        <CheckBox Content="{Binding Path=Name}" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding}" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center">
+                        <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Selected}" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding}" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2" ScaleY="2"/>
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                        <TextBlock Text="{Binding Path=Price}"  FontSize="40" Foreground="White" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+
+        <ListBox ItemsSource="{Binding Toppings}" Background="#181818" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Width="300">
+                        <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Selected}" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding}" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
@@ -70,43 +87,10 @@
         <!--<Label Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2" Foreground="#FFFF" FontSize="33" FontWeight="Bold" HorizontalContentAlignment="Center" Content="Dine Udvalgt" Panel.ZIndex="1">
         </Label>-->
 
-        <ListBox Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="4" FontSize="30" Foreground="White" FontWeight="Bold" Background="#282828" HorizontalContentAlignment="Center" ItemsSource="{Binding SelectedToppings,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel Height="50" Width="360" Margin="0,10,0,0">
-                        <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Left" />
-                        <Button Width="50" Background="Transparent" HorizontalAlignment="Right">
-                            <Image HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Source="https://img.icons8.com/color/344/delete-forever.png"/>
-                        </Button>
-                    </DockPanel>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" Foreground="White" Background="#282828" VerticalAlignment="Center" TextAlignment="Center" Text="I Alt:" Height="80" Width="560"/>
 
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-        </ListBox>
-
-        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="6" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" Foreground="White" Background="#282828" TextAlignment="Right" Text="I Alt: "
-                   />
-
-        <DockPanel Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="7">
-            <StackPanel HorizontalAlignment="Left" >
-                <Button Width="100" Background="Transparent" Command="{Binding CloseWindowCommand, Mode=OneWay}"
-                        CommandParameter="{Binding ElementName=ModifyWindowN}">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/399/399274.png">
-                    </Image>
-                </Button>
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button HorizontalAlignment="Right" Width="100" Background="Transparent">
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/4315/4315445.png" />
-                </Button>
-
-            </StackPanel>
-        </DockPanel>
-
-
-
+        <Button HorizontalAlignment="Center" Width="100" Background="Transparent" Click="Button_Click" Grid.Column="2" Grid.Row="7" >
+            <Image Source="https://cdn-icons-png.flaticon.com/512/4315/4315445.png" />
+        </Button>
     </Grid>
-
 </Window>

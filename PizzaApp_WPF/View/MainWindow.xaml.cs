@@ -12,5 +12,10 @@ namespace PizzaApp_WPF.View
             InitializeComponent();
         }
 
+        private void ToPayment_bt_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmWindow confirm = new();
+            confirm.ShowDialog();
+        }
     }
 }

@@ -7,50 +7,41 @@ namespace PizzaApp_WPF.Class
     public class PizzaType : INotifyPropertyChanged
     {
 
-        //propertien til Pizzaes ID
-        private int _id;
         public int Id
         {
-            get { return _id; }
+            get { return Id; }
             set
             {
-                _id = value;
+                Id = value;
                 OnPropertyChanged("Id");
 
             }
         }
 
-        //propertien til pizza navnet
-        private string? _name;
         public string? Name
         {
-            get { return _name; }
+            get { return Name; }
             set
             {
-                _name = value;
+                Name = value;
                 OnPropertyChanged("Name");
             }
         }
 
-        //propertien til pizzas pris
-        private int _price;
-
         public int Price
         {
-            get { return _price; }
+            get { return Price; }
             set
             {
-                _price = value;
+                Price = value;
                 OnPropertyChanged("Price");
             }
         }
 
-        private string? _description;
-
         public string? Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get { return Description; }
+            set { Description = value; }
         }
 
         public ObservableCollection<Toppings>? Toppings
@@ -59,8 +50,19 @@ namespace PizzaApp_WPF.Class
             set;
         }
 
+        public PizzaType(int id, string? name, int price, string? description, ObservableCollection<Toppings>? toppings)
+        {
+#pragma warning disable
+            Id = id;
+            Name = name;
+            Price = price;
+            Description = description;
+            Toppings = new ObservableCollection<Toppings>(toppings);
+        }
+#pragma warning restore
 
-        //it updates data, so the datagrid gets the latest update
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string PropertyNavn)
         {

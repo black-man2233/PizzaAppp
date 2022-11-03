@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PizzaAppp
+namespace PizzaApp_WPF.View
 {
     /// <summary>
-    /// Interaction logic for PaymentWindow.xaml
+    /// Interaction logic for ConfirmWindow.xaml
     /// </summary>
-    public partial class PaymentWindow : Window
+    public partial class ConfirmWindow : Window
     {
-        public PaymentWindow()
+        public ConfirmWindow()
         {
             InitializeComponent();
         }

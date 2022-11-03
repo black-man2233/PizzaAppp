@@ -30,7 +30,7 @@ namespace PizzaApp_WPF.ViewModel
             get { return _cartList; }
             set { _cartList = value; OnPropertyChanged("CartList"); }
         }
-        public static int _cartSelectedIndex;
+        public static int _cartSelectedIndex = 0;
         public int CartSelectedIndex
         {
             get => _cartSelectedIndex;
@@ -44,8 +44,6 @@ namespace PizzaApp_WPF.ViewModel
 
         public MainViewModel()
         {
-            _cartList.Add(_menuList[0]);
-            _cartList.Add(_menuList[4]);
 
             AddToCartCommand = new DelegateCommand(Add);
             EditCommand = new DelegateCommand(Edit);
@@ -55,12 +53,32 @@ namespace PizzaApp_WPF.ViewModel
 
 
         //Buttons prop
+
+        public static ICommand AddToCartCommand { get; set; } //Add Button Command
+        public void Add()
+        {
+            //_cartList.Add(_menuList[MenuSelectedIndex]);
+
+
+            PizzaType selectedPizzaInfo = null;
+
+            selectedPizzaInfo = _menuList[MenuSelectedIndex];
+
+            ObservableCollection<Toppings> toppsAsList = _menuList[MenuSelectedIndex].Toppings;
+
+
+            _cartList.Add(new PizzaType(selectedPizzaInfo.Id, selectedPizzaInfo.Name, selectedPizzaInfo.Price, selectedPizzaInfo.Description, toppsAsList));
+
+
+        } //Add button Action
+
+
+
         public ICommand EditCommand { get; set; } //Edit Button 
         private void Edit()
         {
             try
             {
-
                 View.ModifyWindow modifyWindow = new View.ModifyWindow();
                 modifyWindow.ShowDialog();
             }
@@ -70,15 +88,6 @@ namespace PizzaApp_WPF.ViewModel
             }
 
         } //Edit Action
-
-
-
-        public static ICommand AddToCartCommand { get; set; } //Add Button Command
-        public void Add()
-        {
-            _cartList.Add(_menuList[MenuSelectedIndex]);
-
-        } //Add button Action
 
 
         public ICommand DeleteCommand { get; set; } //Delete Button Command
@@ -108,8 +117,6 @@ namespace PizzaApp_WPF.ViewModel
 
 
         } //Delete Action
-
-
 
 
 

@@ -21,7 +21,7 @@
     </Window.Resources>
 
 
-    <Grid Background="Black" DataContext="{Binding Source={StaticResource vm}}">
+    <Grid Background="Black" DataContext="{Binding Source={StaticResource vm}}" >
 
         <!--Definere antal af de horizontale rækker-->
         <Grid.ColumnDefinitions>
@@ -63,7 +63,7 @@
             <Image.Effect>
                 <BlurEffect Radius="0"/>
             </Image.Effect>
-                
+
         </Image>
 
         <!--Menu kortets label-->
@@ -153,6 +153,8 @@
                 Content="Slet"
                 FontSize="30"
                 FontWeight="DemiBold"
+                
+                
                 Margin="23"
                 Width="200"
                 Height="100"
@@ -239,19 +241,24 @@
                />
 
 
-        <Button Name="ToPayment_bt" 
-                Content="Til Betaling"
+        <Button 
                 FontFamily="Arial"
                 FontSize="30"
                 FontWeight="DemiBold"
                 Grid.Column="2"
                 Grid.Row="4"
-                Margin="23"
-                Width="200"
-                Height="100"
-                Background="#181818"
-                Foreground="WhiteSmoke"
-                />
+                Height="130"
+                Background="Transparent"
+                Click="ToPayment_bt_Click"
+                Width="140"
+                >
+
+            <Button.Content >
+                <Grid Margin="0 0 0 0">
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/2038/2038792.png"/>
+                </Grid>
+            </Button.Content>
+        </Button>
 
     </Grid>
 </Window>

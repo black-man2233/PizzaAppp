@@ -1,8 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using PizzaApp_WPF.Class;
+﻿using PizzaApp_WPF.Class;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
 using static PizzaApp_WPF.ViewModel.MainViewModel;
 
 namespace PizzaApp_WPF.ViewModel
@@ -10,8 +8,19 @@ namespace PizzaApp_WPF.ViewModel
 #pragma warning disable
     public class ModifyViewModel : INotifyPropertyChanged
     {
-        public string PizzaDescription { get => _cartList[_cartSelectedIndex].Description; set => OnPropertyChanged("PizzaDescription"); }
+        public string PizzaDescription
+        {
+            get
+            {
+                return _cartList[_cartSelectedIndex].Description;
+            }
+            set
+            {
+                _cartList[_cartSelectedIndex].Description = value;
+                OnPropertyChanged("PizzaDescription");
+            }
 
+        } //Pizza Desription
         public ObservableCollection<Toppings> Toppings
         {
             get
@@ -29,20 +38,9 @@ namespace PizzaApp_WPF.ViewModel
 
         public ModifyViewModel()
         {
-            SelectedToppings = new ObservableCollection<Toppings>();
-            Toppings = _cartList[_cartSelectedIndex].Toppings;
-            this.CloseWindowCommand = new RelayCommand<Window>(this.CloseWindow);
-
+            //Toppings = _cartList[_cartSelectedIndex].Toppings;
         } // The constructor
 
-        public RelayCommand<Window> CloseWindowCommand { get; private set; }
-        private void CloseWindow(Window window)
-        {
-            if (window != null)
-            {
-                window.Close();
-            }
-        }
 
 
         //it updates data, so the datagrid gets the latest update
@@ -66,7 +64,5 @@ namespace PizzaApp_WPF.ViewModel
         //        handler(this, new PropertyChangedEventArgs(name));
         //}
         //#endregion
-
-
     }
 }
