@@ -16,6 +16,8 @@
         ResizeMode="NoResize"
         BorderThickness=".5"
         >
+
+
     <Window.Resources>
         <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
     </Window.Resources>
@@ -131,7 +133,6 @@
         </ListBox>
 
 
-        <!--tilføjer den valgte item til indkøbskurven det valgte item fra indkøbskurven-->
         <Button Name="Add_btn"
                 Grid.Column="1"
                 Grid.Row="1"
@@ -146,65 +147,14 @@
                 Command="{Binding AddToCartCommand}"
                 />
 
-        <!--slet det valgte item fra indkøbskurven-->
-        <Button Name="Delete_btn"
-                Grid.Column="1"
-                Grid.Row="2"
-                Content="Slet"
-                FontSize="30"
-                FontWeight="DemiBold"
-                
-                
-                Margin="23"
-                Width="200"
-                Height="100"
-                Background="#181818"
-                Foreground="WhiteSmoke"
-                Command="{Binding DeleteCommand}"
-/>
-        <!--Redigere denne pizza-->
-        <Button Name="Edit_btn"
-                Grid.Column="1"
-                Grid.Row="3"
-                Content="Redigere"
-                FontSize="30"
-                FontWeight="DemiBold"
-                Margin="23"
-                Width="200"
-                Height="100"
-                Background="#181818"
-                Foreground="WhiteSmoke"
-                Command="{Binding EditCommand}"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="Slet" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Command="{Binding DeleteCommand}"/>
+        
+        <Button Grid.Column="1" Grid.Row="3" Content="Redigere"
+                FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Click="Edit_btn_Click" Tag="{Binding}"/>
 
-        <!--Indkæbskurvens ListBoxen-->
-        <DataGrid Name="Cart_Dg"
-                  Grid.Row="1"
-                  Grid.Column="2"
-                  FontSize="23"
-                  Height="Auto" 
-                  Grid.RowSpan="2"
-                  RowHeight="35"
-                                    
-                  ItemsSource="{Binding CartList}"
-                  
-                  SelectedIndex="{Binding CartSelectedIndex}"
-                  
-                  
-                  AutoGenerateColumns="False" 
-                 IsReadOnly="True"
-                  CanUserSortColumns="False"
-                 CanUserAddRows="False"
-                 CanUserDeleteRows="False"
-                 CanUserResizeColumns="False"
-                 CanUserResizeRows="False" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                  
-                  
-                  BorderBrush="#181818"
-                  AlternatingRowBackground="#181818" 
-                  RowBackground="#181818" 
-                  Foreground="#121212"
-                  Background="#181818">
+        <DataGrid Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" MouseDoubleClick="Edit_btn_Click" Tag="{Binding}"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                  BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818"> 
 
             <DataGrid.Columns>
                 <DataGridTextColumn  Foreground="#fff" Header="Id" Binding="{Binding Id}"/>

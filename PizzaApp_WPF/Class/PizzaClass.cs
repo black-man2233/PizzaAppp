@@ -7,41 +7,49 @@ namespace PizzaApp_WPF.Class
     public class PizzaType : INotifyPropertyChanged
     {
 
+        private int _id;
         public int Id
         {
-            get { return Id; }
+            get => _id;
             set
             {
-                Id = value;
+                _id = value;
                 OnPropertyChanged("Id");
-
             }
         }
 
-        public string? Name
+        private string _name;
+        public string Name
         {
-            get { return Name; }
+            get => _name;
             set
             {
-                Name = value;
-                OnPropertyChanged("Name");
+                _name = value; OnPropertyChanged("Name");
             }
         }
 
+
+        private int _price;
         public int Price
         {
-            get { return Price; }
+            get => _price;
             set
             {
-                Price = value;
+                _price = value;
                 OnPropertyChanged("Price");
             }
         }
 
-        public string? Description
+
+        private string _description;
+        public string Description
         {
-            get { return Description; }
-            set { Description = value; }
+            get => _description;
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
+            }
         }
 
         public ObservableCollection<Toppings>? Toppings
@@ -50,9 +58,16 @@ namespace PizzaApp_WPF.Class
             set;
         }
 
+
+#pragma warning disable
+        /// <summary>Initializes a new instance of the <see cref="PizzaType" /> class.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="toppings">The toppings.</param>
         public PizzaType(int id, string? name, int price, string? description, ObservableCollection<Toppings>? toppings)
         {
-#pragma warning disable
             Id = id;
             Name = name;
             Price = price;
@@ -64,12 +79,11 @@ namespace PizzaApp_WPF.Class
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        /// <summary>Called when [property changed].</summary>
+        /// <param name="PropertyNavn">The property navn.</param>
         private void OnPropertyChanged(string PropertyNavn)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyNavn));
         }
 
     }

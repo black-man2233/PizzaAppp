@@ -16,12 +16,7 @@
         ResizeMode="NoResize"
         BorderThickness=".5"
         WindowStartupLocation="CenterScreen">
-
-    <Window.Resources>
-        <viewmodel:ModifyViewModel x:Key="vm"></viewmodel:ModifyViewModel>
-    </Window.Resources>
-
-    <Grid DataContext="{Binding Source={StaticResource vm}}" >
+    <Grid>
         <!--Definere antal af de horizontale rækker-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -52,11 +47,11 @@
         <TextBlock Text="{Binding PizzaDescription}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" FontSize="25" Foreground="Wheat" FontWeight="Bold" Background="#181818" TextWrapping="Wrap" TextTrimming="None" Width="Auto">
         </TextBlock>
 
-        <ListBox ItemsSource="{Binding Toppings}" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
+        <ListBox ItemsSource="{Binding Toppings}" Foreground="White" FontSize="15" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Width="300">
-                        <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Selected}" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding}" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center">
+                        <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Seleted}" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding}" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2"/>
                             </CheckBox.LayoutTransform>
@@ -69,19 +64,7 @@
 
 
 
-        <ListBox ItemsSource="{Binding Toppings}" Background="#181818" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel Width="300">
-                        <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Selected}" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding}" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center">
-                            <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2" ScaleY="2"/>
-                            </CheckBox.LayoutTransform>
-                        </CheckBox>
-                        <TextBlock Text="{Binding Path=Price}"  FontSize="40" Foreground="White" HorizontalAlignment="Right"/>
-                    </DockPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <ListBox Background="#181818" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
         </ListBox>
 
         <!--<Label Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2" Foreground="#FFFF" FontSize="33" FontWeight="Bold" HorizontalContentAlignment="Center" Content="Dine Udvalgt" Panel.ZIndex="1">

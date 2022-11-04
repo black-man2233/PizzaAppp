@@ -8,38 +8,29 @@ namespace PizzaApp_WPF.ViewModel
 #pragma warning disable
     public class ModifyViewModel : INotifyPropertyChanged
     {
+        private string _pizzaDescr;
         public string PizzaDescription
         {
-            get
-            {
-                return _cartList[_cartSelectedIndex].Description;
-            }
+            get => _pizzaDescr;
             set
             {
                 _cartList[_cartSelectedIndex].Description = value;
                 OnPropertyChanged("PizzaDescription");
             }
 
-        } //Pizza Desription
+        }
+
+        private ObservableCollection<Toppings> _toppings;
         public ObservableCollection<Toppings> Toppings
         {
-            get
-            {
-                return _cartList[_cartSelectedIndex].Toppings;
-            }
+            get => this._toppings;
             set
             {
-                _cartList[_cartSelectedIndex].Toppings = value;
+                _toppings = value;
                 OnPropertyChanged("Toppings");
             }
         }
 
-
-
-        public ModifyViewModel()
-        {
-            //Toppings = _cartList[_cartSelectedIndex].Toppings;
-        } // The constructor
 
 
 
@@ -53,16 +44,5 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
 
-
-
-        //#region INotifyPropertyChanged
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //protected void OnPropertyChanged([CallerMemberName] string name = "")
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null)
-        //        handler(this, new PropertyChangedEventArgs(name));
-        //}
-        //#endregion
     }
 }

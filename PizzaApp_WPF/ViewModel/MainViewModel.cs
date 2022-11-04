@@ -12,6 +12,14 @@ namespace PizzaApp_WPF.ViewModel
 #pragma warning disable
     public class MainViewModel
     {
+        public MainViewModel()
+        {
+
+            AddToCartCommand = new DelegateCommand(Add);
+            //EditCommand = new DelegateCommand(Edit);
+            DeleteCommand = new DelegateCommand(Delete);
+        }
+
         //DataGrid properties
         PizzaListModel PizzaListModel = new PizzaListModel();
         private static ObservableCollection<PizzaType> _menuList = PizzaListModel.ItemsList;
@@ -20,10 +28,23 @@ namespace PizzaApp_WPF.ViewModel
             get { return _menuList; }
             set { _menuList = value; }
         }
-        public static int MenuSelectedIndex { get; set; }  //selectedindex from menu.datagrid
+
+        private static int _menuSelectedIndex;
+        public int MenuSelectedIndex
+        {
+            get
+            {
+                return _menuSelectedIndex;
+            }
+            set
+            {
+                _menuSelectedIndex = value;
+                OnPropertyChanged("MenuSelectedIndex");
+            }
+        }
 
 
-        //cart items
+
         public static ObservableCollection<PizzaType>? _cartList = new();
         public ObservableCollection<PizzaType>? CartList
         {
@@ -41,14 +62,17 @@ namespace PizzaApp_WPF.ViewModel
             }
         }  //selectedindex from Cart
 
-
-        public MainViewModel()
+        private ObservableCollection<Toppings> toppings = _menuList[_menuSelectedIndex].Toppings;
+        public ObservableCollection<Toppings> Toppings
         {
-
-            AddToCartCommand = new DelegateCommand(Add);
-            EditCommand = new DelegateCommand(Edit);
-            DeleteCommand = new DelegateCommand(Delete);
+            get => toppings;
+            set
+            {
+                toppings = value;
+                OnPropertyChanged("Toppings");
+            }
         }
+
 
 
 
@@ -57,37 +81,30 @@ namespace PizzaApp_WPF.ViewModel
         public static ICommand AddToCartCommand { get; set; } //Add Button Command
         public void Add()
         {
-            //_cartList.Add(_menuList[MenuSelectedIndex]);
-
-
-            PizzaType selectedPizzaInfo = null;
-
-            selectedPizzaInfo = _menuList[MenuSelectedIndex];
+            PizzaType selectedPizzaInfo = _menuList[MenuSelectedIndex];
 
             ObservableCollection<Toppings> toppsAsList = _menuList[MenuSelectedIndex].Toppings;
 
-
             _cartList.Add(new PizzaType(selectedPizzaInfo.Id, selectedPizzaInfo.Name, selectedPizzaInfo.Price, selectedPizzaInfo.Description, toppsAsList));
-
 
         } //Add button Action
 
 
 
-        public ICommand EditCommand { get; set; } //Edit Button 
-        private void Edit()
-        {
-            try
-            {
-                View.ModifyWindow modifyWindow = new View.ModifyWindow();
-                modifyWindow.ShowDialog();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
-            }
+        ////public ICommand EditCommand { get; set; } //Edit Button 
+        ////private void Edit()
+        ////{
+        ////    try
+        ////    {
+        ////        ModifyWindow modifyWindow = new ModifyWindow();
+        ////        modifyWindow.ShowDialog();
+        ////    }
+        ////    catch (Exception)
+        ////    {
+        ////        MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
+        ////    }
 
-        } //Edit Action
+        ////} //Edit Action
 
 
         public ICommand DeleteCommand { get; set; } //Delete Button Command

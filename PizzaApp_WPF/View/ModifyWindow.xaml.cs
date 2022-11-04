@@ -1,5 +1,5 @@
 ﻿using PizzaApp_WPF.Class;
-using System.Collections.ObjectModel;
+using PizzaApp_WPF.ViewModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,19 +12,15 @@ namespace PizzaApp_WPF.View
     public partial class ModifyWindow : Window
     {
 #pragma warning disable
-        public ModifyWindow()
+
+        ModifyViewModel modify = new ModifyViewModel();
+        public ModifyWindow(PizzaType pizzaFromCart)
         {
             InitializeComponent();
-        }
+            DataContext = modify;
+            modify.Toppings = pizzaFromCart.Toppings;
+            modify.PizzaDescription = _cartList[_cartSelectedIndex].Description;
 
-        public ObservableCollection<Toppings> SelectedToppings
-        {
-            get => SelectedToppings;
-            set
-            {
-                SelectedToppings = value;
-                OnPropertyChanged("SelectedToppings");
-            }
         }
 
 
@@ -38,7 +34,6 @@ namespace PizzaApp_WPF.View
 
                 if (t != null)
                 {
-                    _cartList[_cartSelectedIndex].Name = "changed";
                     _cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
                 }
             }

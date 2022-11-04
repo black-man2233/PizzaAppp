@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaApp_WPF.View"
+        xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
         mc:Ignorable="d"
        Title="Customize the Pizza"
         Height="730" 
@@ -14,7 +15,10 @@
         ResizeMode="NoResize"
         BorderThickness=".5"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Window.Resources>
+        <viewmodel:ModifyViewModel x:Key="vm"></viewmodel:ModifyViewModel>
+    </Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource vm}}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
