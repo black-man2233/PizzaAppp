@@ -1,7 +1,6 @@
-﻿using PizzaApp_WPF.Class;
+﻿using PizzaApp_WPF.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using static PizzaApp_WPF.ViewModel.MainViewModel;
 
 namespace PizzaApp_WPF.ViewModel
 {
@@ -14,14 +13,14 @@ namespace PizzaApp_WPF.ViewModel
             get => _pizzaDescr;
             set
             {
-                _cartList[_cartSelectedIndex].Description = value;
+                //_cartList[_cartSelectedIndex].Description = value;
                 OnPropertyChanged("PizzaDescription");
             }
 
         }
 
-        private ObservableCollection<Toppings> _toppings;
-        public ObservableCollection<Toppings> Toppings
+        private ObservableCollection<ToppingsModel> _toppings;
+        public ObservableCollection<ToppingsModel> Toppings
         {
             get => this._toppings;
             set

@@ -1,7 +1,4 @@
-﻿using PizzaApp_WPF.Class;
-using PizzaApp_WPF.ViewModel;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace PizzaApp_WPF.View
 {
@@ -13,39 +10,34 @@ namespace PizzaApp_WPF.View
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
         private void ToPayment_bt_Click(object sender, RoutedEventArgs e)
         {
             ConfirmWindow confirm = new();
-            confirm.ShowDialog();
+            _ = confirm.ShowDialog();
         }
 
 
         private void Edit_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (MainViewModel._cartList.Count > 0)
-            {
+            //if (MainViewModel._cartList.Count > 0)
+            //{
+            //    if (sender is Button)
+            //    {
+            //        if (MainViewModel._cartList[MainViewModel._cartSelectedIndex] is not null)
+            //        {
+            //            ModifyWindow modifyWindow = new(MainViewModel._cartList[MainViewModel._cartSelectedIndex]);
+            //            _ = modifyWindow.ShowDialog();
 
-                if (sender is Button button)
-                {
-                    PizzaType? pizza = MainViewModel._cartList[MainViewModel._cartSelectedIndex] as PizzaType;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    _ = MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
 
-                    if (pizza != null)
-                    {
-                        ModifyWindow modifyWindow = new ModifyWindow(MainViewModel._cartList[MainViewModel._cartSelectedIndex]);
-                        modifyWindow.ShowDialog();
-
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
-
-            }
+            //}
         }
     }
 }

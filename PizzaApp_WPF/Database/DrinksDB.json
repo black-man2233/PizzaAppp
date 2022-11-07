@@ -1,0 +1,74 @@
+﻿[
+  {
+    "name": "Cola",
+    "price": 2,
+    "capacity": [
+      {
+        "name": "small",
+        "price": 8
+      },
+      {
+        "name": "medium",
+        "price": 15
+      },
+      {
+        "name": "Large",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Fanta",
+    "price": 3,
+    "capacity": [
+      {
+        "name": "small",
+        "price": 8
+      },
+      {
+        "name": "medium",
+        "price": 15
+      },
+      {
+        "name": "Large",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Faxe Kondi",
+    "price": 2,
+    "capacity": [
+      {
+        "name": "small",
+        "price": 8
+      },
+      {
+        "name": "medium",
+        "price": 15
+      },
+      {
+        "name": "Large",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Spiritus",
+    "price": 2,
+    "capacity": [
+      {
+        "name": "small",
+        "price": 8
+      },
+      {
+        "name": "medium",
+        "price": 15
+      },
+      {
+        "name": "Large",
+        "price": 20
+      }
+    ]
+  }
+]

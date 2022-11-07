@@ -1,89 +1,45 @@
-﻿using PizzaApp_WPF.Class;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
 using Prism.Commands;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
 namespace PizzaApp_WPF.ViewModel
 {
 #pragma warning disable
-    public class MainViewModel
+    public partial class MainViewModel : ObservableObject
     {
+        static PizzaListModelModel menu = new();
         public MainViewModel()
         {
-
             AddToCartCommand = new DelegateCommand(Add);
             //EditCommand = new DelegateCommand(Edit);
             DeleteCommand = new DelegateCommand(Delete);
         }
 
-        //DataGrid properties
-        PizzaListModel PizzaListModel = new PizzaListModel();
-        private static ObservableCollection<PizzaType> _menuList = PizzaListModel.ItemsList;
-        public static ObservableCollection<PizzaType> MenuList
-        {
-            get { return _menuList; }
-            set { _menuList = value; }
-        }
 
-        private static int _menuSelectedIndex;
-        public int MenuSelectedIndex
-        {
-            get
-            {
-                return _menuSelectedIndex;
-            }
-            set
-            {
-                _menuSelectedIndex = value;
-                OnPropertyChanged("MenuSelectedIndex");
-            }
-        }
+
+        [ObservableProperty] static ObservableCollection<PizzaType>? _menuList = menu.PizzasList;
+        [ObservableProperty] private static int _menuSelectedIndex;
+
+        [ObservableProperty] static ObservableCollection<PizzaType>? _cartList = new();
+        [ObservableProperty] static int _cartSelectedIndex = 0;
 
 
 
-        public static ObservableCollection<PizzaType>? _cartList = new();
-        public ObservableCollection<PizzaType>? CartList
-        {
-            get { return _cartList; }
-            set { _cartList = value; OnPropertyChanged("CartList"); }
-        }
-        public static int _cartSelectedIndex = 0;
-        public int CartSelectedIndex
-        {
-            get => _cartSelectedIndex;
-            set
-            {
-                _cartSelectedIndex = value;
-                OnPropertyChanged("CartSelectedIndex");
-            }
-        }  //selectedindex from Cart
-
-        private ObservableCollection<Toppings> toppings = _menuList[_menuSelectedIndex].Toppings;
-        public ObservableCollection<Toppings> Toppings
-        {
-            get => toppings;
-            set
-            {
-                toppings = value;
-                OnPropertyChanged("Toppings");
-            }
-        }
-
-
+        [ObservableProperty] private static ObservableCollection<DrinksModel> _drinks = menu.DrinksList;
+        [ObservableProperty] private ObservableCollection<DrinkSizeModel> _drinkSize;
 
 
         //Buttons prop
-
         public static ICommand AddToCartCommand { get; set; } //Add Button Command
         public void Add()
         {
             PizzaType selectedPizzaInfo = _menuList[MenuSelectedIndex];
 
-            ObservableCollection<Toppings> toppsAsList = _menuList[MenuSelectedIndex].Toppings;
+            ObservableCollection<ToppingsModel> toppsAsList = new(selectedPizzaInfo.Toppings);
 
             _cartList.Add(new PizzaType(selectedPizzaInfo.Id, selectedPizzaInfo.Name, selectedPizzaInfo.Price, selectedPizzaInfo.Description, toppsAsList));
 
@@ -113,7 +69,7 @@ namespace PizzaApp_WPF.ViewModel
 
             try
             {
-                if (CartList.Count > 0)
+                if (_cartList.Count > 0)
                 {
                     _cartList.Remove(_cartList[CartSelectedIndex]);
                     CartSelectedIndex -= CartSelectedIndex;
@@ -135,17 +91,5 @@ namespace PizzaApp_WPF.ViewModel
 
         } //Delete Action
 
-
-
-
-        //it updates data, so the datagrid gets the latest update
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string PropertyNavn)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
-            }
-        }
     }
 }

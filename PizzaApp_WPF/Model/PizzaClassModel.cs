@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace PizzaApp_WPF.Class
+namespace PizzaApp_WPF.Model
 {
 
     public class PizzaType : INotifyPropertyChanged
@@ -52,7 +52,7 @@ namespace PizzaApp_WPF.Class
             }
         }
 
-        public ObservableCollection<Toppings>? Toppings
+        public ObservableCollection<ToppingsModel>? Toppings
         {
             get;
             set;
@@ -66,13 +66,13 @@ namespace PizzaApp_WPF.Class
         /// <param name="price">The price.</param>
         /// <param name="description">The description.</param>
         /// <param name="toppings">The toppings.</param>
-        public PizzaType(int id, string? name, int price, string? description, ObservableCollection<Toppings>? toppings)
+        public PizzaType(int id, string? name, int price, string? description, ObservableCollection<ToppingsModel>? toppings)
         {
             Id = id;
             Name = name;
             Price = price;
             Description = description;
-            Toppings = new ObservableCollection<Toppings>(toppings);
+            Toppings = new ObservableCollection<ToppingsModel>(toppings);
         }
 #pragma warning restore
 

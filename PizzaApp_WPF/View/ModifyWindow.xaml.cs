@@ -1,9 +1,8 @@
-﻿using PizzaApp_WPF.Class;
+﻿using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using static PizzaApp_WPF.ViewModel.MainViewModel;
 namespace PizzaApp_WPF.View
 {
     /// <summary>
@@ -19,7 +18,7 @@ namespace PizzaApp_WPF.View
             InitializeComponent();
             DataContext = modify;
             modify.Toppings = pizzaFromCart.Toppings;
-            modify.PizzaDescription = _cartList[_cartSelectedIndex].Description;
+            //modify.PizzaDescription = _cartList[_cartSelectedIndex].Description;
 
         }
 
@@ -30,11 +29,11 @@ namespace PizzaApp_WPF.View
 
             if (c != null)
             {
-                Toppings? t = c.Tag as Toppings;
+                ToppingsModel? t = c.Tag as ToppingsModel;
 
                 if (t != null)
                 {
-                    _cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
+                    //_cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
                 }
             }
         }
@@ -45,11 +44,11 @@ namespace PizzaApp_WPF.View
 
             if (c != null)
             {
-                Toppings? t = c.Tag as Toppings;
+                ToppingsModel? t = c.Tag as ToppingsModel;
 
                 if (t != null)
                 {
-                    _cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
+                    //_cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
 
                 }
             }
