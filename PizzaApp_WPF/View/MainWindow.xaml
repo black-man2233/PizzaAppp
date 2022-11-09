@@ -67,10 +67,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Width="30" Foreground="#fff" Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn  Foreground="#fff" Header="Price" Binding="{Binding Path=Price,StringFormat=' {0} kr.'}">
-
-                </DataGridTextColumn>
+                <DataGridTextColumn  Foreground="#fff" Header="Price" Binding="{Binding Path=Price,StringFormat=' {0} kr.'}"/>
             </DataGrid.Columns>
+
             <DataGrid.Resources>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers>
@@ -79,7 +78,6 @@
                         </Trigger>
                         <Trigger Property="FontFamily" Value="Bold"/>
                         <Trigger Property="BorderBrush" Value="Transparent"/>
-
                     </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
@@ -87,15 +85,12 @@
 
 
         <ListBox ItemsSource="{Binding Drinks}"
-                 Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Auto" Background="#FF181818" >
+                 Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Auto" Background="#FF181818" MouseDoubleClick="ListBox_MouseDoubleClick" Tag="{Binding}" SelectedIndex="{Binding DrinksSelected}" >
             <ListBox.ItemTemplate>
                 <DataTemplate >
                     <DockPanel Width="330"  >
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
@@ -105,24 +100,6 @@
 
                             <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
                             <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="2" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
-
-                            <ComboBox ItemsSource="{Binding Path=Capacity}" Grid.Column="3" Grid.ColumnSpan="2" FontSize="23"  >
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <DockPanel Height="45">
-                                            <TextBlock Text="{Binding Path=Name}" Foreground="White"  FontSize="23" HorizontalAlignment="Right"/>
-                                            <TextBlock Text="                           " Foreground="White"  FontSize="23" />
-                                            <TextBlock Text="{Binding Path=Price}" Foreground="White" FontSize="23" HorizontalAlignment="Left"/>
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                                <ComboBox.Resources>
-                                    <Style TargetType="ComboBoxItem">
-                                        <Setter Property="Foreground" Value="Yellow"/>
-                                        <Setter Property="Background" Value="#181818"/>
-                                    </Style>
-                                </ComboBox.Resources>
-                            </ComboBox>
                         </Grid>
 
                     </DockPanel>
@@ -132,19 +109,7 @@
         </ListBox>
 
 
-        <Button Name="Add_btn"
-                Grid.Column="1"
-                Grid.Row="1"
-                Content="Tilføj"
-                FontSize="30"
-                FontWeight="DemiBold"
-                Margin="23"
-                Width="200"
-                Height="100"
-                Background="#181818"
-                Foreground="WhiteSmoke"
-                Command="{Binding AddToCartCommand}"
-                />
+        <Button Grid.Column="1" Grid.Row="1" Content="Tilføj" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Command="{Binding AddToCartCommand}" />
 
         <Button Grid.Column="1" Grid.Row="2" Content="Slet" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Command="{Binding DeleteCommand}"/>
 
@@ -177,30 +142,10 @@
         </DataGrid>
 
         <!--Den samlede pris af indkøbskruvens indhold-->
-        <TextBlock Name="TpHome"
-               FontFamily="Arial"
-               FontSize=" 30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   
-               FontWeight="DemiBold"
-               Grid.Column="2"
-               Grid.Row="3"
-               Foreground="#FFF" Text="Total Kommer Snart" 
-               />
+        <TextBlock FontFamily="Arial" FontSize=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" Grid.Column="2" Grid.Row="3" Foreground="#FFF" Text="Total Kommer Snart" />
 
 
-        <Button 
-                FontFamily="Arial"
-                FontSize="30"
-                FontWeight="DemiBold"
-                Grid.Column="2"
-                Grid.Row="4"
-                Height="130"
-                Background="Transparent"
-                Click="ToPayment_bt_Click"
-                Width="140"
-                >
+        <Button FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="4" Height="130" Background="Transparent"  Click="ToPayment_bt_Click" Width="140">
 
             <Button.Content >
                 <Grid Margin="0 0 0 0">

@@ -5,11 +5,13 @@ namespace PizzaApp_WPF.Model
 {
     public partial class DrinksModel : ObservableObject
     {
+        [ObservableProperty] int _id;
+
         [ObservableProperty] string? _name;
 
         [ObservableProperty] int _price;
 
-        [ObservableProperty] ObservableCollection<DrinkSizeModel>? _capacity;
+        [ObservableProperty] ObservableCollection<ToppingsModel>? _capacity;
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿[
   {
+    "id" : 1,
     "name": "Cola",
     "price": 2,
     "capacity": [
@@ -18,6 +19,7 @@
     ]
   },
   {
+    "id": 2,
     "name": "Fanta",
     "price": 3,
     "capacity": [
@@ -36,6 +38,7 @@
     ]
   },
   {
+    "id": 3,
     "name": "Faxe Kondi",
     "price": 2,
     "capacity": [
@@ -54,6 +57,7 @@
     ]
   },
   {
+    "id": 4,
     "name": "Spiritus",
     "price": 2,
     "capacity": [

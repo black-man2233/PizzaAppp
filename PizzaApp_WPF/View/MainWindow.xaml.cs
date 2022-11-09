@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PizzaApp_WPF.Model;
+using PizzaApp_WPF.ViewModel;
+using System.Windows;
 
 namespace PizzaApp_WPF.View
 {
@@ -21,23 +23,33 @@ namespace PizzaApp_WPF.View
 
         private void Edit_btn_Click(object sender, RoutedEventArgs e)
         {
-            //if (MainViewModel._cartList.Count > 0)
-            //{
-            //    if (sender is Button)
-            //    {
-            //        if (MainViewModel._cartList[MainViewModel._cartSelectedIndex] is not null)
-            //        {
-            //            ModifyWindow modifyWindow = new(MainViewModel._cartList[MainViewModel._cartSelectedIndex]);
-            //            _ = modifyWindow.ShowDialog();
+            if (MainViewModel._cartList.Count > 0)
+            {
 
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    _ = MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
+                if (MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings is not null)
+                {
+                    ModifyWindow modifyWindow = new(MainViewModel._cartList[MainViewModel._cartSelectedIndex]);
+                    _ = modifyWindow.ShowDialog();
+                }
+                else
+                {
+                    _ = MessageBox.Show("Dette Element kan ikke modificeres", "Hov");
+                }
+            }
+            else
+            {
+                _ = MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
+            }
 
-            //}
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DrinksModel d = MainViewModel._drinks[MainViewModel._drinksSelected];
+            if (MainViewModel._drinksSelected >= 0)
+            {
+                MainViewModel._cartList.Add(new PizzaType(d.Id, d.Name, d.Price, d.Name, d.Capacity));
+            }
         }
     }
 }

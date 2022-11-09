@@ -1,62 +1,22 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace PizzaApp_WPF.Model
 {
 
-    public class PizzaType : INotifyPropertyChanged
+    public partial class PizzaType : ObservableObject
     {
 
-        private int _id;
-        public int Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged("Id");
-            }
-        }
+        [ObservableProperty] int _id;
 
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value; OnPropertyChanged("Name");
-            }
-        }
+        [ObservableProperty] private string _name;
 
+        [ObservableProperty] int _price;
 
-        private int _price;
-        public int Price
-        {
-            get => _price;
-            set
-            {
-                _price = value;
-                OnPropertyChanged("Price");
-            }
-        }
+        [ObservableProperty] string _description;
 
+        [ObservableProperty] ObservableCollection<ToppingsModel>? _toppings;
 
-        private string _description;
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                _description = value;
-                OnPropertyChanged("Description");
-            }
-        }
-
-        public ObservableCollection<ToppingsModel>? Toppings
-        {
-            get;
-            set;
-        }
 
 
 #pragma warning disable
@@ -75,16 +35,6 @@ namespace PizzaApp_WPF.Model
             Toppings = new ObservableCollection<ToppingsModel>(toppings);
         }
 #pragma warning restore
-
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        /// <summary>Called when [property changed].</summary>
-        /// <param name="PropertyNavn">The property navn.</param>
-        private void OnPropertyChanged(string PropertyNavn)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyNavn));
-        }
 
     }
 

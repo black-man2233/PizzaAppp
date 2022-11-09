@@ -1,45 +1,44 @@
-﻿using PizzaApp_WPF.Model;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PizzaApp_WPF.Model;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Linq;
 
 namespace PizzaApp_WPF.ViewModel
 {
 #pragma warning disable
-    public class ModifyViewModel : INotifyPropertyChanged
+    public partial class ModifyViewModel : ObservableObject
     {
-        private string _pizzaDescr;
-        public string PizzaDescription
+        public ModifyViewModel(PizzaType pizza)
         {
-            get => _pizzaDescr;
-            set
-            {
-                //_cartList[_cartSelectedIndex].Description = value;
-                OnPropertyChanged("PizzaDescription");
-            }
+            _pizzaDescription = pizza.Description;
+
+            _toppings = pizza.Toppings;
 
         }
 
-        private ObservableCollection<ToppingsModel> _toppings;
-        public ObservableCollection<ToppingsModel> Toppings
+        [ObservableProperty] string _pizzaDescription;
+
+        [ObservableProperty] ObservableCollection<ToppingsModel> _toppings = new();
+
+        [ObservableProperty] int _totalPrice;
+
+
+        void total()
         {
-            get => this._toppings;
-            set
+            _totalPrice = 0;
+            ObservableCollection<int> allPrices = new();
+
+            if (_toppings.Count > 0)
             {
-                _toppings = value;
-                OnPropertyChanged("Toppings");
-            }
-        }
+                for (int i = 0; i < _toppings.Count; i++)
+                {
+                    if (_toppings[i].Selected = true)
+                    {
+                        allPrices.Add(_toppings[i].Price);
+                    }
+                }
 
-
-
-
-        //it updates data, so the datagrid gets the latest update
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string PropertyNavn)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
+                _totalPrice = allPrices.Sum();
             }
         }
 

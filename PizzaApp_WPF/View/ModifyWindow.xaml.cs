@@ -1,6 +1,5 @@
 ﻿using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 namespace PizzaApp_WPF.View
@@ -12,13 +11,11 @@ namespace PizzaApp_WPF.View
     {
 #pragma warning disable
 
-        ModifyViewModel modify = new ModifyViewModel();
         public ModifyWindow(PizzaType pizzaFromCart)
         {
+            ModifyViewModel vm = new ModifyViewModel(pizzaFromCart);
             InitializeComponent();
-            DataContext = modify;
-            modify.Toppings = pizzaFromCart.Toppings;
-            //modify.PizzaDescription = _cartList[_cartSelectedIndex].Description;
+            DataContext = vm;
 
         }
 
@@ -33,7 +30,10 @@ namespace PizzaApp_WPF.View
 
                 if (t != null)
                 {
-                    //_cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
+                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
+                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "False";
+                    MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
+
                 }
             }
         }
@@ -48,28 +48,18 @@ namespace PizzaApp_WPF.View
 
                 if (t != null)
                 {
-                    //_cartList[_cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
+                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
+                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "true";
+                    MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
 
                 }
             }
 
         }
 
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        //it updates data, so the datagrid gets the latest update
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string PropertyNavn)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNavn));
-            }
         }
 
     }

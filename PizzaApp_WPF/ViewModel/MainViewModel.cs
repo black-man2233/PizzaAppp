@@ -15,8 +15,12 @@ namespace PizzaApp_WPF.ViewModel
         public MainViewModel()
         {
             AddToCartCommand = new DelegateCommand(Add);
-            //EditCommand = new DelegateCommand(Edit);
             DeleteCommand = new DelegateCommand(Delete);
+
+            _cartList.Add(_menuList[1]);
+            _cartList.Add(_menuList[3]);
+            _cartList.Add(_menuList[4]);
+
         }
 
 
@@ -24,13 +28,14 @@ namespace PizzaApp_WPF.ViewModel
         [ObservableProperty] static ObservableCollection<PizzaType>? _menuList = menu.PizzasList;
         [ObservableProperty] private static int _menuSelectedIndex;
 
-        [ObservableProperty] static ObservableCollection<PizzaType>? _cartList = new();
-        [ObservableProperty] static int _cartSelectedIndex = 0;
+        [ObservableProperty] public static ObservableCollection<PizzaType>? _cartList = new();
+        [ObservableProperty] public static int _cartSelectedIndex = 0;
 
 
+        [ObservableProperty] public static ObservableCollection<DrinksModel> _drinks = menu.DrinksList;
+        [ObservableProperty] private ObservableCollection<ToppingsModel> _drinkSize;
+        [ObservableProperty] public static int _drinksSelected;
 
-        [ObservableProperty] private static ObservableCollection<DrinksModel> _drinks = menu.DrinksList;
-        [ObservableProperty] private ObservableCollection<DrinkSizeModel> _drinkSize;
 
 
         //Buttons prop
@@ -44,23 +49,6 @@ namespace PizzaApp_WPF.ViewModel
             _cartList.Add(new PizzaType(selectedPizzaInfo.Id, selectedPizzaInfo.Name, selectedPizzaInfo.Price, selectedPizzaInfo.Description, toppsAsList));
 
         } //Add button Action
-
-
-
-        ////public ICommand EditCommand { get; set; } //Edit Button 
-        ////private void Edit()
-        ////{
-        ////    try
-        ////    {
-        ////        ModifyWindow modifyWindow = new ModifyWindow();
-        ////        modifyWindow.ShowDialog();
-        ////    }
-        ////    catch (Exception)
-        ////    {
-        ////        MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
-        ////    }
-
-        ////} //Edit Action
 
 
         public ICommand DeleteCommand { get; set; } //Delete Button Command
