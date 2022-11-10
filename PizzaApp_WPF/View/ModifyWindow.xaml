@@ -8,21 +8,18 @@
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
         mc:Ignorable="d"
         Title="Customize the Pizza"
-        Height="730" 
-        Width="960"
+        Height="730" Width="960"
         Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
         Background="Black"
         BorderBrush="#FF3B5998"
         ResizeMode="NoResize"
         BorderThickness=".5"
         WindowStartupLocation="CenterScreen"
-        
-        
         >
-
     <Window.Resources>
+        <viewmodel:ModifyViewModel x:Key="vm"></viewmodel:ModifyViewModel>
     </Window.Resources>
-    <Grid>
+    <Grid DataContext="{Binding Source={StaticResource vm}}">
         <!--Definere antal af de horizontale rækker-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -52,7 +49,7 @@
 
         <TextBlock Text="{Binding PizzaDescription}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" FontSize="25" Foreground="Wheat" FontWeight="Bold" Background="#181818" TextWrapping="Wrap" TextTrimming="None" Width="Auto"/>
 
-<ListBox ItemsSource="{Binding Toppings}" Foreground="White" FontSize="15" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
+        <ListBox ItemsSource="{Binding Toppings}" Foreground="White" FontSize="15" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Width="300">
@@ -66,12 +63,44 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Background="#181818" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
 
+        <ListBox ItemsSource="{Binding Extras}" Background="#181818" Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="32" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderBrush="Transparent">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="370">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Path=Name}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Path=Price}" TextAlignment="Right" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Path=Amount}" TextAlignment="Right" Grid.Column="2"/>
+
+                        <DockPanel Grid.Column="3" HorizontalAlignment="Right">
+
+                            <Button Width="22" Height="22">
+                                <Image Source="https://cdn-icons-png.flaticon.com/512/748/748113.png" />
+                            </Button>
+
+                            <Button Width="22" Height="22">
+                                <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828906.png"/>
+                            </Button>
+                        </DockPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
-        <!--<Label Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2" Foreground="#FFFF" FontSize="33" FontWeight="Bold" HorizontalContentAlignment="Center" Content="Dine Udvalgt" Panel.ZIndex="1">
-        </Label>-->
 
         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" Foreground="White" Background="#282828" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding TotalPrice,StringFormat='Total {0} kr.'}" Height="80" Width="560"/>
 

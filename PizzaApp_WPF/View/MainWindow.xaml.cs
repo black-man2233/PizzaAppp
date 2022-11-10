@@ -23,22 +23,25 @@ namespace PizzaApp_WPF.View
 
         private void Edit_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (MainViewModel._cartList.Count > 0)
+            try
             {
-
                 if (MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings is not null)
                 {
-                    ModifyWindow modifyWindow = new(MainViewModel._cartList[MainViewModel._cartSelectedIndex]);
-                    _ = modifyWindow.ShowDialog();
+                    MainViewModel._selectedPizza = MainViewModel._cartList[MainViewModel._cartSelectedIndex];
+
+                    ModifyWindow modifyWindow = new();
+                    modifyWindow.Show();
                 }
                 else
                 {
                     _ = MessageBox.Show("Dette Element kan ikke modificeres", "Hov");
                 }
+
             }
-            else
+            catch (System.Exception)
             {
                 _ = MessageBox.Show("Ingen Valgte Pizza fra Kurven", "How");
+
             }
 
         }
@@ -48,7 +51,7 @@ namespace PizzaApp_WPF.View
             DrinksModel d = MainViewModel._drinks[MainViewModel._drinksSelected];
             if (MainViewModel._drinksSelected >= 0)
             {
-                MainViewModel._cartList.Add(new PizzaType(d.Id, d.Name, d.Price, d.Name, d.Capacity));
+                //MainViewModel._cartList.Add(new PizzaType(d.Id, d.Name, d.Price, d.Name, d.Capacity));
             }
         }
     }

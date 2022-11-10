@@ -11,12 +11,9 @@ namespace PizzaApp_WPF.View
     {
 #pragma warning disable
 
-        public ModifyWindow(PizzaType pizzaFromCart)
+        public ModifyWindow()
         {
-            ModifyViewModel vm = new ModifyViewModel(pizzaFromCart);
             InitializeComponent();
-            DataContext = vm;
-
         }
 
 

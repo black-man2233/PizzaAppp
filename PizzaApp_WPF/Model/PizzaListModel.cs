@@ -4,15 +4,14 @@ using System.IO;
 
 namespace PizzaApp_WPF.Model
 {
-    public class PizzaListModelModel
+#pragma warning disable
+    public class PizzaListModel
     {
-        //stigen til Pizza.Json
-        private static readonly string menuDbText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\PizzasDB.json");
-
         // Menu Database
-        private protected ObservableCollection<PizzaType>? _pizzasList = JsonConvert.DeserializeObject<ObservableCollection<PizzaType>>(menuDbText);
+        private static string menuDbText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\PizzasDB.json");
 
-        public ObservableCollection<PizzaType>? PizzasList { get => _pizzasList; set => _pizzasList = value; }
+        public ObservableCollection<PizzaModel>? PizzasList = JsonConvert.DeserializeObject<ObservableCollection<PizzaModel>>(menuDbText);
+
 
 
 
