@@ -1,9 +1,9 @@
 ﻿[
   {
     "Description": "Opskrift på fantastisk hjemmelavet Pizza Margherita, den mest enkle pizza variant og helt og aldeles fantastisk hvis den laves rigtigt.",
-    "id": 1,
     "name": "Margherita",
-    "price": "76",
+    "price": 76,
+    "total": 76,
     "Extras": [
       {
         "id": 1,
@@ -58,9 +58,9 @@
   },
   {
     "Description": "NATURLI’ Pizza Vesuvio – når det skal være hurtigt og lækkert. Den skal nok få din pizzatand til at løbe i vand på rekordtid. Flyt den fra fryseren til mikroovnen. Vent 3 minutter. Nemt!",
-    "id": 2,
     "name": "Vesuvio",
-    "price": "3",
+    "total": 3,
+    "price": 3,
     "Extras": [
       {
         "id": 1,
@@ -123,9 +123,9 @@
   },
   {
     "Description": "Pizza capricciosa er en pizza i det italienske køkken af mozzarella, italiensk skinke, svampe, artiskok og tomatSvampene. Den blev opfundet af Enea Dante Santerini, ejer af restauranten La Capricciosa på Via del Corso i Rom.",
-    "id": 3,
     "name": "Capricciosa",
-    "price": "5",
+    "total": 5,
+    "price": 5,
     "Extras": [
       {
         "id": 1,
@@ -195,8 +195,8 @@
   },
   {
     "Description": "Hawaiipizza er en pizza med tomatsovs, ost, ananas og skinke. Nogle versioner kan også inkludere peberfrugt, svampe eller bacon. Den første pizza af denne type blev fremstillet af Sam Panopoulos i 1962 i Chatham-Kent, Canada.",
-    "id": 4,
     "name": "Hawaii",
+    "total": 4,
     "price": 84,
     "Extras": [
       {
@@ -267,8 +267,8 @@
   },
   {
     "Description": "Pizza quattro stagioni (four seasons pizza) is a variety of pizza in Italian cuisine that is prepared in four sections with diverse ingredients",
-    "id": 5,
     "name": "Quatro stagioni",
+    "total": 84,
     "price": 84,
     "Extras": [
       {

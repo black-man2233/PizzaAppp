@@ -18,13 +18,12 @@ namespace PizzaApp_WPF.ViewModel
             DeleteCommand = new DelegateCommand(Delete);
 
             //_cartList.Add(_menuList[1]);
-            //_cartList.Add(_menuList[3]);
             //_cartList.Add(_menuList[4]);
 
         }
 
 
-        [ObservableProperty] static ObservableCollection<PizzaModel>? _menuList = menu.PizzasList;
+        [ObservableProperty] public static ObservableCollection<PizzaModel>? _menuList = menu.PizzasList;
         [ObservableProperty] private static int _menuSelectedIndex = -1;
 
         [ObservableProperty] public static ObservableCollection<PizzaModel>? _cartList = new();
@@ -48,8 +47,8 @@ namespace PizzaApp_WPF.ViewModel
             try
             {
                 PizzaModel selectedPizzaInfo = _menuList[MenuSelectedIndex];
-                ObservableCollection<ToppingsModel> toppsAsList = new(selectedPizzaInfo.Toppings);
-                _cartList.Add(selectedPizzaInfo);
+
+                _cartList.Add(new PizzaModel((selectedPizzaInfo.Name), (selectedPizzaInfo.Price), (selectedPizzaInfo.Total), (selectedPizzaInfo.Description), (selectedPizzaInfo.Toppings), (selectedPizzaInfo.Extras)));
 
             }
             catch (Exception e)

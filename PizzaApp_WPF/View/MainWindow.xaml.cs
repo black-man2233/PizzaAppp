@@ -1,6 +1,7 @@
 ﻿using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PizzaApp_WPF.View
 {
@@ -48,7 +49,10 @@ namespace PizzaApp_WPF.View
 
         private void ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DrinksModel d = MainViewModel._drinks[MainViewModel._drinksSelected];
+            ListBox a = sender as ListBox;
+
+            DrinksModel d = a.Tag as DrinksModel;
+
             if (MainViewModel._drinksSelected >= 0)
             {
                 //MainViewModel._cartList.Add(new PizzaType(d.Id, d.Name, d.Price, d.Name, d.Capacity));
