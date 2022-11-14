@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using PizzaApp_WPF.Model;
+using PizzaApp_WPF.ViewModel;
+using System;
+using System.Collections.ObjectModel;
+using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static System.Drawing.Image;
 
 namespace PizzaApp_WPF.View
 {
@@ -19,9 +16,34 @@ namespace PizzaApp_WPF.View
     /// </summary>
     public partial class ConfirmWindow : Window
     {
-        public ConfirmWindow()
+
+        public ConfirmWindow(ObservableCollection<PizzaModel> _cartList)
         {
             InitializeComponent();
+            ConfirmViewModel vm = new(_cartList);
+            DataContext = vm;
+
+        }
+
+        private new void MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is Button b)
+            {
+                Image? i = b.Content as Image;
+                i.Source = new BitmapImage(new Uri(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Image\trashOpen.png"));
+            }
+
+
+        }
+
+        private new void MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is Button b)
+            {
+                Image? i = b.Content as Image;
+                i.Source = new BitmapImage(new Uri(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Image\trashClosed.png"));
+            }
+
         }
     }
 }

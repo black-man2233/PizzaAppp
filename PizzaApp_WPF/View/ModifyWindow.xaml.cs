@@ -13,21 +13,17 @@ namespace PizzaApp_WPF.View
     {
 #pragma warning disable
 
-        public ModifyWindow()
+        public ModifyWindow(PizzaModel pizza)
         {
             InitializeComponent();
-
-            ModifyViewModel viewModel = new ModifyViewModel();
-
+            ModifyViewModel viewModel = new ModifyViewModel(pizza);
             this.DataContext = viewModel;
-
         }
 
-
+        //checkBoxes
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox? c = sender as CheckBox;
-
             if (c != null)
             {
                 ToppingsModel? t = c.Tag as ToppingsModel;
@@ -61,27 +57,14 @@ namespace PizzaApp_WPF.View
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ConfirmButton(object sender, RoutedEventArgs e)
         {
-            MainViewModel._selectedPizza.Total = (EditModifiedPrice()) + (MainViewModel._selectedPizza.Price);
-
             Close();
         }
 
 
-        static int EditModifiedPrice()
-        {
-            ObservableCollection<int> allPrices = new();
-            for (int i = 0; i < ModifyViewModel._extras.Count; i++)
-            {
-                if (ModifyViewModel._extras[i].Amount > 0)
-                {
-                    allPrices.Add((ModifyViewModel._extras[i].Amount) * (ModifyViewModel._extras[i].Price));
-                }
-            }
-            return allPrices.Sum();
-        }
 
+        //Buttons
         private void Increase_btClick(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
@@ -91,7 +74,9 @@ namespace PizzaApp_WPF.View
             if (extra.Amount < 30)
             {
                 extra.Amount++;
-                ModifyViewModel._totalPrice = EditModifiedPrice();
+
+                ModifyViewModel.pizza.Total = (EditModifiedPrice()) + (ModifyViewModel.pizza.Price);
+
             }
             else
             {
@@ -99,7 +84,6 @@ namespace PizzaApp_WPF.View
 
             }
         }
-
         private void Decrease_btClick(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
@@ -108,7 +92,7 @@ namespace PizzaApp_WPF.View
             if (extra.Amount > 0)
             {
                 extra.Amount--;
-                ModifyViewModel._totalPrice = EditModifiedPrice();
+                ModifyViewModel.pizza.Total = (EditModifiedPrice()) + (ModifyViewModel.pizza.Price);
 
             }
             else
@@ -116,6 +100,22 @@ namespace PizzaApp_WPF.View
                 MessageBox.Show("Du kan ikke få mindre end nul");
             }
 
+        }
+        static int EditModifiedPrice()
+        {
+            var extras = ModifyViewModel._extras;
+
+            ObservableCollection<int> allPrices = new();
+
+
+            for (int i = 0; i < extras.Count; i++)
+            {
+                if (ModifyViewModel._extras[i].Amount > 0)
+                {
+                    allPrices.Add((extras[i].Amount) * (extras[i].Price));
+                }
+            }
+            return allPrices.Sum();
         }
     }
 }

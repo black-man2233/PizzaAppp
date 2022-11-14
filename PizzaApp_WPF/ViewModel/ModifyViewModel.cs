@@ -8,24 +8,21 @@ namespace PizzaApp_WPF.ViewModel
 #pragma warning disable
     public partial class ModifyViewModel : ObservableObject, INotifyPropertyChanged
     {
-        public ModifyViewModel()
+        public ModifyViewModel(PizzaModel __pizza)
         {
-            _pizzaDescription = new(MainViewModel._selectedPizza.Description);
-            _toppings = new(MainViewModel._selectedPizza.Toppings);
-            _extras = new(MainViewModel._selectedPizza.Extras);
-            _totalPrice = MainViewModel._selectedPizza.Total;
+            pizza = __pizza;
+            _pizzaDescription= pizza.Description;
+            _toppings= pizza.Toppings;
+            _extras= pizza.Extras;
 
         }
+        [ObservableProperty] public static PizzaModel pizza;
 
         [ObservableProperty] string? _pizzaDescription;
 
-        [ObservableProperty] static ObservableCollection<ToppingsModel>? _toppings = new();
+        [ObservableProperty] static ObservableCollection<ToppingsModel>? _toppings;
 
-        [ObservableProperty] public static ObservableCollection<ExtrasModel>? _extras = new();
-
-        [ObservableProperty] public static int _totalPrice;
-
-
+        [ObservableProperty] public static ObservableCollection<ExtrasModel>? _extras;
     }
 }
 

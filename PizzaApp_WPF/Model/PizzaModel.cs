@@ -27,16 +27,15 @@ namespace PizzaApp_WPF.Model
         /// <param name="description">The description.</param>
         /// <param name="toppings">The toppings.</param>
         /// <param name="ex">The extra toppings.</param>
-        public PizzaModel(string name, int price, int total, string description, ObservableCollection<ToppingsModel> toppings, ObservableCollection<ExtrasModel> extras)
+        public PizzaModel(string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
         {
-            this.Name = name;
-            this.Price = price;
-            this.Total = total;
-            this.Description = description;
+            Name = name;
+            Price = price;
+            Total = total;
+            Description = description;
 #pragma warning disable CS8604 // Possible null reference argument.
-
-            this.Toppings = toppings;
-            this.Extras = extras;
+            Toppings = toppings;
+            Extras = extras;
         }
 
     }
