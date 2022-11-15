@@ -1,77 +1,89 @@
 ﻿[
   {
-    "id" : 1,
+    "id": 1,
     "name": "Cola",
-    "price": 2,
+    "price": 8,
     "capacity": [
       {
         "name": "small",
-        "price": 8
+        "price": 8,
+        "selected": false
       },
       {
         "name": "medium",
-        "price": 15
+        "price": 15,
+        "selected": false
       },
       {
         "name": "Large",
-        "price": 20
+        "price": 20,
+        "selected": false
       }
     ]
   },
   {
     "id": 2,
     "name": "Fanta",
-    "price": 3,
+    "price": 8,
     "capacity": [
       {
         "name": "small",
-        "price": 8
+        "price": 8,
+        "selected": false
       },
       {
         "name": "medium",
-        "price": 15
+        "price": 15,
+        "selected": false
       },
       {
         "name": "Large",
-        "price": 20
+        "price": 20,
+        "selected": false
       }
     ]
   },
   {
     "id": 3,
     "name": "Faxe Kondi",
-    "price": 2,
+    "price": 8,
     "capacity": [
       {
         "name": "small",
-        "price": 8
+        "price": 8,
+        "selected": false
       },
       {
         "name": "medium",
-        "price": 15
+        "price": 15,
+        "selected": false
       },
       {
         "name": "Large",
-        "price": 20
+        "price": 20,
+        "selected": false
       }
     ]
   },
   {
     "id": 4,
     "name": "Spiritus",
-    "price": 2,
+    "price": 8,
     "capacity": [
       {
         "name": "small",
-        "price": 8
+        "price": 8,
+        "selected": false
       },
       {
         "name": "medium",
-        "price": 15
+        "price": 15,
+        "selected": false
       },
       {
         "name": "Large",
-        "price": 20
+        "price": 20,
+        "selected": false
       }
     ]
   }

@@ -1,14 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
-using Prism.Commands;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Input;
 
 namespace PizzaApp_WPF.ViewModel
 {
@@ -25,13 +21,19 @@ namespace PizzaApp_WPF.ViewModel
 
 
         [ObservableProperty] ObservableCollection<DrinksModel> _drinks = menu.DrinksList;
-        [ObservableProperty] ObservableCollection<ToppingsModel> _drinkSize;
         [ObservableProperty] int _drinksSelected;
         [ObservableProperty] PizzaModel _selectedPizza;
 
         [ObservableProperty] public static int _totPrice;
 
-        public void totCalc()
+
+        //public MainViewModel()
+        //{
+        //    MessageBox.Show((_drinks[1].Capacity[1].Name)); 
+        //}
+
+
+        public static int totCalc()
         {
             var c = _cartList;
             List<int> pricesCombined = new();
@@ -40,9 +42,10 @@ namespace PizzaApp_WPF.ViewModel
             {
                 pricesCombined.Add(c[i].Total);
             }
-            _totPrice = pricesCombined.Sum();
+            return pricesCombined.Sum();
 
         }
+
 
     }
 }

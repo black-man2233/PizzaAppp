@@ -8,7 +8,10 @@
         xmlns:model="clr-namespace:PizzaApp_WPF.Model"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-
+        
+        
+        WindowStyle="SingleBorderWindow"
+        
         WindowStartupLocation="CenterScreen"
         Height="800" 
         Width="1040"
@@ -62,7 +65,7 @@
         <!--Menukortets ListBoxen-->
         <DataGrid ItemsSource="{Binding MenuList}"
                   SelectedIndex="{Binding MenuSelectedIndex}"
-                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" >
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" MouseDoubleClick="AddToCart" Tag="{Binding}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
@@ -83,13 +86,13 @@
         </DataGrid>
 
 
-        <ListBox ItemsSource="{Binding Drinks}" MouseDoubleClick="DrinksDoubleclick" Tag="{Binding}" SelectedIndex="{Binding DrinksSelected}"
-                 Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818">
+        <ListBox ItemsSource="{Binding Drinks}" MouseDoubleClick="DrinksDoubleclick" Tag="{Binding}" Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818">
             <ListBox.ItemTemplate>
-                <DataTemplate >
-                    <DockPanel Width="330"  >
+                <DataTemplate>
+                    <DockPanel Width="330">
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
@@ -98,9 +101,20 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
-                            <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="2" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
-                        </Grid>
+                            <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
 
+
+                            <ComboBox ItemsSource="{Binding Capacity}" Grid.Column="2" SelectionChanged="DrinkSizeSelected" Tag="{Binding}" IsTextSearchEnabled="False" Loaded="Combooo_Selected" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" />
+                                            <TextBlock Text="{Binding Price}" HorizontalAlignment="Right" Padding="100,0,0,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -145,13 +159,36 @@
         </StackPanel>
 
 
-        <Button FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="4" Height="130" Background="Transparent"  Click="ToPayment_bt_Click" Width="140" Tag="{Binding}">
+        <Button FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="4" Height="130" Background="Transparent"  Click="ToPayment_bt_Click" Width="140" Tag="{Binding}" BorderBrush="Transparent">
 
             <Button.Content >
-                <Grid Margin="0 0 0 0">
+                <Grid >
                     <Image Source="https://cdn-icons-png.flaticon.com/512/2038/2038792.png"/>
                 </Grid>
             </Button.Content>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="LightBlue" />
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="transparent " TargetName="Border" />
+                                        <Setter Property="Width" Value="100" TargetName="Border"/>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
 
     </Grid>

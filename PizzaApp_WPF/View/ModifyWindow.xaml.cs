@@ -18,6 +18,9 @@ namespace PizzaApp_WPF.View
             InitializeComponent();
             ModifyViewModel viewModel = new ModifyViewModel(pizza);
             this.DataContext = viewModel;
+
+            ModifyViewModel.pizza.Total = (EditModifiedPrice()) + (ModifyViewModel.pizza.Price);
+
         }
 
         //checkBoxes
@@ -30,9 +33,9 @@ namespace PizzaApp_WPF.View
 
                 if (t != null)
                 {
-                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
-                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "False";
-                    MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
+                    //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
+                    //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "False";
+                    //MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
 
                 }
             }
@@ -48,9 +51,9 @@ namespace PizzaApp_WPF.View
 
                 if (t != null)
                 {
-                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
-                    MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "true";
-                    MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
+                    //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
+                    //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "true";
+                    //MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
 
                 }
             }

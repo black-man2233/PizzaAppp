@@ -11,6 +11,6 @@ namespace PizzaApp_WPF.Model
 
         [ObservableProperty] int _price;
 
-        [ObservableProperty] ObservableCollection<ToppingsModel>? _capacity;
+        [ObservableProperty] ObservableCollection<DrinksSize>? _capacity;
     }
 }

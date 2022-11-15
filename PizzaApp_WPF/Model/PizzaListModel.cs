@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -18,9 +19,8 @@ namespace PizzaApp_WPF.Model
         ////Drinks Database
         private static readonly string DrinksDbText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\DrinksDB.json");
 
-        private protected ObservableCollection<DrinksModel>? _drinksList = JsonConvert.DeserializeObject<ObservableCollection<DrinksModel>>(DrinksDbText);
+        public ObservableCollection<DrinksModel>? DrinksList = JsonConvert.DeserializeObject<ObservableCollection<DrinksModel>>(DrinksDbText);
 
-        public ObservableCollection<DrinksModel>? DrinksList { get => _drinksList; set => _drinksList = value; }
 
     }
 }
