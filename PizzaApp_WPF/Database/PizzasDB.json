@@ -304,7 +304,7 @@
         "id": 1,
         "name": "TomatSauce",
         "price": "5",
-        "selected": true
+        "selected": false
 
       },
       {

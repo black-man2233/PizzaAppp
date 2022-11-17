@@ -26,7 +26,7 @@
     </Window.Resources>
 
 
-    <Grid Background="Black" DataContext="{Binding Source={StaticResource vm}}" >
+    <Grid Background="Black" DataContext="{Binding Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -63,8 +63,8 @@
         <Label Content="Indkøbskurv" Foreground="#FFF" FontSize="35" FontFamily="Arial Black" VerticalContentAlignment="Bottom" Grid.Column="2" />
 
         <!--Menukortets ListBoxen-->
-        <DataGrid ItemsSource="{Binding MenuList}"
-                  SelectedIndex="{Binding MenuSelectedIndex}"
+        <DataGrid ItemsSource="{Binding MenuList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedIndex="{Binding MenuSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
                   Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" MouseDoubleClick="AddToCart" Tag="{Binding}">
 
             <DataGrid.Columns>
@@ -104,7 +104,7 @@
                             <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
 
 
-                            <ComboBox ItemsSource="{Binding Capacity}" Grid.Column="2" SelectionChanged="DrinkSizeSelected" Tag="{Binding}" IsTextSearchEnabled="False" Loaded="Combooo_Selected" >
+                            <ComboBox ItemsSource="{Binding Capacity}" Grid.Column="2" SelectionChanged="DrinkSizeSelected" Tag="{Binding}" IsTextSearchEnabled="False" x:Name="Ccomb"  >
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -129,7 +129,7 @@
         <Button Grid.Column="1" Grid.Row="3" Content="Redigere"
                 FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Click="EditButton" Tag="{Binding}"/>
 
-        <DataGrid Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" MouseDoubleClick="EditButton" Tag="{Binding}"
+        <DataGrid Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" ItemsSource="{Binding CartList,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding CartSelectedIndex}" MouseDoubleClick="EditButton" Tag="{Binding}"
                   AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                   BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818">
 
@@ -155,7 +155,7 @@
 
         <!--Den samlede pris af indkøbskruvens indhold-->
         <StackPanel  Grid.Column="2" Grid.Row="3"  Background="#181818" VerticalAlignment="Center" HorizontalAlignment="Center" Height="70" >
-            <TextBlock Text="{Binding TotPrice, StringFormat=' Total : {0} '}"  FontFamily="Arial" FontSize=" 30" FontWeight="DemiBold" TextAlignment="Center" Foreground="#FFF" />
+            <TextBlock Text="{Binding TotPrice, StringFormat=' Total : {0} ', UpdateSourceTrigger=PropertyChanged}"  FontFamily="Arial" FontSize=" 30" FontWeight="DemiBold" TextAlignment="Center" Foreground="#FFF" />
         </StackPanel>
 
 

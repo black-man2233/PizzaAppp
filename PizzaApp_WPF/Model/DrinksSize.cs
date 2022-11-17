@@ -12,7 +12,5 @@ namespace PizzaApp_WPF.Model
         [ObservableProperty] string? _name;
         [ObservableProperty] int _price;
         [ObservableProperty] bool _selected;
-
-
     }
 }

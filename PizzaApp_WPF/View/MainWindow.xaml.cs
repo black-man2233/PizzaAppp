@@ -2,7 +2,6 @@
 using PizzaApp_WPF.ViewModel;
 using System;
 using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +18,8 @@ namespace PizzaApp_WPF.View
         {
             InitializeComponent();
         }
+
+
 
         private void ToPayment_bt_Click(object sender, RoutedEventArgs e)
         {
@@ -39,7 +40,7 @@ namespace PizzaApp_WPF.View
             }
         }
 
-        private void DrinksDoubleclick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void DrinksDoubleclick(object sender, MouseButtonEventArgs e)
         {
             ListBox? a = sender as ListBox;
 
@@ -50,13 +51,10 @@ namespace PizzaApp_WPF.View
 
                 if (a.SelectedItem is DrinksModel d)
                 {
-
                     MainViewModel._cartList.Add(new PizzaModel(d.Name, d.Price, d.Price, d.Name, null, null));
-
-
                 }
 
-                MainViewModel._totPrice = MainViewModel.totCalc();
+                vm._totPrice = MainViewModel.totCalc();
             }
         }
         private void DrinkSizeSelected(object sender, RoutedEventArgs e)
@@ -68,13 +66,15 @@ namespace PizzaApp_WPF.View
                 if (c.SelectedValue is DrinksSize p)
                 {
                     MainViewModel._cartList.Add(new PizzaModel(d.Name, p.Price, p.Price, d.Name, null, null));
+
+                    c.Text = "Select Size";
+
                 }
 
             }
         }
 
-
-        void Redigere(MainViewModel vm)
+        private static void Redigere(MainViewModel vm)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace PizzaApp_WPF.View
                 {
                     ModifyWindow modifyWindow = new(vm.SelectedPizza);
                     modifyWindow.Show();
-                    MainViewModel._totPrice = MainViewModel.totCalc();
+                    vm._totPrice = MainViewModel.totCalc();
 
                 }
                 else
@@ -95,7 +95,7 @@ namespace PizzaApp_WPF.View
             catch (Exception ex)
             {
 
-                MessageBox.Show($"{ex.Message}");
+                _ = MessageBox.Show($"{ex.Message}");
             }
         }
 
@@ -134,8 +134,12 @@ namespace PizzaApp_WPF.View
                 try
                 {
                     PizzaModel p = _vm.MenuList[_vm.MenuSelectedIndex];
-                    _cartList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
-                    MainViewModel._totPrice = MainViewModel.totCalc();
+
+                    //_cartList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
+
+                    _cartList.Add(p);
+
+                    _vm._totPrice = MainViewModel.totCalc();
 
                 }
                 catch (Exception ex)
@@ -152,18 +156,17 @@ namespace PizzaApp_WPF.View
                 {
                     MainViewModel vm = d.Tag as MainViewModel;
 
-                    PizzaModel currentPizza = d.CurrentItem as PizzaModel;
-                    if (currentPizza != null)
+                    if (d.CurrentItem is PizzaModel currentPizza)
                     {
                         vm.CartList.Add(new PizzaModel(currentPizza.Name, currentPizza.Price, currentPizza.Price, currentPizza.Description, currentPizza.Toppings, currentPizza.Extras));
-                        MainViewModel._totPrice = MainViewModel.totCalc();
+                        vm._totPrice = MainViewModel.totCalc();
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
-                    MessageBox.Show("Someting Went Wrong, ", "How");
+                    _ = MessageBox.Show("Someting Went Wrong, ", "How");
                 }
 
 
@@ -180,7 +183,7 @@ namespace PizzaApp_WPF.View
                 {
                     _ = _vm.MenuList[_vm.CartSelectedIndex];
                     _ = _cartList.Remove(_cartList[_vm.CartSelectedIndex]);
-                    MainViewModel._totPrice = MainViewModel.totCalc();
+                    _vm._totPrice = MainViewModel.totCalc();
 
                 }
                 catch (Exception ex)
@@ -191,14 +194,16 @@ namespace PizzaApp_WPF.View
             }
         }
 
-       
-    
 
-        private void Combooo_Selected(object sender, RoutedEventArgs e)
-        {
-            ComboBox c = sender as ComboBox;
 
-            c.Text = "Hello";
-        }
+
+        //private void Combooo_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    ComboBox c = sender as ComboBox;
+
+        //    c.Text = "Hello";
+        //}
+
+
     }
 }

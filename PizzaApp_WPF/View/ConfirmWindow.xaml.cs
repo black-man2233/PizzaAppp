@@ -17,6 +17,7 @@ namespace PizzaApp_WPF.View
     /// </summary>
     public partial class ConfirmWindow : Window
     {
+#pragma warning disable
         // Prep stuff needed to remove close button on window
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
@@ -67,11 +68,11 @@ namespace PizzaApp_WPF.View
         {
             if (sender is Button b)
             {
-                PizzaModel element = b.Tag as PizzaModel;
+                PizzaModel? element = b.Tag as PizzaModel;
 
 
-                ConfirmViewModel._pizzas.Remove(element);
-                MainViewModel._cartList.Remove(element);
+                _ = ConfirmViewModel._pizzas.Remove(element);
+                _ = MainViewModel._cartList.Remove(element);
 
 
             }

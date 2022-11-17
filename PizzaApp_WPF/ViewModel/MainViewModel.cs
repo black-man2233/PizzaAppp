@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace PizzaApp_WPF.ViewModel
@@ -17,20 +18,18 @@ namespace PizzaApp_WPF.ViewModel
         [ObservableProperty] int _menuSelectedIndex = -1;
 
         [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
-        [ObservableProperty] public static int _cartSelectedIndex = -1;
+        [ObservableProperty] public int _cartSelectedIndex = -1;
 
 
         [ObservableProperty] ObservableCollection<DrinksModel> _drinks = menu.DrinksList;
         [ObservableProperty] int _drinksSelected;
         [ObservableProperty] PizzaModel _selectedPizza;
 
-        [ObservableProperty] public static int _totPrice;
+
+        [ObservableProperty] public int _totPrice;
 
 
-        //public MainViewModel()
-        //{
-        //    MessageBox.Show((_drinks[1].Capacity[1].Name)); 
-        //}
+
 
 
         public static int totCalc()
