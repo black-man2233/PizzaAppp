@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ namespace PizzaApp_WPF.ViewModel
         [ObservableProperty] int _menuSelectedIndex = -1;
 
         [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
-        [ObservableProperty] public int _cartSelectedIndex = -1;
+        [ObservableProperty] int _cartSelectedIndex = -1;
 
 
         [ObservableProperty] ObservableCollection<DrinksModel> _drinks = menu.DrinksList;
@@ -26,13 +27,24 @@ namespace PizzaApp_WPF.ViewModel
         [ObservableProperty] PizzaModel _selectedPizza;
 
 
-        [ObservableProperty] public int _totPrice;
+        public static string _totPrice;
+        public string TotPrice
+        {
+            get
+            {
+                return _totPrice;
+            }
+            set
+            {
+                _totPrice = value;
+                OnPropertyChanged("TotPrice");
+            }
+        }
 
 
 
 
-
-        public static int totCalc()
+        public static string totCalc()
         {
             var c = _cartList;
             List<int> pricesCombined = new();
@@ -41,8 +53,20 @@ namespace PizzaApp_WPF.ViewModel
             {
                 pricesCombined.Add(c[i].Total);
             }
-            return pricesCombined.Sum();
+            return (pricesCombined.Sum()).ToString();
 
+        }
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                PropertyChangedEventHandler handler = PropertyChanged;
+                if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            }));
         }
 
 

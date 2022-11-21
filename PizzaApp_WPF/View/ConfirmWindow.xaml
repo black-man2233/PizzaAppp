@@ -182,7 +182,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Text="{Binding TotalPrice, StringFormat=' I ALT : {0}'}" Grid.Row="3"  Grid.Column="4" TextAlignment="Center"  VerticalAlignment="Center"  Foreground="White" FontSize="40" FontWeight="DemiBold" />
+        <TextBlock Text="{Binding TotalPrice, StringFormat=' I ALT : {0}'}" Grid.Row="3"  Grid.Column="3" Grid.ColumnSpan="2" TextAlignment="Center"  VerticalAlignment="Center"  Foreground="White" FontSize="40" FontWeight="DemiBold" />
 
         <Image Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Source="file:///C:/Users/Kevin/Desktop/WE/payment_logos_large.webp"/>
 

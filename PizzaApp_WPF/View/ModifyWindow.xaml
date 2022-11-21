@@ -99,7 +99,7 @@
 
 
         <StackPanel Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" Background="#282828"  Height="80" Width="560" DataContext="{Binding Pizza}">
-            <TextBlock Text="{Binding Path=Total}" Foreground="White"  TextAlignment="Center" Padding="0,10,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" />
+            <TextBlock Text="{Binding Path=Total}" Foreground="White"  TextAlignment="Center" Padding="0,10,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" VerticalAlignment="Center"/>
 
         </StackPanel>
         
