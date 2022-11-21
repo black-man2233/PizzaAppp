@@ -82,7 +82,7 @@ namespace PizzaApp_WPF.View
                 if (IsDrink(vm.SelectedPizza) == false)
                 {
                     ModifyWindow modifyWindow = new(vm.SelectedPizza);
-                    modifyWindow.Show();
+                    modifyWindow.ShowDialog();
                     vm.TotPrice = MainViewModel.totCalc().ToString();
 
                 }

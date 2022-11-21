@@ -70,13 +70,10 @@ namespace PizzaApp_WPF.View
                 _ = ConfirmViewModel._pizzas.Remove(element);
                 _ = MainViewModel._cartList.Remove(element);
 #pragma warning restore CS8604 // Possible null reference argument.
+
                 MainViewModel._totPrice = MainViewModel.totCalc();
-
                 ConfirmViewModel.totCalc();
-
-
             }
-
         }
 
         private void DeleteDrinks(object sender, RoutedEventArgs e)
@@ -90,7 +87,7 @@ namespace PizzaApp_WPF.View
                 _ = MainViewModel._cartList.Remove(element);
 #pragma warning restore CS8604 // Possible null reference argument.
                 MainViewModel._totPrice = MainViewModel.totCalc();
-
+                ConfirmViewModel.totCalc();
 
             }
         }

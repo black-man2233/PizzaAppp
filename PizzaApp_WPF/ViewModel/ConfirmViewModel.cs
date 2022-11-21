@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 
@@ -13,6 +15,8 @@ namespace PizzaApp_WPF.ViewModel
 {
     public partial class ConfirmViewModel : ObservableObject
     {
+        static ObservableCollection<PizzaModel> items;
+
         public ConfirmViewModel(ObservableCollection<PizzaModel> cart)
         {
             _pizzas.Clear();
@@ -45,9 +49,7 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
 
-
-
-        private string _totalPrice;
+        private static string _totalPrice;
         public string TotalPrice
         {
             get => _totalPrice;
@@ -62,16 +64,25 @@ namespace PizzaApp_WPF.ViewModel
 
         public static void totCalc()
         {
-            //var c = _cartList;
-            //List<int> pricesCombined = new();
+            List<int> pricesCombined = new();
 
-            //for (int i = 0; i < c.Count; i++)
-            //{
-            //    pricesCombined.Add(c[i].Total);
-            //}
-            //return pricesCombined.Sum();
+            if (_pizzas.Count > 0 || _drinks.Count > 0)
+            {
+                for (int i = 0; i < _pizzas.Count; i++)
+                {
+                    for (int j = 0; j < _drinks.Count; j++)
+                    {
+                        pricesCombined.Add(_pizzas[i].Total);
+
+                    }
+
+                }
+            }
+
+
 
         }
+
 
 
 
