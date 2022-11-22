@@ -15,7 +15,7 @@ namespace PizzaApp_WPF.ViewModel
     {
         static PizzaListModel menu = new();
 
-        [ObservableProperty] ObservableCollection<PizzaModel>? _menuList = menu.PizzasList;
+        [ObservableProperty] ObservableCollection<PizzaModel>? _menuList ;
         [ObservableProperty] int _menuSelectedIndex = -1;
 
         [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
