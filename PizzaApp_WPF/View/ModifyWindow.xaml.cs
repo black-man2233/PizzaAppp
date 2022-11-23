@@ -2,6 +2,7 @@
 using PizzaApp_WPF.ViewModel;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 namespace PizzaApp_WPF.View
@@ -13,25 +14,21 @@ namespace PizzaApp_WPF.View
     {
 #pragma warning disable
 
+        public static ModifyViewModel mvm;
         public ModifyWindow(PizzaModel pizza)
         {
             InitializeComponent();
-            ModifyViewModel viewModel = new ModifyViewModel(pizza);
-            this.DataContext = viewModel;
 
-            ModifyViewModel.pizza.Total = (EditModifiedPrice()) + (ModifyViewModel.pizza.Price);
-
+            mvm = new ModifyViewModel(pizza);
+            this.DataContext = mvm;
         }
 
         //checkBoxes
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            CheckBox? c = sender as CheckBox;
-            if (c != null)
+            if (sender is CheckBox c)
             {
-                ToppingsModel? t = c.Tag as ToppingsModel;
-
-                if (t != null)
+                if (c.Tag is ToppingsModel)
                 {
                     //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
                     //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "False";
@@ -68,25 +65,7 @@ namespace PizzaApp_WPF.View
 
 
         //Buttons
-        private void Increase_btClick(object sender, RoutedEventArgs e)
-        {
-            Button b = sender as Button;
-
-            ExtrasModel extra = b.Tag as ExtrasModel;
-
-            if (extra.Amount < 30)
-            {
-                extra.Amount++;
-
-                ModifyViewModel.pizza.Total = (EditModifiedPrice()) + (ModifyViewModel.pizza.Price);
-
-            }
-            else
-            {
-                MessageBox.Show("Du kan ikke få mere end 30");
-
-            }
-        }
+        
         private void Decrease_btClick(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
@@ -95,7 +74,7 @@ namespace PizzaApp_WPF.View
             if (extra.Amount > 0)
             {
                 extra.Amount--;
-                ModifyViewModel.pizza.Total = (EditModifiedPrice()) + (ModifyViewModel.pizza.Price);
+                mvm.pizza.Total = (EditModifiedPrice()) + (mvm.pizza.Price);
 
             }
             else
@@ -104,16 +83,17 @@ namespace PizzaApp_WPF.View
             }
 
         }
-        static int EditModifiedPrice()
+
+
+        public static int EditModifiedPrice()
         {
-            var extras = ModifyViewModel._extras;
+            var extras = mvm.pizza.Extras;
 
             ObservableCollection<int> allPrices = new();
 
-
             for (int i = 0; i < extras.Count; i++)
             {
-                if (ModifyViewModel._extras[i].Amount > 0)
+                if (extras[i].Amount > 0)
                 {
                     allPrices.Add((extras[i].Amount) * (extras[i].Price));
                 }

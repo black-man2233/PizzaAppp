@@ -1,0 +1,29 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Annas",
+    "price": 17,
+    "amount": 0
+  },
+  {
+    "id": 2,
+    "name": "Bacon",
+    "price": 22,
+    "amount": 0
+
+  },
+  {
+    "id": 3,
+    "name": "Chili",
+    "price": 3,
+    "amount": 0
+
+  },
+  {
+    "id": 4,
+    "name": "Dressing",
+    "price": 17,
+    "amount": 0
+
+  }
+]

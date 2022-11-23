@@ -1,4 +1,7 @@
-﻿using PizzaApp_WPF.Model;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DevExpress.Internal;
+using DevExpress.Utils.MVVM;
+using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
 using System;
 using System.Collections.ObjectModel;
@@ -13,62 +16,79 @@ namespace PizzaApp_WPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel mvm = new();
+
 
         public MainWindow()
         {
             InitializeComponent();
         }
-        private void ToPayment_bt_Click(object sender, RoutedEventArgs e)
+
+        private static bool IsDrink(PizzaModel element)
         {
-            try
-            {
-                Button? b = sender as Button;
-                MainViewModel? vm = b.Tag as MainViewModel;
-
-
-                ConfirmWindow confirm = new(_cartList: vm.CartList);
-                _ = confirm.ShowDialog();
-
-                vm.TotPrice = MainViewModel.totCalc().ToString();
-
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return element.Extras == null;
         }
 
-        private void DrinksDoubleclick(object sender, MouseButtonEventArgs e)
+        private void AddButton(object sender, RoutedEventArgs e)
         {
-            ListBox? a = sender as ListBox;
-
-            if (a.Tag is MainViewModel vm)
+            if (sender is Button b)
             {
-                //DrinksModel d = vm.Drinks[vm.DrinksSelected];
-                //vm.CartList.Add(new PizzaModel(d.Name, d.Price, d.Price, d.Name, null, null));
-
-                if (a.SelectedItem is DrinksModel d)
+                if (b.Tag is MainViewModel vm)
                 {
-                    MainViewModel._cartList.Add(new PizzaModel(d.Name, d.Price, d.Price, d.Name, null, null));
+                    try
+                    {
+                        var pizzafinale = vm.MenuList[vm.MenuSelectedIndex];
+                        ObservableCollection<ExtrasModel> extras = new();
+
+#pragma warning disable CS8604 // Possible null reference argument.
+                        //vm.CartList.Add(new PizzaModel(
+                        //    new(pizzafinale.Name),
+                        //    pizzafinale.Price,
+                        //    pizzafinale.Total,
+                        //    pizzafinale.Description,
+                        //    new(collection: pizzafinale.Toppings),
+                        //    new(extras)));
+#pragma warning restore CS8604 // Possible null reference argument.
+
+                        vm.TotPrice = MainViewModel.totCalc();
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = MessageBox.Show($@"Vælge venligste et element fra Pizza Menu \n {ex.Message}");
+                    }
                 }
-
-                vm.TotPrice = MainViewModel.totCalc().ToString();
             }
         }
-        private void DrinkSizeSelected(object sender, RoutedEventArgs e)
+        private void AddToCart(object sender, MouseButtonEventArgs e)
         {
-            ComboBox? c = sender as ComboBox;
-
-            if (c.Tag is DrinksModel d)
+            if (sender is DataGrid d)
             {
-                if (c.SelectedValue is DrinksSize p)
+                if (d.SelectedItem is PizzaModel p)
                 {
-                    MainViewModel._cartList.Add(new PizzaModel(d.Name, p.Price, p.Price, null, null, null));
+                    if (d.Tag is MainViewModel vm)
+                    {
+                        try
+                        {
+                            PizzaModel pizzafinale = vm.MenuSelectedValue;
+                            ObservableCollection<ExtrasModel> extras = new();
+                            //vm.CartList.Add(new PizzaModel(new(pizzafinale.Name),
+                            //                               pizzafinale.Price,
+                            //                               pizzafinale.Total,
+                            //                               pizzafinale.Description,
+                            //                               new(collection: pizzafinale.Toppings),
+                            //                               new(extras)));
 
-                    c.Text = "Select Size";
+                            vm.TotPrice = MainViewModel.totCalc();
+                        }
+                        catch (Exception ex)
+                        {
 
+                            _ = MessageBox.Show($@"Vælge venligste et element fra Pizza Menu \n {ex.Message}");
+
+
+                        }
+
+                    }
                 }
             }
         }
@@ -81,9 +101,15 @@ namespace PizzaApp_WPF.View
 
                 if (IsDrink(vm.SelectedPizza) == false)
                 {
+                    if (vm.SelectedPizza.Extras.Count <= 0)
+                    {
+                        foreach (var item in vm.Extras)
+                        {
+                            vm.SelectedPizza.Extras.Add(item);
+                        }
+                    }
                     ModifyWindow modifyWindow = new(vm.SelectedPizza);
-                    modifyWindow.ShowDialog();
-                    vm.TotPrice = MainViewModel.totCalc().ToString();
+                    _ = modifyWindow.ShowDialog();
 
                 }
                 else
@@ -93,10 +119,10 @@ namespace PizzaApp_WPF.View
             }
             catch (Exception ex)
             {
-
                 _ = MessageBox.Show($"{ex.Message}");
             }
         }
+
 
         private void EditButton(object sender, RoutedEventArgs e)
         {
@@ -114,62 +140,6 @@ namespace PizzaApp_WPF.View
             else
             {
                 _ = MessageBox.Show("Ingen Valgte Pizza fra Kurven", "Hov");
-            }
-        }
-
-        private static bool IsDrink(PizzaModel element)
-        {
-            return element.Extras == null;
-        }
-
-        private void AddButton(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button b)
-            {
-                MainViewModel? _vm = b.Tag as MainViewModel;
-
-                ObservableCollection<PizzaModel>? _cartList = _vm.CartList;
-
-                try
-                {
-                    PizzaModel p = _vm.MenuList[_vm.MenuSelectedIndex];
-
-                    //_cartList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
-
-                    _cartList.Add(p);
-
-                    _vm.TotPrice = MainViewModel.totCalc().ToString();
-
-                }
-                catch (Exception ex)
-                {
-                    _ = MessageBox.Show($@"Vælge venligste et element fra Pizza Menu \n {ex.Message}");
-                }
-            }
-        }
-        private void AddToCart(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is DataGrid d)
-            {
-                try
-                {
-                    if (d.Tag is MainViewModel vm)
-                    {
-                        if (d.CurrentItem is PizzaModel currentPizza)
-                        {
-                            vm.CartList.Add(new PizzaModel(currentPizza.Name, currentPizza.Price, currentPizza.Price, currentPizza.Description, currentPizza.Toppings, currentPizza.Extras));
-                            vm.TotPrice = MainViewModel.totCalc().ToString();
-                        }
-
-                    }
-                }
-                catch (Exception)
-                {
-
-                    _ = MessageBox.Show("Someting Went Wrong, ", "How");
-                }
-
-
             }
         }
 
@@ -194,6 +164,56 @@ namespace PizzaApp_WPF.View
             }
         }
 
+        private void DrinksDoubleclick(object sender, MouseButtonEventArgs e)
+        {
+            ListBox? a = sender as ListBox;
 
+            if (a.Tag is MainViewModel vm)
+            {
+                if (a.SelectedItem is DrinksModel d)
+                {
+                    //MainViewModel._cartList.Add(new PizzaModel(d.Name, d.Price, d.Price, d.Name, null, null));
+                }
+
+                vm.TotPrice = MainViewModel.totCalc();
+            }
+        }
+        private void DrinkSizeSelected(object sender, RoutedEventArgs e)
+        {
+            if (sender is ComboBox c)
+            {
+                if (c.Tag is MainViewModel vm)
+                {
+                    if (c.SelectedItem is DrinksSize d)
+                    {
+                        //vm.CartList.Add(new PizzaModel(d.Name, d.Price, d.Price, d.Name, null, null));
+                    }
+
+                    vm.TotPrice = MainViewModel.totCalc();
+                }
+            }
+        }
+
+        private void ToPayment_bt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button? b = sender as Button;
+                MainViewModel? vm = b.Tag as MainViewModel;
+
+
+                ConfirmWindow confirm = new(_cartList: vm.CartList);
+                _ = confirm.ShowDialog();
+
+                vm.TotPrice = MainViewModel.totCalc().ToString();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

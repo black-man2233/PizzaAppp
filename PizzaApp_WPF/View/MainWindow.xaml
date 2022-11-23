@@ -33,13 +33,8 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition /> <RowDefinition /><RowDefinition /> <RowDefinition /> <RowDefinition /> 
         </Grid.RowDefinitions>
 
         <!--Logoen til appen -->
@@ -65,7 +60,7 @@
         <!--Menukortets ListBoxen-->
         <DataGrid ItemsSource="{Binding MenuList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding MenuSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" MouseDoubleClick="AddToCart" Tag="{Binding}">
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" MouseDoubleClick="AddToCart" Tag="{Binding}" SelectedValue="{Binding MenuSelectedValue}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
@@ -104,7 +99,7 @@
                             <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
 
 
-                            <ComboBox ItemsSource="{Binding Capacity}" Grid.Column="2" SelectionChanged="DrinkSizeSelected" Tag="{Binding}" IsTextSearchEnabled="False" x:Name="Ccomb"  >
+                            <ComboBox ItemsSource="{Binding Capacity}" Grid.Column="2" SelectionChanged="DrinkSizeSelected"  Tag="{Binding Source={StaticResource vm}}" IsTextSearchEnabled="False" x:Name="Ccomb" Text="Sizes"> 
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -122,7 +117,7 @@
         </ListBox>
 
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Tilføj" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Click="AddButton" Tag="{Binding}"  />
+        <Button Grid.Column="1" Grid.Row="1" Content="Tilføj" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Command="{Binding AddToCart}" Tag="{Binding}"  />
 
         <Button Grid.Column="1" Grid.Row="2" Content="Slet" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Click="DeleteButton"/>
 

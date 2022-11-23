@@ -15,7 +15,7 @@ namespace PizzaApp_WPF.ViewModel
 {
     public partial class ConfirmViewModel : ObservableObject
     {
-        static ObservableCollection<PizzaModel> items;
+        //static ObservableCollection<PizzaModel> items;
 
         public ConfirmViewModel(ObservableCollection<PizzaModel> cart)
         {
@@ -49,7 +49,7 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
 
-        private static string _totalPrice;
+        private static string _totalPrice = "0";
         public string TotalPrice
         {
             get => _totalPrice;
@@ -88,7 +88,7 @@ namespace PizzaApp_WPF.ViewModel
 
 
 #pragma warning disable
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             Application.Current.Dispatcher.BeginInvoke((Action)(() =>

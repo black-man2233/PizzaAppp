@@ -1,61 +1,43 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows;
+using PizzaApp_WPF.View;
 
 namespace PizzaApp_WPF.ViewModel
 {
 #pragma warning disable
-    public partial class ModifyViewModel : ObservableObject, INotifyPropertyChanged
+    public partial class ModifyViewModel : ObservableObject
     {
-        public ModifyViewModel(PizzaModel __pizza)
+        public ModifyViewModel(PizzaModel aPizza)
         {
-            pizza = __pizza;
-            _pizzaDescription= pizza.Description;
-            _toppings= pizza.Toppings;
-            _extras= pizza.Extras;
-            this._total = pizza.Total.ToString();
+            this.pizza = aPizza;
         }
 
+        [ObservableProperty] public PizzaModel pizza = null;
 
-        [ObservableProperty] public static PizzaModel pizza;
-
-        [ObservableProperty] string? _pizzaDescription;
-
-        [ObservableProperty] static ObservableCollection<ToppingsModel>? _toppings;
-
-        [ObservableProperty] public static ObservableCollection<ExtrasModel>? _extras;
-
-
-        private string _total;
-        public string Total
+        #region Button
+        public void Increase_btClick(object sender, RoutedEventArgs e)
         {
-            get
+            Button b = sender as Button;
+
+            ExtrasModel extra = b.Tag as ExtrasModel;
+
+            if (extra.Amount < 30)
             {
-                return _total;
+                extra.Amount++;
+
+                this.pizza.Total = (ModifyWindow.EditModifiedPrice()) + (this.pizza.Price);
+
             }
-            set
+            else
             {
-                _total = value;
-                OnPropertyChanged("Total");
+                MessageBox.Show("Du kan ikke få mere end 30");
+
             }
         }
 
-
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-            {
-                PropertyChangedEventHandler handler = PropertyChanged;
-                if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-            }));
-        }
+        #endregion
 
     }
 }
