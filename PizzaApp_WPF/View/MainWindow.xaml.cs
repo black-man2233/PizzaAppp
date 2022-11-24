@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using PizzaApp_WPF.Model;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PizzaApp_WPF.View
 {
@@ -11,6 +13,26 @@ namespace PizzaApp_WPF.View
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+
+
+        public ICommand SelectedDrinksSizeChangedCommand
+        {
+            get { return (ICommand)GetValue(SelectedDrinksSizeChangedCommandProperty); }
+            set { SetValue(SelectedDrinksSizeChangedCommandProperty, value); }
+        }
+        public static readonly DependencyProperty SelectedDrinksSizeChangedCommandProperty =
+            DependencyProperty.Register("MyProperty", typeof(ICommand), typeof(DrinksModel), new PropertyMetadata(null));
+
+
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedDrinksSizeChangedCommand != null)
+            {
+                //SelectedDrinksSizeChangedCommand.Execute(Yaoo.SelectedItem);
+            }
         }
     }
 }

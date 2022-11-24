@@ -21,26 +21,26 @@ namespace PizzaApp_WPF.ViewModel
         #region Contstructor
         public MainViewModel()
         {
-                #region Data
-                DataBaseViewModel menu = new();
-                for (int i = 0; i < menu.PizzasList.Count; i++)
-                {
-                    var p = menu.PizzasList[i];
-                    _menuList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
-                }
+            #region Data
+            DataBaseViewModel menu = new();
+            for (int i = 0; i < menu.PizzasList.Count; i++)
+            {
+                var p = menu.PizzasList[i];
+                _menuList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
+            }
 
-                for (int i = 0; i < menu.DrinksList.Count; i++)
-                {
-                    var d = menu.DrinksList[i];
-                    _drinksList.Add(new DrinksModel(d.Name, d.Price, d.Capacity));
-                }
+            for (int i = 0; i < menu.DrinksList.Count; i++)
+            {
+                var d = menu.DrinksList[i];
+                _drinksList.Add(new DrinksModel(d.Name, d.Price, d.Capacity));
+            }
 
-                for (int i = 0; i < menu.ExtrasList.Count; i++)
-                {
-                    var e = menu.ExtrasList[i];
-                    Extras.Add(new ExtrasModel(e.Name, e.Price, e.Amount));
-                }
-                #endregion
+            for (int i = 0; i < menu.ExtrasList.Count; i++)
+            {
+                var e = menu.ExtrasList[i];
+                Extras.Add(new ExtrasModel(e.Name, e.Price, e.Amount));
+            }
+            #endregion
 
             #region Commands initialised
 
@@ -101,8 +101,8 @@ namespace PizzaApp_WPF.ViewModel
         public ICommand RemoveFromCartCommand { get; set; }
         public ICommand ModifyFromCartCommand { get; set; }
         public ICommand GoToConfirmCommand { get; set; }
-        
-        
+
+
         #endregion
 
         #region Event Method        
@@ -119,10 +119,13 @@ namespace PizzaApp_WPF.ViewModel
                 var pizza = MenuSelectedValue;
                 _cartList.Add(new PizzaModel(pizza.Name, pizza.Price, pizza.Price, pizza.Description, new(pizza.Toppings), new(Extras)));
                 totCalc();
+
             }
             else
                 MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
         }
+
+      
 
         /// <summary>Determines whether this instance can add the specified value.</summary>
         /// <returns>
@@ -144,7 +147,7 @@ namespace PizzaApp_WPF.ViewModel
             if (_drinksList is not null)
             {
                 var d = SelectedDrinksSize;
-                _cartList.Add(new PizzaModel($"{ d.Name.Substring(0)} {DrinksName}/", d.Price, d.Price, null, null, null));
+                _cartList.Add(new PizzaModel($"{d.Name.Substring(0)} {DrinksName}/", d.Price, d.Price, null, null, null));
                 totCalc();
             }
             else
