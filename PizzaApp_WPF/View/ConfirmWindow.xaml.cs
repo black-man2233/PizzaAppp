@@ -71,7 +71,7 @@ namespace PizzaApp_WPF.View
                 _ = MainViewModel._cartList.Remove(element);
 #pragma warning restore CS8604 // Possible null reference argument.
 
-                MainViewModel._totPrice = MainViewModel.totCalc();
+                //MainViewModel._totPrice = MainViewModel.totCalc();
                 ConfirmViewModel.totCalc();
             }
         }
@@ -86,7 +86,7 @@ namespace PizzaApp_WPF.View
                 _ = ConfirmViewModel._drinks.Remove(element);
                 _ = MainViewModel._cartList.Remove(element);
 #pragma warning restore CS8604 // Possible null reference argument.
-                MainViewModel._totPrice = MainViewModel.totCalc();
+                //MainViewModel._totPrice = MainViewModel.totCalc();
                 ConfirmViewModel.totCalc();
 
             }
@@ -94,7 +94,7 @@ namespace PizzaApp_WPF.View
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            MainViewModel._totPrice = MainViewModel.totCalc();
+            //MainViewModel._totPrice = MainViewModel.totCalc();
             Close();
 
         }

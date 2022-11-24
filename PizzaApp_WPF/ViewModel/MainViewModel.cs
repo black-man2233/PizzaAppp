@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using PizzaApp_WPF.Command;
 using PizzaApp_WPF.Model;
+using PizzaApp_WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,129 +13,71 @@ using System.Windows.Input;
 namespace PizzaApp_WPF.ViewModel
 {
 #pragma warning disable
+    /// <summary>
+    ///   <br />
+    /// </summary>
     public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
     {
         #region Contstructor
         public MainViewModel()
         {
-            #region Data
-            DataBaseViewModel menu = new();
-            for (int i = 0; i < menu.PizzasList.Count; i++)
-            {
-                var p = menu.PizzasList[i];
-                _menuList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
-            }
+                #region Data
+                DataBaseViewModel menu = new();
+                for (int i = 0; i < menu.PizzasList.Count; i++)
+                {
+                    var p = menu.PizzasList[i];
+                    _menuList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
+                }
 
-            for (int i = 0; i < menu.DrinksList.Count; i++)
-            {
-                var d = menu.DrinksList[i];
-                _drinks.Add(new DrinksModel(d.Name, d.Price, d.Capacity));
-            }
+                for (int i = 0; i < menu.DrinksList.Count; i++)
+                {
+                    var d = menu.DrinksList[i];
+                    _drinksList.Add(new DrinksModel(d.Name, d.Price, d.Capacity));
+                }
 
-            for (int i = 0; i < menu.ExtrasList.Count; i++)
-            {
-                var e = menu.ExtrasList[i];
-                Extras.Add(new ExtrasModel(e.Name, e.Price, e.Amount));
-            }
+                for (int i = 0; i < menu.ExtrasList.Count; i++)
+                {
+                    var e = menu.ExtrasList[i];
+                    Extras.Add(new ExtrasModel(e.Name, e.Price, e.Amount));
+                }
+                #endregion
+
+            #region Commands initialised
+
+            ModifyFromCartCommand = new Command.RelayCommand.RelayCommand(ModifyFromCart, CanModiFy);
+            RemoveFromCartCommand = new Command.RelayCommand.RelayCommand(RemoveFromCart, CanRemove);
+            AddToCartCommand = new Command.RelayCommand.RelayCommand(AddToCart, CanAdd);
+            GoToConfirmCommand = new Command.RelayCommand.RelayCommand(GoToConfirm, CanGoToConfirm);
+
             #endregion
-
-
-            //#region Commands initialised
-            //AddToCart = new Command.RelayCommand(CanAdd, CanEdit);
-            //#endregion
-
 
         }
         #endregion
 
         #region Properties
-        #region Menu
+
         [ObservableProperty] ObservableCollection<PizzaModel>? _menuList = new();
         [ObservableProperty] ObservableCollection<ExtrasModel>? _extras = new();
         [ObservableProperty] int _menuSelectedIndex = -1;
         [ObservableProperty] PizzaModel _menuSelectedValue;
-        #endregion
 
-        #region Drinks
-        [ObservableProperty] ObservableCollection<DrinksModel> _drinks = new();
-        [ObservableProperty] int _drinksSelected;
-        [ObservableProperty] PizzaModel _selectedPizza;
-        #endregion
+        [ObservableProperty] ObservableCollection<DrinksModel> _drinksList = new();
+        [ObservableProperty] DrinksModel _drinksName;
+        private DrinksSize _selectedDrinksSize;
+        public DrinksSize SelectedDrinksSize
+        {
+            get => _selectedDrinksSize;
+            set
+            {
+                _selectedDrinksSize = value;
+                AddDrinks();
+                OnPropertyChanged("SelectedDrinksSize");
+            }
+        }
 
-        #region Cart
         [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
         [ObservableProperty] public static PizzaModel _cartSelectedItem;
         [ObservableProperty] int _cartSelectedIndex = -1;
-        #endregion
-
-        #region buton   
-        private bool _isButtonClicked;
-        public bool IsButtonClicked
-        {
-            get { return _isButtonClicked; }
-            set { SetProperty(ref _isButtonClicked, value); }
-        }
-        #endregion
-        #endregion
-
-
-        #region ICommands  
-
-        public ICommand AddToCart { get; set; }
-        public ICommand RemoveFromCart { get; set; }
-        public ICommand CustomiseFromCart { get; set; }
-        public ICommand GoToPayment { get; set; }
-        #endregion
-
-        #region Event Method        
-
-        private void CanAdd(object value)
-        {
-            IsButtonClicked = true;
-        }
-
-
-
-        private void AddToCartFromMenu()
-        {
-
-        }
-
-
-        private bool CanEdit(object value)
-        {
-            try
-            {
-
-                if (_cartSelectedItem.Extras is null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            return true;
-        }
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
 
         public static string _totPrice;
         public string TotPrice
@@ -146,8 +87,176 @@ namespace PizzaApp_WPF.ViewModel
             set { _totPrice = value; OnPropertyChanged("TotPrice"); }
         }
 
+        private bool _isButtonClicked;
+        public bool IsButtonClicked
+        {
+            get { return _isButtonClicked; }
+            set { SetProperty(ref _isButtonClicked, value); }
+        }
 
-        public static string totCalc()
+        #endregion
+
+        #region ICommands  
+        public ICommand AddToCartCommand { get; set; }
+        public ICommand RemoveFromCartCommand { get; set; }
+        public ICommand ModifyFromCartCommand { get; set; }
+        public ICommand GoToConfirmCommand { get; set; }
+        
+        
+        #endregion
+
+        #region Event Method        
+
+        //Add Pizza to cart
+        /// <summary>
+        /// Adds the selectedItem from Menu to cart.
+        /// </summary>
+        private void AddToCart(object value)
+        {
+            if (MenuSelectedValue is not null)
+            {
+                IsButtonClicked = false;
+                var pizza = MenuSelectedValue;
+                _cartList.Add(new PizzaModel(pizza.Name, pizza.Price, pizza.Price, pizza.Description, new(pizza.Toppings), new(Extras)));
+                totCalc();
+            }
+            else
+                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
+        }
+
+        /// <summary>Determines whether this instance can add the specified value.</summary>
+        /// <returns>
+        ///   <c>true</c> if this instance can add the specified value; otherwise, <c>false</c>.</returns>
+        private bool CanAdd(object value)
+        {
+            if (MenuSelectedIndex < -1)
+                return false;
+            else
+                return true;
+        }
+
+        //Add Drinks to cart
+        /// <summary>
+        /// Adds the drinks according to the selected Size.
+        /// </summary>
+        void AddDrinks()
+        {
+            if (_drinksList is not null)
+            {
+                var d = SelectedDrinksSize;
+                _cartList.Add(new PizzaModel($"{ d.Name.Substring(0)} {DrinksName}/", d.Price, d.Price, null, null, null));
+                totCalc();
+            }
+            else
+                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
+        }
+
+
+
+        //Removes items from cart
+        /// <summary>
+        /// Removes from cart according to the selected Item.
+        /// </summary>
+        private void RemoveFromCart(object value)
+        {
+            if (CartSelectedItem is not null)
+            {
+                IsButtonClicked = false;
+                _cartList.Remove(CartSelectedItem);
+                totCalc();
+            }
+            else
+                MessageBox.Show($@"Vælge venligste et element fra kurven");
+
+        }
+
+        /// <summary>Determines whether this instance can remove the specified value.</summary>
+        /// <returns>
+        ///   <c>true</c> if this instance can remove the specified value; otherwise, <c>false</c>.</returns>
+        private bool CanRemove(object value)
+        {
+            if (CartSelectedIndex < -1)
+                return false;
+            else
+                return true;
+        }
+
+        //Modify pizza from cart
+        /// <summary> Opens a modification window, for the CartSelectedItem</summary>
+        /// <param name="value"></param>
+        private void ModifyFromCart(object value)
+        {
+            if (CartSelectedItem is not null)
+            {
+                IsButtonClicked = false;
+
+                ModifyWindow modifyWindow = new(CartSelectedItem);
+                modifyWindow.ShowDialog();
+            }
+            else
+                MessageBox.Show($@"Vælge venligste et element fra kurven");
+
+        }
+
+        /// <summary>Determines whether this instance Canmodify the selected item.</summary>
+        /// <returns>
+        ///   <c>true</c> if this instance canmodify the specified value; otherwise, <c>false</c>.</returns>
+        private bool CanModiFy(object value)
+        {
+            if (CartSelectedIndex > -1)
+            {
+                if (CartSelectedItem.Extras is null)
+                {
+                    return false;
+
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        //GoTo Confirm
+        /// <summary>Goes to confirmation Window.</summary>
+        /// <param name="value">The value.</param>
+        private void GoToConfirm(object value)
+        {
+            if (CartList.Count is not 0)
+            {
+                IsButtonClicked = false;
+
+                ConfirmWindow confirmWindow = new(CartList);
+                confirmWindow.ShowDialog();
+            }
+            else
+                MessageBox.Show("Fyld venligste Kurven op", "Hov");
+        }
+
+        /// <summary>Determines whether this instance Can go to Confirm the specified value.</summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        ///   <c>true</c> if this the cart isnt't empty; otherwise, <c>false</c>.</returns>
+        private bool CanGoToConfirm(object value)
+        {
+            if (CartList.Count < 0)
+            {
+                return false;
+            }
+            else
+                return true;
+        }
+
+        //Calctulator of total price
+        /// <summary>  <para> Total Price calculator.</para>
+        ///   <para>Calculates According to the price of items in the cart </para>
+        /// </summary>
+        void totCalc()
         {
             var c = _cartList;
             List<int> pricesCombined = new();
@@ -156,11 +265,10 @@ namespace PizzaApp_WPF.ViewModel
             {
                 pricesCombined.Add(c[i].Total);
             }
-            return (pricesCombined.Sum()).ToString();
-
+            TotPrice = (pricesCombined.Sum()).ToString();
         }
 
-
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

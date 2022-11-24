@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows.Input;
+using PIzzaApp_WPF
 
 namespace WPFAPP
 {
@@ -20,7 +21,8 @@ namespace WPFAPP
         public MainWindowViewModel()
         {
             RegisterButtonClicked = new RelayCommand(RegisterUser, CanUserRegister);
-            ResetButtonClicked = new RelayCommand(ResetPage, CanResetPage);
+            
+            ResetButtonClicked = new RelayCommand(AddToCart, CanAddToCart);
         }
 
         #region ICommands  
@@ -49,17 +51,15 @@ namespace WPFAPP
             }
         }
 
-        private void ResetPage(object value)
+        private void AddToCart(object value)
         {
             IsButtonClicked = false;
             UserName = Age = EmailId = "";
         }
 
-        private bool CanResetPage(object value)
+        private bool CanAddToCart(object value)
         {
-            if (string.IsNullOrEmpty(UserName)
-                || string.IsNullOrEmpty(EmailId)
-                || string.IsNullOrEmpty(Age))
+            if (CartSelectedIndex < 0)
             {
                 return false;
             }

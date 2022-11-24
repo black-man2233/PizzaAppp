@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
-using System.Windows.Controls;
-using System.Windows;
-using PizzaApp_WPF.View;
 
 namespace PizzaApp_WPF.ViewModel
 {
@@ -14,30 +11,28 @@ namespace PizzaApp_WPF.ViewModel
             this.pizza = aPizza;
         }
 
-        [ObservableProperty] public PizzaModel pizza = null;
+        [ObservableProperty] PizzaModel pizza;
 
-        #region Button
-        public void Increase_btClick(object sender, RoutedEventArgs e)
-        {
-            Button b = sender as Button;
+        //public void Increase_btClick(object sender, RoutedEventArgs e)
+        //{
+        //    Button b = sender as Button;
 
-            ExtrasModel extra = b.Tag as ExtrasModel;
+        //    ExtrasModel extra = b.Tag as ExtrasModel;
 
-            if (extra.Amount < 30)
-            {
-                extra.Amount++;
+        //    if (extra.Amount < 30)
+        //    {
+        //        extra.Amount++;
 
-                this.pizza.Total = (ModifyWindow.EditModifiedPrice()) + (this.pizza.Price);
+        //        this.pizza.Total = (ModifyWindow.EditModifiedPrice()) + (this.pizza.Price);
 
-            }
-            else
-            {
-                MessageBox.Show("Du kan ikke få mere end 30");
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Du kan ikke få mere end 30");
 
-            }
-        }
+        //    }
+        //}
 
-        #endregion
 
     }
 }

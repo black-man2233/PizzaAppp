@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PizzaApp_WPF.Command
+namespace PizzaApp_WPF.Command.RelayCommand
 {
+#pragma warning disable
     public class RelayCommand : ICommand
     {
         Action<object> _execute;

@@ -6,6 +6,7 @@ namespace PizzaApp_WPF.Model
 
     public partial class PizzaModel : ObservableObject
     {
+#pragma warning disable
         #region Properties
         [ObservableProperty] ObservableCollection<ToppingsModel>? _toppings;
         [ObservableProperty] ObservableCollection<ExtrasModel>? _extras;
@@ -20,15 +21,10 @@ namespace PizzaApp_WPF.Model
         public PizzaModel(string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
         {
             Name = new(name);
-
             Price = price;
-
             Total = total;
-
             Description = Description != null ? (new(description)) : null;
-
             Toppings = toppings != null ? (new(toppings)) : null;
-
             Extras = extras != null ? (new(extras)) : null;
         }
 

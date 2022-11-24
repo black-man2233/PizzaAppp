@@ -7,22 +7,20 @@
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
         xmlns:model="clr-namespace:PizzaApp_WPF.Model"
         mc:Ignorable="d"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        
-        
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"       
         WindowStyle="SingleBorderWindow"
-        
         WindowStartupLocation="CenterScreen"
         Height="800" 
         Width="1040"
         Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
         ResizeMode="NoResize"
-        BorderThickness=".5"
-        >
+        BorderThickness=".5">
 
 
     <Window.Resources>
         <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
+
+
     </Window.Resources>
 
 
@@ -34,7 +32,11 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition /> <RowDefinition /><RowDefinition /> <RowDefinition /> <RowDefinition /> 
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!--Logoen til appen -->
@@ -60,7 +62,7 @@
         <!--Menukortets ListBoxen-->
         <DataGrid ItemsSource="{Binding MenuList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding MenuSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" MouseDoubleClick="AddToCart" Tag="{Binding}" SelectedValue="{Binding MenuSelectedValue}">
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" Tag="{Binding}" SelectedValue="{Binding MenuSelectedValue}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
@@ -81,25 +83,24 @@
         </DataGrid>
 
 
-        <ListBox ItemsSource="{Binding Drinks}" MouseDoubleClick="DrinksDoubleclick" Tag="{Binding}" Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818">
+        <ListBox ItemsSource="{Binding DrinksList}" Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Width="330">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition /> 
+                                <ColumnDefinition />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
+                            <TextBlock  Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
                             <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
 
-
-                            <ComboBox ItemsSource="{Binding Capacity}" Grid.Column="2" SelectionChanged="DrinkSizeSelected"  Tag="{Binding Source={StaticResource vm}}" IsTextSearchEnabled="False" x:Name="Ccomb" Text="Sizes"> 
+                            <ComboBox ItemsSource="{Binding Capacity}" SelectedItem="{Binding SelectedDrinksSize, Source={StaticResource vm}}" Grid.Column="2">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -117,15 +118,13 @@
         </ListBox>
 
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Tilføj" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Command="{Binding AddToCart}" Tag="{Binding}"  />
+        <Button Command="{Binding AddToCartCommand}" Grid.Column="1" Grid.Row="1" Content="Tilføj" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke"/>
 
-        <Button Grid.Column="1" Grid.Row="2" Content="Slet" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Click="DeleteButton"/>
+        <Button Command="{Binding RemoveFromCartCommand}" Grid.Column="1" Grid.Row="2" Content="Slet" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" />
 
-        <Button Grid.Column="1" Grid.Row="3" Content="Redigere"
-                FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" Click="EditButton" Tag="{Binding}"/>
+        <Button Command="{Binding ModifyFromCartCommand}" Content="Redigere" Grid.Column="1" Grid.Row="3" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke"/>
 
-        <DataGrid Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" ItemsSource="{Binding CartList,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding CartSelectedIndex}" MouseDoubleClick="EditButton" Tag="{Binding}"
-                  AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818">
+        <DataGrid ItemsSource="{Binding CartList,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding CartSelectedIndex}" SelectedItem="{Binding CartSelectedItem}" Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Path=Name}"/>
@@ -149,12 +148,11 @@
 
         <!--Den samlede pris af indkøbskruvens indhold-->
         <Grid  Grid.Column="2" Grid.Row="3"  Background="#181818" VerticalAlignment="Center" HorizontalAlignment="Center" Height="70" >
-            <TextBlock Text="{Binding TotPrice, StringFormat=' Total : {0} ', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="300"  FontFamily="Arial" FontSize=" 30" FontWeight="DemiBold" TextAlignment="Center" Foreground="#FFF" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding TotPrice, StringFormat=' Total : {0} ', UpdateSourceTrigger=PropertyChanged}" Width="300"  FontFamily="Arial" FontSize=" 30" FontWeight="DemiBold" TextAlignment="Center" Foreground="#FFF" VerticalAlignment="Center" />
         </Grid>
 
 
-        <Button FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="4" Height="130" Background="Transparent"  Click="ToPayment_bt_Click" Width="140" Tag="{Binding}" BorderBrush="Transparent">
-
+        <Button Command="{Binding GoToConfirmCommand}" FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="4" Height="130" Background="Transparent" Width="140" BorderBrush="Transparent">
             <Button.Content >
                 <Grid >
                     <Image Source="https://cdn-icons-png.flaticon.com/512/2038/2038792.png"/>

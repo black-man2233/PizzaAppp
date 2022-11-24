@@ -5,11 +5,11 @@ namespace PizzaApp_WPF.Model.Pizzas
 {
     public partial class PIzzaMenuModel : ObservableObject
     {
+#pragma warning disable
         [ObservableProperty] string? _name;
         [ObservableProperty] int price;
         [ObservableProperty] ObservableCollection<ToppingsModel>? toppings;
         [ObservableProperty] ObservableCollection<ExtrasModel>? extras;
-
 
         public PIzzaMenuModel(string name, int price, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
         {
