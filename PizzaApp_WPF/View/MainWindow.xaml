@@ -62,7 +62,7 @@
         <!--Menukortets ListBoxen-->
         <DataGrid ItemsSource="{Binding MenuList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding MenuSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" Tag="{Binding}" SelectedValue="{Binding MenuSelectedValue}">
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" Tag="{Binding}" SelectedItem="{Binding MenuSelectedItem}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
@@ -100,7 +100,7 @@
                             <TextBlock  Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
                             <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
 
-                            <ComboBox ItemsSource="{Binding Capacity}" SelectedItem="{Binding SelectedDrinksSize, Source={StaticResource vm}}" Grid.Column="2" ToolTip="Vælge størrelsen på dit drikkevare" SelectionChanged="ComboBox_SelectionChanged" x:Name="Yaoo">
+                            <ComboBox ItemsSource="{Binding Capacity}" SelectedItem="{Binding SelectedDrinksSize, Source={StaticResource vm}}" Grid.Column="2" ToolTip="Vælge størrelsen på dit drikkevare">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>

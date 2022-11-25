@@ -18,8 +18,6 @@ namespace PizzaApp_WPF.Model
             Price = price;
             Capacity = capacity;
         }
-
-
         #endregion
 
     }

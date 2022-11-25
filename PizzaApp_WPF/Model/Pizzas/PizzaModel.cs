@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DevExpress.Utils.Url;
 using System.Collections.ObjectModel;
 
 namespace PizzaApp_WPF.Model
@@ -29,5 +30,34 @@ namespace PizzaApp_WPF.Model
         }
 
         #endregion
+
+
+        public PizzaModel Clone()
+        {
+            PizzaModel _pizzamodel = (PizzaModel)MemberwiseClone();
+            
+            //toppings
+            ObservableCollection<ToppingsModel> toppings = new();
+            for (int i = 0; i < toppings.Count; i++)
+            {
+                toppings[i].Name = _pizzamodel.Toppings[i].Name;
+            }
+            _pizzamodel.Toppings = toppings;
+
+
+            //Extras
+            ObservableCollection<ExtrasModel> extras = new();
+            for (int i = 0; i < extras.Count; i++)
+            {
+                extras[i].Name = _pizzamodel.Extras[i].Name;
+            }
+            _pizzamodel.Extras = extras;
+
+
+            return _pizzamodel;
+
+        }
+
+
     }
 }

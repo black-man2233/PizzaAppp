@@ -14,25 +14,5 @@ namespace PizzaApp_WPF.View
         {
             InitializeComponent();
         }
-
-
-
-        public ICommand SelectedDrinksSizeChangedCommand
-        {
-            get { return (ICommand)GetValue(SelectedDrinksSizeChangedCommandProperty); }
-            set { SetValue(SelectedDrinksSizeChangedCommandProperty, value); }
-        }
-        public static readonly DependencyProperty SelectedDrinksSizeChangedCommandProperty =
-            DependencyProperty.Register("MyProperty", typeof(ICommand), typeof(DrinksModel), new PropertyMetadata(null));
-
-
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (SelectedDrinksSizeChangedCommand != null)
-            {
-                //SelectedDrinksSizeChangedCommand.Execute(Yaoo.SelectedItem);
-            }
-        }
     }
 }

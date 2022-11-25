@@ -59,7 +59,7 @@ namespace PizzaApp_WPF.ViewModel
         [ObservableProperty] ObservableCollection<PizzaModel>? _menuList = new();
         [ObservableProperty] ObservableCollection<ExtrasModel>? _extras = new();
         [ObservableProperty] int _menuSelectedIndex = -1;
-        [ObservableProperty] PizzaModel _menuSelectedValue;
+        [ObservableProperty] PizzaModel _menuSelectedItem;
 
         [ObservableProperty] ObservableCollection<DrinksModel> _drinksList = new();
         [ObservableProperty] DrinksModel _drinksName;
@@ -113,11 +113,22 @@ namespace PizzaApp_WPF.ViewModel
         /// </summary>
         private void AddToCart(object value)
         {
-            if (MenuSelectedValue is not null)
+            if (MenuSelectedItem is not null)
             {
                 IsButtonClicked = false;
-                var pizza = MenuSelectedValue;
-                _cartList.Add(new PizzaModel(pizza.Name, pizza.Price, pizza.Price, pizza.Description, new(pizza.Toppings), new(Extras)));
+
+                var pizza = MenuSelectedItem.Clone();
+
+
+
+                if (MenuSelectedItem.Price == 76)
+                {
+                    MenuSelectedItem.Name = "Diii";
+                }
+
+
+
+                _cartList.Add(new PizzaModel(pizza.Name, pizza.Price, pizza.Price, pizza.Description, pizza.Toppings, Extras));
                 totCalc();
 
             }
@@ -125,7 +136,7 @@ namespace PizzaApp_WPF.ViewModel
                 MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
         }
 
-      
+
 
         /// <summary>Determines whether this instance can add the specified value.</summary>
         /// <returns>
@@ -273,6 +284,8 @@ namespace PizzaApp_WPF.ViewModel
 
         #endregion
 
+
+        #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -283,6 +296,6 @@ namespace PizzaApp_WPF.ViewModel
             }));
         }
 
-
+        #endregion
     }
 }
