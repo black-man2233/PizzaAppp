@@ -1,6 +1,8 @@
 ﻿using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
+
 namespace PizzaApp_WPF.View
 {
     /// <summary>
@@ -9,69 +11,14 @@ namespace PizzaApp_WPF.View
     public partial class ModifyWindow : Window
     {
 #pragma warning disable
+            ModifyViewModel mvm;
         public ModifyWindow(PizzaModel pizza)
         {
             InitializeComponent();
-            ModifyViewModel mvm = new ModifyViewModel(pizza);
+
+            mvm = new ModifyViewModel(pizza);
             this.DataContext = mvm;
         }
-
-        //checkBoxes
-        //private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    if (sender is CheckBox c)
-        //    {
-        //        if (c.Tag is ToppingsModel)
-        //        {
-        //            //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = false;
-        //            //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "False";
-        //            //MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
-
-        //        }
-        //    }
-        //}
-
-        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    CheckBox? c = sender as CheckBox;
-
-        //    if (c != null)
-        //    {
-        //        ToppingsModel? t = c.Tag as ToppingsModel;
-
-        //        if (t != null)
-        //        {
-        //            //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected = true;
-        //            //MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Name = "true";
-        //            //MessageBox.Show($"{MainViewModel._cartList[MainViewModel._cartSelectedIndex].Toppings[(t.Id) - 1].Selected}");
-
-        //        }
-        //    }
-
-        //}
-
-
-
-
-        ////Buttons
-
-        //private void Decrease_btClick(object sender, RoutedEventArgs e)
-        //{
-        //    Button b = sender as Button;
-
-        //    ExtrasModel extra = b.Tag as ExtrasModel;
-        //    if (extra.Amount > 0)
-        //    {
-        //        extra.Amount--;
-        //        mvm.pizza.Total = (EditModifiedPrice()) + (mvm.pizza.Price);
-
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Du kan ikke få mindre end nul");
-        //    }
-
-        //}
 
         //public static int EditModifiedPrice()
         //{
@@ -91,6 +38,32 @@ namespace PizzaApp_WPF.View
         private void ConfirmButton(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button b)
+            {
+                if (b.Tag is ExtrasModel exx)
+                {
+                    exx.Amount++;
+                }
+
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox c)
+            {
+                if (c.Tag is ToppingsModel t)
+                {
+                    t._Selected();
+
+                    //t.Selected = true;
+                }
+            }
+
         }
     }
 }

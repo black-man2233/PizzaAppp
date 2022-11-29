@@ -1,6 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DevExpress.Utils;
 using DevExpress.Utils.Url;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace PizzaApp_WPF.Model
 {
@@ -15,6 +19,8 @@ namespace PizzaApp_WPF.Model
         [ObservableProperty] string? _name;
         [ObservableProperty] int _total;
         [ObservableProperty] int _price;
+        private PizzaModel pizzaModel;
+
         #endregion
 
 
@@ -28,36 +34,23 @@ namespace PizzaApp_WPF.Model
             Toppings = toppings != null ? (new(toppings)) : null;
             Extras = extras != null ? (new(extras)) : null;
         }
-
         #endregion
-
-
-        public PizzaModel Clone()
+        public PizzaModel DeepCopy()
         {
-            PizzaModel _pizzamodel = (PizzaModel)MemberwiseClone();
-            
-            //toppings
-            ObservableCollection<ToppingsModel> toppings = new();
-            for (int i = 0; i < toppings.Count; i++)
-            {
-                toppings[i].Name = _pizzamodel.Toppings[i].Name;
-            }
-            _pizzamodel.Toppings = toppings;
-
-
-            //Extras
-            ObservableCollection<ExtrasModel> extras = new();
-            for (int i = 0; i < extras.Count; i++)
-            {
-                extras[i].Name = _pizzamodel.Extras[i].Name;
-            }
-            _pizzamodel.Extras = extras;
-
-
-            return _pizzamodel;
-
+            PizzaModel pizzaModel = new(this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
+            return pizzaModel;
         }
 
 
+        #region Hash Code for all properties
+        public void printHash()
+        {
+            MessageBox.Show($@" HashCode for thisItemProperty
+Item = {this.GetHashCode()} 
+Toppings = {this.Toppings.GetHashCode()}
+Extras = {this.Extras.GetHashCode()}
+");
+        }
+        #endregion
     }
 }

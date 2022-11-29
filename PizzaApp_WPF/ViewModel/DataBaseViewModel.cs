@@ -19,18 +19,18 @@ namespace PizzaApp_WPF.Model
         
         //PizzaList
         private readonly string menuDbText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\PizzasDB.json");
-        [ObservableProperty] public ObservableCollection<PizzaModel>? _pizzasList;
+        [ObservableProperty] ObservableCollection<PizzaModel>? _pizzasList;
 
         ////Drinks 
         private readonly string DrinksDbText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\DrinksDB.json");
 
-        [ObservableProperty] public ObservableCollection<DrinksModel>? _drinksList;
+        [ObservableProperty] ObservableCollection<DrinksModel>? _drinksList;
 
 
         ////Extras
         private readonly string ExtrasDbText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Database\ExtrasDb.json");
 
-        [ObservableProperty] public ObservableCollection<ExtrasModel>? _extrasList;
+        [ObservableProperty] ObservableCollection<ExtrasModel>? _extrasList;
 
     }
 }

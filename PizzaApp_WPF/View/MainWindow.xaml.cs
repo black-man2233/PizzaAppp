@@ -1,4 +1,5 @@
 ﻿using PizzaApp_WPF.Model;
+using PizzaApp_WPF.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +14,22 @@ namespace PizzaApp_WPF.View
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            DataGrid d = sender as DataGrid;
+
+            PizzaModel p = d.SelectedItem as PizzaModel;
+
+            p.printHash();
+
+
         }
     }
 }

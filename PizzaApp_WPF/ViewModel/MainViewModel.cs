@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PizzaApp_WPF.ViewModel
 {
@@ -23,41 +25,26 @@ namespace PizzaApp_WPF.ViewModel
         {
             #region Data
             DataBaseViewModel menu = new();
-            for (int i = 0; i < menu.PizzasList.Count; i++)
-            {
-                var p = menu.PizzasList[i];
-                _menuList.Add(new PizzaModel(p.Name, p.Price, p.Total, p.Description, p.Toppings, p.Extras));
-            }
+            _menuList = menu.PizzasList;
 
-            for (int i = 0; i < menu.DrinksList.Count; i++)
-            {
-                var d = menu.DrinksList[i];
-                _drinksList.Add(new DrinksModel(d.Name, d.Price, d.Capacity));
-            }
+            _drinksList = menu.DrinksList;
 
-            for (int i = 0; i < menu.ExtrasList.Count; i++)
-            {
-                var e = menu.ExtrasList[i];
-                Extras.Add(new ExtrasModel(e.Name, e.Price, e.Amount));
-            }
+            _extrasList = menu.ExtrasList;
             #endregion
 
             #region Commands initialised
-
             ModifyFromCartCommand = new Command.RelayCommand.RelayCommand(ModifyFromCart, CanModiFy);
             RemoveFromCartCommand = new Command.RelayCommand.RelayCommand(RemoveFromCart, CanRemove);
             AddToCartCommand = new Command.RelayCommand.RelayCommand(AddToCart, CanAdd);
             GoToConfirmCommand = new Command.RelayCommand.RelayCommand(GoToConfirm, CanGoToConfirm);
-
             #endregion
-
         }
         #endregion
 
         #region Properties
 
         [ObservableProperty] ObservableCollection<PizzaModel>? _menuList = new();
-        [ObservableProperty] ObservableCollection<ExtrasModel>? _extras = new();
+        [ObservableProperty] ObservableCollection<ExtrasModel>? _extrasList = new();
         [ObservableProperty] int _menuSelectedIndex = -1;
         [ObservableProperty] PizzaModel _menuSelectedItem;
 
@@ -116,21 +103,18 @@ namespace PizzaApp_WPF.ViewModel
             if (MenuSelectedItem is not null)
             {
                 IsButtonClicked = false;
-
-                var pizza = MenuSelectedItem.Clone();
-
-
-
-                if (MenuSelectedItem.Price == 76)
+                if (MenuSelectedItem.DeepCopy() is PizzaModel pizza)
                 {
-                    MenuSelectedItem.Name = "Diii";
+                    ObservableCollection<ExtrasModel> newExtras = new ObservableCollection<ExtrasModel>();
+                    for (int i = 0; i < ExtrasList.Count; i++)
+                    {
+                        ExtrasList[i].DeepCopy();
+                        newExtras.Add(ExtrasList[i]);
+                    }
+                    pizza.Extras = newExtras;
+                    _cartList.Add(pizza);
                 }
-
-
-
-                _cartList.Add(new PizzaModel(pizza.Name, pizza.Price, pizza.Price, pizza.Description, pizza.Toppings, Extras));
                 totCalc();
-
             }
             else
                 MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
@@ -287,13 +271,9 @@ namespace PizzaApp_WPF.ViewModel
 
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-            {
-                PropertyChangedEventHandler handler = PropertyChanged;
-                if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-            }));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         #endregion

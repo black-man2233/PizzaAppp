@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
+using System.Collections.ObjectModel;
 
 namespace PizzaApp_WPF.Model
 {
@@ -17,6 +19,28 @@ namespace PizzaApp_WPF.Model
             Price = price;
             Amount = amount;
         }
+
+        public ExtrasModel DeepCopy()
+        {
+            ExtrasModel extra = new(this.Name, this.Price, this.Amount);
+            return extra;
+        }
+
+        public ObservableCollection<ExtrasModel> DeepCopyList(ObservableCollection<ExtrasModel> ext)
+        {
+            ObservableCollection<ExtrasModel> newExtras = new ObservableCollection<ExtrasModel>();
+            for (int i = 0; i < ext.Count; i++)
+            {
+                ext[i].DeepCopy();
+                newExtras.Add(ext[i]);
+            }
+
+            return newExtras;
+
+        }
         #endregion
+
+
+
     }
 }
