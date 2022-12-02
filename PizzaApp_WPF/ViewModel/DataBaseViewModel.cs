@@ -15,8 +15,9 @@ namespace PizzaApp_WPF.Model
             _pizzasList = new ObservableCollection<PizzaModel>(JsonConvert.DeserializeObject<ObservableCollection<PizzaModel>>(menuDbText));
             _drinksList = new ObservableCollection<DrinksModel>(JsonConvert.DeserializeObject<ObservableCollection<DrinksModel>>(DrinksDbText));
             _extrasList = new ObservableCollection<ExtrasModel>(JsonConvert.DeserializeObject<ObservableCollection<ExtrasModel>>(ExtrasDbText));
+
         }
-        
+
         //PizzaList
         private readonly string menuDbText = File.ReadAllText(@"C:\Users\Kevin\Source\Repos\PizzaAppp\PizzaApp_WPF\Database\PizzasDB.json");
         [ObservableProperty] ObservableCollection<PizzaModel>? _pizzasList;

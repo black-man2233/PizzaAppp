@@ -4,25 +4,100 @@ using DevExpress.Utils.Url;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace PizzaApp_WPF.Model
 {
-
-    public partial class PizzaModel : ObservableObject
-    {
 #pragma warning disable
+
+    public partial class PizzaModel : ObservableObject, INotifyPropertyChanged, ICloneable
+    {
         #region Properties
-        [ObservableProperty] ObservableCollection<ToppingsModel>? _toppings;
-        [ObservableProperty] ObservableCollection<ExtrasModel>? _extras;
-        [ObservableProperty] string? _description;
-        [ObservableProperty] string? _name;
-        [ObservableProperty] int _total;
-        [ObservableProperty] int _price;
-        private PizzaModel pizzaModel;
+        //name
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
 
+        //price
+        private int _price;
+        public int Price
+        {
+            get
+            {
+                return _price;
+            }
+            set
+            {
+                _price = value;
+                OnPropertyChanged("Price");
+            }
+        }
+
+        //total
+        private int _total;
+        public int Total
+        {
+            get
+            {
+                return _total;
+            }
+            set
+            {
+                _total = value;
+                OnPropertyChanged("Total");
+            }
+        }
+
+        //description
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+
+        //Toppings
+        private ObservableCollection<ToppingsModel> _toppings;
+        public ObservableCollection<ToppingsModel> Toppings
+        {
+            get
+            {
+                return _toppings;
+            }
+            set
+            {
+                _toppings = value;
+                OnPropertyChanged("Toppings");
+            }
+        }
+
+        //Extras
+        private ObservableCollection<ExtrasModel> _extras = new();
+        public ObservableCollection<ExtrasModel> Extras
+        {
+            get { return _extras; }
+            set { _extras = value; OnPropertyChanged("Extras"); }
+        }
         #endregion
-
 
         #region Constructors
         public PizzaModel(string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
@@ -35,22 +110,33 @@ namespace PizzaApp_WPF.Model
             Extras = extras != null ? (new(extras)) : null;
         }
         #endregion
-        public PizzaModel DeepCopy()
+
+        #region Clone
+        public object Clone()
         {
-            PizzaModel pizzaModel = new(this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
-            return pizzaModel;
+            return new PizzaModel(this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
         }
-
-
+        #endregion
 
         #region Hash Code for all properties
         public void printHash()
         {
-            MessageBox.Show($@" HashCode for thisItemProperty
-Item = {this.GetHashCode()} 
-Toppings = {this.Toppings.GetHashCode()}
-Extras = {this.Extras.GetHashCode()}
-");
+            try
+            {
+                MessageBox.Show($"This Has = {this.GetHashCode()}  \n Toppings Hash = {this.Toppings.GetHashCode()} ");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No HashCodes For u BRother");
+            }
+        }
+        #endregion
+
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         #endregion
     }

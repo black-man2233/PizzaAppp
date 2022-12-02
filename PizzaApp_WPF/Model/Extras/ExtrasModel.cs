@@ -1,15 +1,48 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace PizzaApp_WPF.Model
 {
-    public partial class ExtrasModel : ObservableObject
+    public partial class ExtrasModel : ObservableObject, INotifyPropertyChanged, ICloneable
     {
         #region Properties
-        [ObservableProperty] string? _name;
-        [ObservableProperty] int _price;
-        [ObservableProperty] int _amount;
+        //name
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        //Price
+        private int _price;
+        public int Price
+        {
+            get => _price;
+            set
+            {
+                _price = value;
+                OnPropertyChanged("Price");
+            }
+        }
+
+        //Amount
+        private int _amount;
+        public int Amount
+        {
+            get => _amount;
+            set
+            {
+                _amount = value;
+                OnPropertyChanged("Amount");
+            }
+        }
         #endregion
 
         #region Constructor
@@ -19,28 +52,21 @@ namespace PizzaApp_WPF.Model
             Price = price;
             Amount = amount;
         }
+        #endregion
 
-        public ExtrasModel DeepCopy()
+        #region Clone
+        public object Clone()
         {
-            ExtrasModel extra = new(this.Name, this.Price, this.Amount);
-            return extra;
-        }
-
-        public ObservableCollection<ExtrasModel> DeepCopyList(ObservableCollection<ExtrasModel> ext)
-        {
-            ObservableCollection<ExtrasModel> newExtras = new ObservableCollection<ExtrasModel>();
-            for (int i = 0; i < ext.Count; i++)
-            {
-                ext[i].DeepCopy();
-                newExtras.Add(ext[i]);
-            }
-
-            return newExtras;
-
+            return new ExtrasModel(Name, Price, Amount);
         }
         #endregion
 
-
-
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
     }
 }

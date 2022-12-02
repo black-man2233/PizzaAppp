@@ -67,8 +67,8 @@ namespace PizzaApp_WPF.View
                 PizzaModel? element = b.Tag as PizzaModel;
 
 #pragma warning disable CS8604 // Possible null reference argument.
-                _ = ConfirmViewModel._pizzas.Remove(element);
-                _ = MainViewModel._cartList.Remove(element);
+                //_ = ConfirmViewModel._pizzas.Remove(element);
+                //_ = MainViewModel._cartList.Remove(element);
 #pragma warning restore CS8604 // Possible null reference argument.
 
                 //MainViewModel._totPrice = MainViewModel.totCalc();
@@ -83,8 +83,8 @@ namespace PizzaApp_WPF.View
                 PizzaModel? element = b.Tag as PizzaModel;
 
 #pragma warning disable CS8604 // Possible null reference argument.
-                _ = ConfirmViewModel._drinks.Remove(element);
-                _ = MainViewModel._cartList.Remove(element);
+                //_ = ConfirmViewModel._drinks.Remove(element);
+                //_ = MainViewModel._cartList.Remove(element);
 #pragma warning restore CS8604 // Possible null reference argument.
                 //MainViewModel._totPrice = MainViewModel.totCalc();
                 ConfirmViewModel.totCalc();

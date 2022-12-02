@@ -25,11 +25,15 @@ namespace PizzaApp_WPF.ViewModel
         {
             #region Data
             DataBaseViewModel menu = new();
-            _menuList = menu.PizzasList;
 
-            _drinksList = menu.DrinksList;
+            for (int i = 0; i < menu.ExtrasList.Count; i++)
+                ExtrasList.Add((menu.ExtrasList[i].Clone()) as ExtrasModel);
 
-            _extrasList = menu.ExtrasList;
+            for (int i = 0; i < menu.PizzasList.Count; i++)
+                _menuList.Add(menu.PizzasList[i].Clone() as PizzaModel);
+
+            for (int i = 0; i < menu.DrinksList.Count; i++)
+                _drinksList.Add(menu.DrinksList[i]);
             #endregion
 
             #region Commands initialised
@@ -42,14 +46,62 @@ namespace PizzaApp_WPF.ViewModel
         #endregion
 
         #region Properties
+        //PizzaList
+        private ObservableCollection<PizzaModel> _menuList = new();
+        public ObservableCollection<PizzaModel> MenuList
+        {
+            get
+            {
+                return _menuList;
+            }
+            set
+            {
+                _menuList = value;
+                OnPropertyChanged("MenuList");
+            }
+        }
 
-        [ObservableProperty] ObservableCollection<PizzaModel>? _menuList = new();
-        [ObservableProperty] ObservableCollection<ExtrasModel>? _extrasList = new();
-        [ObservableProperty] int _menuSelectedIndex = -1;
-        [ObservableProperty] PizzaModel _menuSelectedItem;
+        private int _menuSelectedIndex;
+        public int MenuSelectedIndex
+        {
+            get => _menuSelectedIndex;
+            set
+            {
+                _menuSelectedIndex = value;
+                OnPropertyChanged("MenuSelectedIndex");
+            }
+        }
 
-        [ObservableProperty] ObservableCollection<DrinksModel> _drinksList = new();
-        [ObservableProperty] DrinksModel _drinksName;
+        private PizzaModel _menuSelectedItem;
+        public PizzaModel MenuSelectedItem
+        {
+            get => _menuSelectedItem;
+            set
+            {
+                _menuSelectedItem = value;
+                OnPropertyChanged("MenuSelectedItem");
+            }
+        }
+
+
+        //Extras
+        ObservableCollection<ExtrasModel> ExtrasList { get; set; } = new();
+
+        //DrinksList
+        private ObservableCollection<DrinksModel> _drinksList = new();
+        public ObservableCollection<DrinksModel> DrinksList
+        {
+            get
+            {
+                return _drinksList;
+            }
+            set
+            {
+                _drinksList = value;
+                OnPropertyChanged("DrinksList");
+            }
+        }
+
         private DrinksSize _selectedDrinksSize;
         public DrinksSize SelectedDrinksSize
         {
@@ -62,10 +114,26 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
 
-        [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
-        [ObservableProperty] public static PizzaModel _cartSelectedItem;
-        [ObservableProperty] int _cartSelectedIndex = -1;
+        //cart
+        [ObservableProperty] ObservableCollection<PizzaModel> _cartList = new();
 
+        private PizzaModel _cartSelectedItem;
+        public PizzaModel CartSelectedItem
+        {
+            get
+            {
+                return _cartSelectedItem;
+            }
+            set
+            {
+                _cartSelectedItem = value;
+                OnPropertyChanged("CartSelectedItem");
+            }
+        }
+
+        public int CartSelectedIndex { get; set; } = -1;
+
+        //TotalPrice
         public static string _totPrice;
         public string TotPrice
         {
@@ -74,6 +142,7 @@ namespace PizzaApp_WPF.ViewModel
             set { _totPrice = value; OnPropertyChanged("TotPrice"); }
         }
 
+        //ButtonCLicked
         private bool _isButtonClicked;
         public bool IsButtonClicked
         {
@@ -103,16 +172,9 @@ namespace PizzaApp_WPF.ViewModel
             if (MenuSelectedItem is not null)
             {
                 IsButtonClicked = false;
-                if (MenuSelectedItem.DeepCopy() is PizzaModel pizza)
+                if (MenuSelectedItem.Clone() is PizzaModel pizza)
                 {
-                    ObservableCollection<ExtrasModel> newExtras = new ObservableCollection<ExtrasModel>();
-                    for (int i = 0; i < ExtrasList.Count; i++)
-                    {
-                        ExtrasList[i].DeepCopy();
-                        newExtras.Add(ExtrasList[i]);
-                    }
-                    pizza.Extras = newExtras;
-                    _cartList.Add(pizza);
+                    _cartList.Add(pizza.Clone() as PizzaModel);
                 }
                 totCalc();
             }
@@ -139,14 +201,15 @@ namespace PizzaApp_WPF.ViewModel
         /// </summary>
         void AddDrinks()
         {
-            if (_drinksList is not null)
+            try
             {
-                var d = SelectedDrinksSize;
-                _cartList.Add(new PizzaModel($"{d.Name.Substring(0)} {DrinksName}/", d.Price, d.Price, null, null, null));
+                _cartList.Add(new PizzaModel($"Heelo", SelectedDrinksSize.Price, SelectedDrinksSize.Price, null, null, null));
                 totCalc();
             }
-            else
-                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
+            catch (Exception)
+            {
+                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ", "Hov");
+            }
         }
 
 
@@ -201,19 +264,25 @@ namespace PizzaApp_WPF.ViewModel
         ///   <c>true</c> if this instance canmodify the specified value; otherwise, <c>false</c>.</returns>
         private bool CanModiFy(object value)
         {
-            if (CartSelectedIndex > -1)
+            try
             {
-                if (CartSelectedItem.Extras is null)
+                if (CartSelectedIndex > -1)
                 {
-                    return false;
-
+                    if (CartSelectedItem.Extras is null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
             }
-            else
+            catch (Exception)
             {
                 return false;
             }

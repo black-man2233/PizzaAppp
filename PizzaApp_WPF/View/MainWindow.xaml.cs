@@ -18,18 +18,20 @@ namespace PizzaApp_WPF.View
 
         private void ComboBox_MouseEnter(object sender, MouseEventArgs e)
         {
+            if (sender is ComboBox c)
+            {
+                c.Text = "NIbba";
+            }
 
         }
 
-        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGrid d = sender as DataGrid;
 
             PizzaModel p = d.SelectedItem as PizzaModel;
 
             p.printHash();
-
-
         }
     }
 }

@@ -122,7 +122,7 @@
 
         <Button Command="{Binding ModifyFromCartCommand}" Content="Redigere" Grid.Column="1" Grid.Row="3" FontSize="30" FontWeight="DemiBold" Margin="74,28,73,10" Background="#181818" Foreground="WhiteSmoke"/>
 
-        <DataGrid ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" SelectedItem="{Binding CartSelectedItem}" Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" SelectedCellsChanged="DataGrid_SelectedCellsChanged" Tag="{Binding}">
+        <DataGrid ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" SelectedItem="{Binding CartSelectedItem}" Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" Tag="{Binding}" MouseDoubleClick="DataGrid_MouseDoubleClick">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Path=Name}"/>
