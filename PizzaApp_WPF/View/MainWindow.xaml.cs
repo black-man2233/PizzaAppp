@@ -1,4 +1,5 @@
-﻿using PizzaApp_WPF.Model;
+﻿using DevExpress.Utils;
+using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,19 +12,13 @@ namespace PizzaApp_WPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel vm = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = vm;
         }
 
-        private void ComboBox_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (sender is ComboBox c)
-            {
-                c.Text = "NIbba";
-            }
-
-        }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -32,6 +27,32 @@ namespace PizzaApp_WPF.View
             PizzaModel p = d.SelectedItem as PizzaModel;
 
             p.printHash();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox c)
+            {
+                if (c.SelectedItem is DrinksSize ds)
+                {
+                    DrinksModel? dm = c.Tag as DrinksModel;
+
+                    vm.CartList.Add((PizzaModel)new PizzaModel($"{ds.Name.Substring(0)} {dm.Name}",
+                        ds.Price,
+                        ds.Price,
+                        dm.Description,
+                        null, null).Clone());
+
+                    vm.totCalc();
+                }
+            }
+        }
+
+
+
+        private void ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((ComboBox)sender).Text = "";
         }
     }
 }

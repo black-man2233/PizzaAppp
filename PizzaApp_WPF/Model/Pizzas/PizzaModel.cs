@@ -123,7 +123,7 @@ namespace PizzaApp_WPF.Model
         {
             try
             {
-                MessageBox.Show($"This Has = {this.GetHashCode()}  \n Toppings Hash = {this.Toppings.GetHashCode()} ");
+                MessageBox.Show($"This Has = {this.GetHashCode()}  \nToppings Hash = {this.Toppings.GetHashCode()} \nExtras Has ={this.Extras.GetHashCode()}");
             }
             catch (Exception)
             {

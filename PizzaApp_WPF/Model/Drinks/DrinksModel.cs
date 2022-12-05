@@ -32,6 +32,21 @@ namespace PizzaApp_WPF.Model
             }
         }
 
+        //description
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+
         //capacity or size
         private ObservableCollection<DrinksSize> _capacity;
         public ObservableCollection<DrinksSize> Capacity
@@ -45,14 +60,7 @@ namespace PizzaApp_WPF.Model
         }
         #endregion
 
-        #region Constructor
-        public DrinksModel(string? name, int price, ObservableCollection<DrinksSize>? capacity)
-        {
-            Name = name;
-            Price = price;
-            Capacity = capacity;
-        }
-        #endregion
+       
 
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

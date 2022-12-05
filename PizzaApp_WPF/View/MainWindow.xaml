@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
         xmlns:model="clr-namespace:PizzaApp_WPF.Model"
         mc:Ignorable="d"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"       
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterScreen"
         Height="800" 
@@ -16,13 +16,11 @@
         ResizeMode="NoResize"
         BorderThickness=".5">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
+    </Window.Resources>-->
 
-
-    </Window.Resources>
-
-    <Grid Background="Black" DataContext="{Binding Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" >
+    <Grid Background="Black">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -85,7 +83,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Width="330">
-                        <Grid>
+                        <Grid x:Name="grid">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
@@ -98,7 +96,7 @@
                             <TextBlock  Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
                             <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
 
-                            <ComboBox ItemsSource="{Binding Capacity}" MouseEnter="ComboBox_MouseEnter" SelectedItem="{Binding SelectedDrinksSize, Source={StaticResource vm}}" Grid.Column="2" ToolTip="Vælge størrelsen på dit drikkevare">
+                            <ComboBox ItemsSource="{Binding Path=Capacity}" SelectionChanged="ComboBox_SelectionChanged" Tag="{Binding}" Grid.Column="2" ToolTip="Vælge størrelsen på dit drikkevare" Text="sdas" MouseEnter="ComboBox_MouseEnter" MouseLeave="ComboBox_MouseEnter">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>

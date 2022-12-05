@@ -50,10 +50,7 @@ namespace PizzaApp_WPF.ViewModel
         private ObservableCollection<PizzaModel> _menuList = new();
         public ObservableCollection<PizzaModel> MenuList
         {
-            get
-            {
-                return _menuList;
-            }
+            get => _menuList;
             set
             {
                 _menuList = value;
@@ -91,10 +88,7 @@ namespace PizzaApp_WPF.ViewModel
         private ObservableCollection<DrinksModel> _drinksList = new();
         public ObservableCollection<DrinksModel> DrinksList
         {
-            get
-            {
-                return _drinksList;
-            }
+            get => _drinksList;
             set
             {
                 _drinksList = value;
@@ -102,17 +96,6 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
 
-        private DrinksSize _selectedDrinksSize;
-        public DrinksSize SelectedDrinksSize
-        {
-            get => _selectedDrinksSize;
-            set
-            {
-                _selectedDrinksSize = value;
-                AddDrinks();
-                OnPropertyChanged("SelectedDrinksSize");
-            }
-        }
 
         //cart
         [ObservableProperty] ObservableCollection<PizzaModel> _cartList = new();
@@ -120,10 +103,7 @@ namespace PizzaApp_WPF.ViewModel
         private PizzaModel _cartSelectedItem;
         public PizzaModel CartSelectedItem
         {
-            get
-            {
-                return _cartSelectedItem;
-            }
+            get => _cartSelectedItem;
             set
             {
                 _cartSelectedItem = value;
@@ -146,7 +126,7 @@ namespace PizzaApp_WPF.ViewModel
         private bool _isButtonClicked;
         public bool IsButtonClicked
         {
-            get { return _isButtonClicked; }
+            get => _isButtonClicked;
             set { SetProperty(ref _isButtonClicked, value); }
         }
 
@@ -157,33 +137,13 @@ namespace PizzaApp_WPF.ViewModel
         public ICommand RemoveFromCartCommand { get; set; }
         public ICommand ModifyFromCartCommand { get; set; }
         public ICommand GoToConfirmCommand { get; set; }
-
+        public ICommand SelectedDrinksSizeChanged { get; set; }
 
         #endregion
 
         #region Event Method        
 
-        //Add Pizza to cart
-        /// <summary>
-        /// Adds the selectedItem from Menu to cart.
-        /// </summary>
-        private void AddToCart(object value)
-        {
-            if (MenuSelectedItem is not null)
-            {
-                IsButtonClicked = false;
-                if (MenuSelectedItem.Clone() is PizzaModel pizza)
-                {
-                    _cartList.Add(pizza.Clone() as PizzaModel);
-                }
-                totCalc();
-            }
-            else
-                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
-        }
-
-
-
+        //Add to cart
         /// <summary>Determines whether this instance can add the specified value.</summary>
         /// <returns>
         ///   <c>true</c> if this instance can add the specified value; otherwise, <c>false</c>.</returns>
@@ -194,30 +154,42 @@ namespace PizzaApp_WPF.ViewModel
             else
                 return true;
         }
-
-        //Add Drinks to cart
-        /// <summary>
-        /// Adds the drinks according to the selected Size.
-        /// </summary>
-        void AddDrinks()
+        private void AddToCart(object value)
         {
-            try
+            if (MenuSelectedItem is not null)
             {
-                _cartList.Add(new PizzaModel($"Heelo", SelectedDrinksSize.Price, SelectedDrinksSize.Price, null, null, null));
+                IsButtonClicked = false;
+                if (MenuSelectedItem.Clone() is PizzaModel pizza)
+                {
+                    PizzaModel p = pizza.Clone() as PizzaModel;
+                    p.Extras = new();
+
+                    foreach (var item in ExtrasList)
+                    {
+                        p.Extras.Add(item.Clone() as ExtrasModel);
+                    }
+
+
+
+                    _cartList.Add(p.Clone() as PizzaModel);
+                }
                 totCalc();
             }
-            catch (Exception)
-            {
-                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ", "Hov");
-            }
+            else
+                MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
         }
 
-
-
         //Removes items from cart
-        /// <summary>
-        /// Removes from cart according to the selected Item.
-        /// </summary>
+        /// <summary>Determines whether this instance can remove the specified value.</summary>
+        /// <returns>
+        ///   <c>true</c> if this instance can remove the specified value; otherwise, <c>false</c>.</returns>
+        private bool CanRemove(object value)
+        {
+            if (CartSelectedIndex < -1)
+                return false;
+            else
+                return true;
+        }
         private void RemoveFromCart(object value)
         {
             if (CartSelectedItem is not null)
@@ -231,33 +203,7 @@ namespace PizzaApp_WPF.ViewModel
 
         }
 
-        /// <summary>Determines whether this instance can remove the specified value.</summary>
-        /// <returns>
-        ///   <c>true</c> if this instance can remove the specified value; otherwise, <c>false</c>.</returns>
-        private bool CanRemove(object value)
-        {
-            if (CartSelectedIndex < -1)
-                return false;
-            else
-                return true;
-        }
-
         //Modify pizza from cart
-        /// <summary> Opens a modification window, for the CartSelectedItem</summary>
-        /// <param name="value"></param>
-        private void ModifyFromCart(object value)
-        {
-            if (CartSelectedItem is not null)
-            {
-                IsButtonClicked = false;
-
-                ModifyWindow modifyWindow = new(CartSelectedItem);
-                modifyWindow.ShowDialog();
-            }
-            else
-                MessageBox.Show($@"Vælge venligste et element fra kurven");
-
-        }
 
         /// <summary>Determines whether this instance Canmodify the selected item.</summary>
         /// <returns>
@@ -266,7 +212,7 @@ namespace PizzaApp_WPF.ViewModel
         {
             try
             {
-                if (CartSelectedIndex > -1)
+                if (CartSelectedItem is not null)
                 {
                     if (CartSelectedItem.Extras is null)
                     {
@@ -286,6 +232,19 @@ namespace PizzaApp_WPF.ViewModel
             {
                 return false;
             }
+        }
+        private void ModifyFromCart(object value)
+        {
+            if (CartSelectedItem is not null)
+            {
+                IsButtonClicked = false;
+
+                ModifyWindow modifyWindow = new(CartSelectedItem);
+                modifyWindow.ShowDialog();
+            }
+            else
+                MessageBox.Show($@"Vælge venligste et element fra kurven");
+
         }
 
 
@@ -323,7 +282,7 @@ namespace PizzaApp_WPF.ViewModel
         /// <summary>  <para> Total Price calculator.</para>
         ///   <para>Calculates According to the price of items in the cart </para>
         /// </summary>
-        void totCalc()
+        public void totCalc()
         {
             var c = _cartList;
             List<int> pricesCombined = new();
