@@ -1,51 +1,80 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace PizzaApp_WPF.Model
 {
 #pragma warning disable
-    public partial class ToppingsModel : ObservableObject
+    public partial class ToppingsModel : ICloneable, INotifyPropertyChanged
     {
-        [ObservableProperty] string _name;
-        [ObservableProperty] bool _selected;
-
-        public ToppingsModel(string name, bool selected)
+        #region Properties
+        private int _id;
+        public int Id
         {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private bool _selected;
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                OnPropertyChanged("Selected");
+            }
+        }
+        #endregion
+
+
+        public ToppingsModel(int id, string name, bool selected)
+        {
+            this.Id= id;
             this._name = name;
             this._selected = selected;
         }
 
-        public ToppingsModel DeepCopy()
+        public Object Clone()
         {
-            ToppingsModel toppings = new(this.Name, this._selected);
+            ToppingsModel toppings = new(this.Id, this.Name, this._selected);
 
             return toppings;
         }
 
 
-        public ObservableCollection<ToppingsModel> DeepCopyToList(ObservableCollection<ToppingsModel> a)
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            ObservableCollection<ToppingsModel> t = a;
-
-            foreach (var item in t)
-            {
-                t.Add(item.DeepCopy());
-            }
-
-            return t;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-
-
-        public bool _Selected()
-        {
-            return this.Selected = true;
-        }
-        public bool _UnSelected()
-        {
-            return this.Selected = false;
-        }
-
-
+        #endregion
     }
 }

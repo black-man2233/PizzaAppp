@@ -58,9 +58,7 @@ namespace PizzaApp_WPF.View
             {
                 if (c.Tag is ToppingsModel t)
                 {
-                    t._Selected();
 
-                    //t.Selected = true;
                 }
             }
 

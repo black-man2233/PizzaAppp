@@ -1,0 +1,153 @@
+﻿[
+  {
+    "Toppings": [
+      {
+        "id": 1,
+        "name": "TomatSauce",
+        "selected": true
+      },
+      {
+        "id": 1,
+        "name": "Ost",
+        "selected": true
+
+      },
+      {
+        "id": 1,
+        "name": "Oregano",
+        "selected": true
+
+      }
+    ]
+  },
+  {
+    "Toppings": [
+      {
+        "id": 2,
+        "name": "TomatSauce",
+        "selected": true
+
+      },
+      {
+        "id": 2,
+        "name": "Ost",
+        "selected": true
+
+      },
+      {
+        "id": 2,
+        "name": "Oregano",
+        "selected": true
+
+      },
+      {
+        "id": 2,
+        "name": "Skinke",
+        "selected": true
+
+      }
+    ]
+  },
+  {
+    "Toppings": [
+      {
+        "id": 3,
+        "name": "TomatSauce",
+        "selected": true
+
+      },
+      {
+        "id": 3,
+        "name": "Ost",
+        "selected": true
+
+      },
+      {
+        "id": 3,
+        "name": "Oregano",
+        "selected": true
+
+      },
+      {
+        "id": 3,
+        "name": "Skinke",
+        "selected": true
+
+      },
+      {
+        "id": 3,
+        "name": "Champignon",
+        "selected": true
+
+      }
+    ]
+  },
+  {
+    "Toppings": [
+      {
+        "id": 4,
+        "name": "TomatSauce",
+        "selected": true
+
+      },
+      {
+        "id": 4,
+        "name": "Ost",
+        "selected": true
+
+      },
+      {
+        "id": 4,
+        "name": "Oregano",
+        "selected": true
+
+      },
+      {
+        "id": 4,
+        "name": "Skinke",
+        "selected": true
+
+      },
+      {
+        "id": 4,
+        "name": "Annas",
+        "selected": true
+
+      }
+    ]
+  },
+  {
+    "Toppings": [
+      {
+        "id": 5,
+        "name": "TomatSauce",
+        "selected": true
+
+      },
+      {
+        "id": 5,
+        "name": "Ost",
+        "selected": true
+
+      },
+      {
+        "id": 5,
+        "name": "Oregano",
+        "selected": true
+
+      },
+      {
+        "id": 5,
+        "name": "Skinke",
+        "selected": true
+
+      },
+      {
+        "id": 5,
+        "name": "Bacon",
+        "selected": true
+
+      }
+    ]
+  }
+]

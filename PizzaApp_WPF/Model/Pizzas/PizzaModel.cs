@@ -15,6 +15,21 @@ namespace PizzaApp_WPF.Model
     public partial class PizzaModel : ObservableObject, INotifyPropertyChanged, ICloneable
     {
         #region Properties
+        //id
+        private int _id;
+        public int ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged("ID");
+            }
+        }
+
         //name
         private string _name;
         public string Name
@@ -100,8 +115,9 @@ namespace PizzaApp_WPF.Model
         #endregion
 
         #region Constructors
-        public PizzaModel(string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
+        public PizzaModel(int id, string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
         {
+            this.ID= id;
             Name = new(name);
             Price = price;
             Total = total;
@@ -114,7 +130,7 @@ namespace PizzaApp_WPF.Model
         #region Clone
         public object Clone()
         {
-            return new PizzaModel(this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
+            return new PizzaModel(this.ID, this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
         }
         #endregion
 

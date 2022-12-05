@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
+using PizzaApp_WPF.Model.Toppings;
 using PizzaApp_WPF.View;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace PizzaApp_WPF.ViewModel
 
             for (int i = 0; i < menu.DrinksList.Count; i++)
                 _drinksList.Add(menu.DrinksList[i]);
+
+            for (int i = 0; i < menu.ToppingsList.Count; i++)
+                ToppingsList.Add(menu.ToppingsList[i]);
             #endregion
 
             #region Commands initialised
@@ -68,7 +72,7 @@ namespace PizzaApp_WPF.ViewModel
                 OnPropertyChanged("MenuSelectedIndex");
             }
         }
-
+        
         private PizzaModel _menuSelectedItem;
         public PizzaModel MenuSelectedItem
         {
@@ -80,6 +84,8 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
 
+        //Toppings
+        ObservableCollection<ToppingsListModel> ToppingsList { get; set; } = new();
 
         //Extras
         ObservableCollection<ExtrasModel> ExtrasList { get; set; } = new();
@@ -137,7 +143,6 @@ namespace PizzaApp_WPF.ViewModel
         public ICommand RemoveFromCartCommand { get; set; }
         public ICommand ModifyFromCartCommand { get; set; }
         public ICommand GoToConfirmCommand { get; set; }
-        public ICommand SelectedDrinksSizeChanged { get; set; }
 
         #endregion
 
@@ -159,19 +164,22 @@ namespace PizzaApp_WPF.ViewModel
             if (MenuSelectedItem is not null)
             {
                 IsButtonClicked = false;
+
+                //Clones the selected Pizza
                 if (MenuSelectedItem.Clone() is PizzaModel pizza)
                 {
-                    PizzaModel p = pizza.Clone() as PizzaModel;
-                    p.Extras = new();
-
-                    foreach (var item in ExtrasList)
+                    pizza.Toppings = new();
+                    foreach (var item in ToppingsList)
                     {
-                        p.Extras.Add(item.Clone() as ExtrasModel);
+                        //pizza.Toppings.Add((ToppingsModel)item);
                     }
 
-
-
-                    _cartList.Add(p.Clone() as PizzaModel);
+                    pizza.Extras = new();
+                    foreach (var item in ExtrasList)
+                    {
+                        pizza.Extras.Add(item.Clone() as ExtrasModel);
+                    }
+                    _cartList.Add(pizza.Clone() as PizzaModel);
                 }
                 totCalc();
             }
