@@ -1,76 +1,77 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using DevExpress.Utils;
+using DevExpress.Utils.Filtering.Internal;
 using PizzaApp_WPF.Model;
+using PizzaApp_WPF.View;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 
 namespace PizzaApp_WPF.ViewModel
 {
 #pragma warning disable
-    public partial class ModifyViewModel : ObservableObject
+    public partial class ModifyViewModel : ObservableObject, INotifyPropertyChanged
     {
         public ModifyViewModel(PizzaModel aPizza)
         {
             this.Pizza = aPizza;
-            this.Toppings= aPizza.Toppings;
-            this.Extras= aPizza.Extras;
 
-            #region Commands initialised
+            foreach (var item in aPizza.Toppings)
+                _tmpToppings.Add((ToppingsModel)item.Clone());
 
-            IncreaseAmmountCommand = new Command.RelayCommand.RelayCommand(IncreaseAmmount, CanIncrease);
-            //DecreaseAmountCommand = new Command.RelayCommand.RelayCommand(RemoveFromCart, CanRemove);
-            //ClearAllAmountCommand = new Command.RelayCommand.RelayCommand(AddToCart, CanAdd);
-
-            #endregion
-
+            foreach (var item in aPizza.Extras)
+                _tmpExtras.Add((ExtrasModel)item.Clone());
         }
 
-        [ObservableProperty] ObservableCollection<ToppingsModel> _toppings = new();
-        [ObservableProperty] ObservableCollection<ExtrasModel> _extras = new();
-        [ObservableProperty] string _description;
-        [ObservableProperty] PizzaModel _pizza;
-        [ObservableProperty] int _total;
-        [ObservableProperty] bool _isSelected = true;
-
-
-
-        #region ICommands  
-        public ICommand IncreaseAmmountCommand { get; set; }
-        public ICommand DecreaseAmountCommand{ get; set; }
-        public ICommand ClearAllAmountCommand { get; set; }
-        #endregion
-
-
-
-        #region Event Method
-        private bool CanIncrease(object value)
+        #region Properties
+        //This Pizza
+        private static PizzaModel _pizza;
+        public PizzaModel Pizza
         {
-            //if ( < -1 || > 30)
-            //    return false;
-            //else
-                return true;
-        }
-        void IncreaseAmmount(object value)
-        {
-            //if (_drinksList is not null)
-            //{
-            //    var d = SelectedDrinksSize;
-            //    _cartList.Add(new PizzaModel($"{d.Name.Substring(0)} {DrinksName}/", d.Price, d.Price, null, null, null));
-            //    totCalc();
-            //}
-            //else
-            //    MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
+            get
+            {
+                return _pizza;
+            }
+            set
+            {
+                _pizza = value;
+                OnPropertyChanged("Pizza");
+            }
         }
 
+        [ObservableProperty] ObservableCollection<ToppingsModel> _tmpToppings = new();
 
-
+        [ObservableProperty] ObservableCollection<ExtrasModel> _tmpExtras = new();
 
         #endregion
 
 
 
+        public void newTotalPrice()
+        {
+            var _extras = this.Pizza.Extras;
 
+            List<int> _amountWithPrices = new();
+
+            for (int i = 0; i < _extras.Count; i++)
+                if (_extras[i].Amount > 0)
+                    _amountWithPrices.Add((_extras[i].Amount * _extras[i].Price));
+
+            this.Pizza.Total = this.Pizza.Price + _amountWithPrices.Sum();
+        }
+
+
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
     }
 }
 

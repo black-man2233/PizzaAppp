@@ -72,7 +72,7 @@ namespace PizzaApp_WPF.ViewModel
                 OnPropertyChanged("MenuSelectedIndex");
             }
         }
-        
+
         private PizzaModel _menuSelectedItem;
         public PizzaModel MenuSelectedItem
         {
@@ -167,21 +167,22 @@ namespace PizzaApp_WPF.ViewModel
 
                 //Clones the selected Pizza
                 if (MenuSelectedItem.Clone() is PizzaModel pizza)
-                {
-                    pizza.Toppings = new();
-                    foreach (var item in ToppingsList)
+                    if (MenuSelectedItem.ID.ToString() is not null)
                     {
-                        //pizza.Toppings.Add((ToppingsModel)item);
-                    }
+                        var _toppingslist = (ToppingsList[MenuSelectedItem.ID - 1].Toppings);
+                        pizza.Toppings = new();
 
-                    pizza.Extras = new();
-                    foreach (var item in ExtrasList)
-                    {
-                        pizza.Extras.Add(item.Clone() as ExtrasModel);
+                        foreach (var item in _toppingslist)
+                            pizza.Toppings.Add((ToppingsModel)item.Clone());
+
+                        pizza.Extras = new();
+                        foreach (var item in ExtrasList)
+                            pizza.Extras.Add(item.Clone() as ExtrasModel);
+
+                        _cartList.Add(pizza.Clone() as PizzaModel);
                     }
-                    _cartList.Add(pizza.Clone() as PizzaModel);
-                }
                 totCalc();
+
             }
             else
                 MessageBox.Show($@"Vælge venligste et element fra Pizza Menu ");
@@ -212,7 +213,6 @@ namespace PizzaApp_WPF.ViewModel
         }
 
         //Modify pizza from cart
-
         /// <summary>Determines whether this instance Canmodify the selected item.</summary>
         /// <returns>
         ///   <c>true</c> if this instance canmodify the specified value; otherwise, <c>false</c>.</returns>
@@ -249,6 +249,7 @@ namespace PizzaApp_WPF.ViewModel
 
                 ModifyWindow modifyWindow = new(CartSelectedItem);
                 modifyWindow.ShowDialog();
+                totCalc();
             }
             else
                 MessageBox.Show($@"Vælge venligste et element fra kurven");
@@ -292,16 +293,22 @@ namespace PizzaApp_WPF.ViewModel
         /// </summary>
         public void totCalc()
         {
-            var c = _cartList;
-            List<int> pricesCombined = new();
-
-            for (int i = 0; i < c.Count; i++)
+            try
             {
-                pricesCombined.Add(c[i].Total);
-            }
-            TotPrice = (pricesCombined.Sum()).ToString();
-        }
+                var c = _cartList;
+                List<int> pricesCombined = new();
 
+                for (int i = 0; i < c.Count; i++)
+                {
+                    pricesCombined.Add(c[i].Total);
+                }
+                TotPrice = (pricesCombined.Sum()).ToString();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
 

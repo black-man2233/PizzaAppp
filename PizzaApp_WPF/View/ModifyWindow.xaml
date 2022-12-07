@@ -16,7 +16,14 @@
         BorderThickness=".5" 
         WindowStartupLocation="CenterScreen">
 
-    <Grid x:Name="grid" DataContext="{Binding}">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid DataContext="{Binding Pizza}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*" />
@@ -42,7 +49,7 @@
         </StackPanel>
 
 
-        <TextBlock Text="{Binding Description}" DataContext="{Binding}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" FontSize="25" Foreground="Wheat" FontWeight="Bold" Background="#181818" TextWrapping="Wrap" TextTrimming="None" Width="Auto"/>
+        <TextBlock Text="{Binding Description}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" FontSize="25" Foreground="Wheat" FontWeight="Bold" Background="#181818" TextWrapping="Wrap" TextTrimming="None" Width="Auto"/>
 
         <ListBox ItemsSource="{Binding Toppings}" Tag="{Binding}" Foreground="White" FontSize="15" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
             <ListBox.ItemTemplate>
@@ -58,46 +65,48 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox ItemsSource="{Binding Extras}" Background="#181818" Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="32" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderBrush="Transparent">
+        <ListBox ItemsSource="{Binding Extras}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#181818" Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="32" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderBrush="Transparent" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="370">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+            <Grid Width="360">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="2"/>
-                        <TextBlock Text="{Binding Path=Price}" TextAlignment="Right" Grid.Column="1"/>
-                        <TextBlock Text="{Binding Path=Amount}" TextAlignment="Right" Grid.Column="2"/>
+                <TextBlock Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <TextBlock Text="{Binding Path=Price}" TextAlignment="Right" Grid.Column="1"/>
+                <TextBlock Text="{Binding Path=Amount}" TextAlignment="Right" Grid.Column="2"/>
 
-                        <DockPanel Grid.Column="3" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right">
+                    <Button Width="44" Height="44" Click="IncreaseButton" Tag="{Binding}">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/4315/4315609.png"/>
+                    </Button>
 
-                            <Button Width="44" Height="44" Click="Button_Click" Tag="{Binding}">
-                                <Image Source="https://cdn-icons-png.flaticon.com/512/748/748113.png"/>
-                            </Button>
-
-                            <Button Width="44" Height="44">
-                                <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828906.png"/>
-                            </Button>
-
-                        </DockPanel>
-
-                    </Grid>
-                </DataTemplate>
+                    <Button Tag="{Binding}" Width="44" Height="44" Click="DecreaseButton">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/4436/4436695.png"/>
+                    </Button>
+                </StackPanel>
+                    
+            </Grid>
+            </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
+       
 
         <StackPanel Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" Background="#282828"  Height="80" Width="560">
-            <TextBlock Text="{Binding Total}" Foreground="White"  TextAlignment="Center" Padding="0,10,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Total, StringFormat=' I alt {0}', UpdateSourceTrigger=PropertyChanged}" Foreground="White"  TextAlignment="Center" Padding="0,10,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="30" VerticalAlignment="Center"/>
         </StackPanel>
 
 
-        <Button HorizontalAlignment="Center" Width="100" Background="Transparent" Click="ConfirmButton" Grid.Column="2" Grid.Row="7" >
+        <Button HorizontalAlignment="Center" Width="100" Click="ConfirmButton" Grid.Column="1" Grid.Row="7" >
             <Image Source="https://cdn-icons-png.flaticon.com/512/4315/4315445.png" />
+        </Button>
+
+        <Button Width="100" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="7" Click="CancelButton">
+            <Image Source="https://cdn-icons-png.flaticon.com/512/8637/8637489.png"/>
         </Button>
     </Grid>
 </Window>

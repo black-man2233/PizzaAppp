@@ -66,7 +66,7 @@
         <TextBlock Background="#141414" Grid.Column="1" Grid.ColumnSpan="3" Text="Dine Order" FontSize="40" TextAlignment="Center" FontWeight="Bold" Foreground="White"/>
 
 
-        <ListBox Background="#181818"  ItemsSource="{Binding Pizzas}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+        <ListBox Background="#181818"  ItemsSource="{Binding Pizzas}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=3}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -97,15 +97,16 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </Border>
+                            <Label Content="{Binding Description}" Width="350" FontSize="22" Foreground="White" />
+
                         </StackPanel>
 
                         <Button Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="DeletePizza" Tag="{Binding}">
-                            <Image Source="/View/trashClosed.png" />
+                            <Image Source="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png" />
 
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="LightBlue" />
-
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type Button}">
@@ -134,7 +135,7 @@
         </ListBox>
 
 
-        <ListBox Background="#181818"  ItemsSource="{Binding Drinks}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2">
+        <ListBox Background="#181818"  ItemsSource="{Binding Drinks}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -146,13 +147,17 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition  Width="160"/>
                                     <ColumnDefinition  Width="160"/>
+                                    <ColumnDefinition  Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Path=Name}" FontSize="30" Foreground="White" FontWeight="Black" Grid.Column="0" Padding="0,0,55,0" HorizontalAlignment="Left"/>
+
+                                <TextBlock Text="{Binding Path=Name}" FontSize="30" Foreground="White" FontWeight="Black" Grid.Column="0" Grid.ColumnSpan="1" Padding="0,0,55,0" HorizontalAlignment="Left">
+                                </TextBlock>
+
                                 <TextBlock Text="{Binding Path=Total}" Foreground="White" FontSize="30" Grid.Column="1" HorizontalAlignment="Right"/>
                             </Grid>
                         </StackPanel>
                         <Button Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="DeleteDrinks" Tag="{Binding}">
-                            <Image Source="/View/trashClosed.png"/>
+                            <Image Source="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png"/>
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="LightBlue" />

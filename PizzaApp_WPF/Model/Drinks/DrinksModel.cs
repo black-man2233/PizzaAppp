@@ -5,12 +5,28 @@ using System.Runtime.CompilerServices;
 
 namespace PizzaApp_WPF.Model
 {
+#pragma warning disable
     public partial class DrinksModel : ObservableObject, INotifyPropertyChanged
     {
         #region Propperties
+        //ID
+        private int _id;
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
         //name
-        private string _name;
-        public string Name
+        private string? _name;
+        public string? Name
         {
             get => _name;
             set
@@ -60,12 +76,10 @@ namespace PizzaApp_WPF.Model
         }
         #endregion
 
-       
-
         #region OnPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

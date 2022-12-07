@@ -30,6 +30,10 @@ namespace PizzaApp_WPF.View
             _ = SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
         }
 
+
+
+
+        #region Constructor
         public ConfirmWindow(ObservableCollection<PizzaModel> _cartList)
         {
             InitializeComponent();
@@ -39,14 +43,16 @@ namespace PizzaApp_WPF.View
             Loaded += ToolWindow_Loaded;
 
         }
-
+        #endregion
 
         private new void MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (sender is Button b)
             {
                 Image? i = b.Content as Image;
-                i.Source = new BitmapImage(new Uri(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Image\trashOpen.png"));
+                i.Height = 42;
+                i.Width = 42;
+                //i.Source = new BitmapImage(new Uri(@"https://img.icons8.com/external-kiranshastry-solid-kiranshastry/512/external-recycle-bin-graph-design-kiranshastry-solid-kiranshastry.png"));
             }
         }
 
@@ -55,7 +61,9 @@ namespace PizzaApp_WPF.View
             if (sender is Button b)
             {
                 Image? i = b.Content as Image;
-                i.Source = new BitmapImage(new Uri(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Image\trashClosed.png"));
+                i.Height = 40;
+                i.Width = 40;
+                //i.Source = new BitmapImage(new Uri(@"https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png"));
             }
 
         }

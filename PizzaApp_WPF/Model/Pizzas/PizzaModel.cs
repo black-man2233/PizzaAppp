@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using DevExpress.Utils;
-using DevExpress.Utils.Url;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -121,10 +118,11 @@ namespace PizzaApp_WPF.Model
             Name = new(name);
             Price = price;
             Total = total;
-            Description = Description != null ? (new(description)) : null;
+            Description = description;
             Toppings = toppings != null ? (new(toppings)) : null;
             Extras = extras != null ? (new(extras)) : null;
         }
+
         #endregion
 
         #region Clone
@@ -146,7 +144,7 @@ namespace PizzaApp_WPF.Model
                 MessageBox.Show("No HashCodes For u BRother");
             }
         }
-        #endregion
+        #endregion  
 
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

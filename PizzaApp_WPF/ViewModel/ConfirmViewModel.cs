@@ -97,10 +97,5 @@ namespace PizzaApp_WPF.ViewModel
                 if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
             }));
         }
-
-
-
-
-
     }
 }

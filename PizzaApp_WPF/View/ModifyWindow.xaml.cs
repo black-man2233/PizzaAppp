@@ -1,8 +1,11 @@
-﻿using PizzaApp_WPF.Model;
+﻿using DevExpress.Utils.MVVM;
+using PizzaApp_WPF.Model;
 using PizzaApp_WPF.ViewModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
+#pragma warning disable
 namespace PizzaApp_WPF.View
 {
     /// <summary>
@@ -10,48 +13,15 @@ namespace PizzaApp_WPF.View
     /// </summary>
     public partial class ModifyWindow : Window
     {
-#pragma warning disable
-            ModifyViewModel mvm;
+        static ModifyViewModel mvm;
         public ModifyWindow(PizzaModel pizza)
         {
             InitializeComponent();
-
             mvm = new ModifyViewModel(pizza);
             this.DataContext = mvm;
         }
 
-        //public static int EditModifiedPrice()
-        //{
-        //    var extras = mvm.pizza.Extras;
-
-        //    ObservableCollection<int> allPrices = new();
-
-        //    for (int i = 0; i < extras.Count; i++)
-        //    {
-        //        if (extras[i].Amount > 0)
-        //        {
-        //            allPrices.Add((extras[i].Amount) * (extras[i].Price));
-        //        }
-        //    }
-        //    return allPrices.Sum();
-        //}
-        private void ConfirmButton(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button b)
-            {
-                if (b.Tag is ExtrasModel exx)
-                {
-                    exx.Amount++;
-                }
-
-            }
-        }
-
+        #region checkbox
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox c)
@@ -63,5 +33,60 @@ namespace PizzaApp_WPF.View
             }
 
         }
+        #endregion
+
+
+
+        #region Increase and decrease
+        private void IncreaseButton(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button b)
+                if (b.Tag is ExtrasModel exx)
+                    if (exx.Amount is not >= 30)
+                    {
+                        exx.Amount++;
+                        mvm.newTotalPrice();
+                    }
+        }
+
+        private void DecreaseButton(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button b)
+                if (b.Tag is ExtrasModel exx)
+                    if (exx.Amount is not <= 0)
+                    {
+                        exx.Amount--;
+                        mvm.newTotalPrice();
+                    }
+        }
+        #endregion
+
+
+
+        #region Confirm And Cancel
+        private void ConfirmButton(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+
+        private void CancelButton(object sender, RoutedEventArgs e)
+        {
+            mvm.Pizza.Extras.Clear();
+            mvm.Pizza.Toppings.Clear();
+            
+            foreach (var item in mvm.TmpExtras)
+            {
+                mvm.Pizza.Extras.Add((ExtrasModel)item.Clone());
+            }
+
+            foreach (var item in mvm.TmpToppings)
+            {
+                mvm.Pizza.Toppings.Add((ToppingsModel)item.Clone());
+            }
+
+            this.Close();
+        }
+        #endregion
     }
 }

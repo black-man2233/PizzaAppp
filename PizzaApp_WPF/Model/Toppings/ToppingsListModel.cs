@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace PizzaApp_WPF.Model.Toppings
 {
+#pragma warning disable
     public class ToppingsListModel : INotifyPropertyChanged
     {
-		private ObservableCollection<ToppingsModel> _toppings;
-		public ObservableCollection<ToppingsModel> Toppings
-		{
-			get
-			{
-				return _toppings;
-			}
-			set
-			{
+        private ObservableCollection<ToppingsModel>? _toppings;
+        public ObservableCollection<ToppingsModel>? Toppings
+        {
+            get
+            {
+                return _toppings;
+            }
+            set
+            {
                 _toppings = value;
-				OnPropertyChanged("MyProperty");
-			}
-		}
+                OnPropertyChanged("MyProperty");
+            }
+        }
 
 
-        
 
 
-		#region OnPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

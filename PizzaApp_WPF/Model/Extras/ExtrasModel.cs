@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace PizzaApp_WPF.Model
 {
+#pragma warning disable
     public partial class ExtrasModel : ObservableObject, INotifyPropertyChanged, ICloneable
     {
         #region Properties
@@ -62,7 +63,7 @@ namespace PizzaApp_WPF.Model
         #endregion
 
         #region OnPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
