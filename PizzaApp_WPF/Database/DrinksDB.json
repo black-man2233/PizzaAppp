@@ -1,7 +1,8 @@
 ﻿[
   {
-    "name": "Cola",
+    "name": "Coca Cola",
     "price": 8,
+    "description": "Drikken indeholder ofte kulsyre, koffein, fosforsyre og karamel. ",
     "capacity": [
       {
         "name": "small",
@@ -23,6 +24,7 @@
   {
     "name": "Fanta",
     "price": 8,
+    "description": "Cola er sødet læskedrik",
     "capacity": [
       {
         "name": "small",
@@ -44,6 +46,7 @@
   {
     "name": "Faxe Kondi",
     "price": 8,
+    "description": "Cola er sødet læskedrik",
     "capacity": [
       {
         "name": "small",
@@ -65,6 +68,7 @@
   {
     "name": "Spiritus",
     "price": 8,
+    "description": "Cola er sødet læskedrik",
     "capacity": [
       {
         "name": "small",

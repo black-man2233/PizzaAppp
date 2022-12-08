@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using PizzaApp_WPF.Model;
 using PizzaApp_WPF.Model.Toppings;
 using PizzaApp_WPF.View;
@@ -39,6 +40,17 @@ namespace PizzaApp_WPF.ViewModel
             for (int i = 0; i < menu.ToppingsList.Count; i++)
                 ToppingsList.Add(menu.ToppingsList[i]);
             #endregion
+
+            for (int i = 0; i < 1; i++)
+            {
+                var a = _menuList[i];
+                a.Extras = new();
+                foreach (var item in ExtrasList)
+                {
+                    a.Extras.Add((ExtrasModel)item.Clone());
+                }
+                CartList.Add((PizzaModel)a.Clone());
+            }
 
             #region Commands initialised
             ModifyFromCartCommand = new Command.RelayCommand.RelayCommand(ModifyFromCart, CanModiFy);
@@ -104,7 +116,7 @@ namespace PizzaApp_WPF.ViewModel
 
 
         //cart
-        [ObservableProperty] ObservableCollection<PizzaModel> _cartList = new();
+        [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
 
         private PizzaModel _cartSelectedItem;
         public PizzaModel CartSelectedItem
@@ -286,7 +298,9 @@ namespace PizzaApp_WPF.ViewModel
             else
                 return true;
         }
+        #endregion
 
+        #region Functions
         //Calctulator of total price
         /// <summary>  <para> Total Price calculator.</para>
         ///   <para>Calculates According to the price of items in the cart </para>
@@ -310,7 +324,6 @@ namespace PizzaApp_WPF.ViewModel
             }
         }
         #endregion
-
 
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

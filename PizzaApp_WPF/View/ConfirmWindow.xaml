@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaApp_WPF.View"
+        x:Name="ConfWindow"
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ConfirmViewModel}"
         mc:Ignorable="d"
        Title="Customize the Pizza"
@@ -17,8 +18,29 @@
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen">
 
-    <Grid >
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
 
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="transparent " TargetName="Border" />
+                                <Setter Property="Width" Value="45" TargetName="Border"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid DataContext="{Binding}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -34,42 +56,18 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Background="Transparent" Click="BackButton" Width="70" Height="70">
-            <Image Source="file:///C:/Users/Kevin/Downloads/Design%20uden%20navn%20(2).jpg"/>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="LightBlue" />
-
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="Border" Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="transparent " TargetName="Border" />
-                                        <Setter Property="Width" Value="100" TargetName="Border"/>
-                                    </Trigger>
-
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-
+        <Button Command="{Binding BackButtonCommand}" CommandParameter="{Binding ElementName=ConfWindow}" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Background="Transparent" Width="70" Height="70">
+            <Image Source="https://cdn-icons-png.flaticon.com/512/122/122641.png"/>
         </Button>
 
 
         <TextBlock Background="#141414" Grid.Column="1" Grid.ColumnSpan="3" Text="Dine Order" FontSize="40" TextAlignment="Center" FontWeight="Bold" Foreground="White"/>
 
 
-        <ListBox Background="#181818"  ItemsSource="{Binding Pizzas}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=3}">
+        <ListBox Background="#181818" ItemsSource="{Binding Pizzas, UpdateSourceTrigger=PropertyChanged}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=3}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" x:Name="PizzaItem" Tag="{Binding}">
                         <StackPanel>
                             <Grid HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
@@ -97,36 +95,12 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </Border>
-                            <Label Content="{Binding Description}" Width="350" FontSize="22" Foreground="White" />
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="350" FontSize="22" Foreground="White" />
 
                         </StackPanel>
 
-                        <Button Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="DeletePizza" Tag="{Binding}">
+                        <Button CommandParameter="{Binding ElementName=PizzaItem}" Command="{Binding DataContext.DeletePizzaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave">
                             <Image Source="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png" />
-
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border x:Name="Border" Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                </Border>
-
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="transparent " TargetName="Border" />
-                                                        <Setter Property="Height" Value="70" />
-                                                        <Setter Property="Width" Value="70" />
-                                                    </Trigger>
-
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
                         </Button>
                     </StackPanel>
                 </DataTemplate>
@@ -135,28 +109,23 @@
         </ListBox>
 
 
-        <ListBox Background="#181818"  ItemsSource="{Binding Drinks}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}">
-
+        <ListBox Background="#181818"  ItemsSource="{Binding Drinks , UpdateSourceTrigger=PropertyChanged}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=2}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-
+                    <StackPanel Tag="{Binding}" x:Name="ThisDrink" Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
-
                             <Grid HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition  Width="160"/>
                                     <ColumnDefinition  Width="160"/>
                                     <ColumnDefinition  Width="50"/>
                                 </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="{Binding Path=Name}" FontSize="30" Foreground="White" FontWeight="Black" Grid.Column="0" Grid.ColumnSpan="1" Padding="0,0,55,0" HorizontalAlignment="Left">
-                                </TextBlock>
-
+                                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="30" Foreground="White" TextWrapping="Wrap" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,0,55,0" HorizontalAlignment="Left"/>
                                 <TextBlock Text="{Binding Path=Total}" Foreground="White" FontSize="30" Grid.Column="1" HorizontalAlignment="Right"/>
                             </Grid>
+                            <TextBlock Foreground="White" FontWeight="Medium" FontSize="22" Text="{Binding Path=Description}" TextWrapping="Wrap"/>
                         </StackPanel>
-                        <Button Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="DeleteDrinks" Tag="{Binding}">
+                        <Button CommandParameter="{Binding ElementName=ThisDrink}" Command="{Binding DataContext.DeleteDrinksCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave">
                             <Image Source="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png"/>
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
@@ -175,7 +144,6 @@
                                                         <Setter Property="Height" Value="70" />
                                                         <Setter Property="Width" Value="70" />
                                                     </Trigger>
-
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </Setter.Value>
