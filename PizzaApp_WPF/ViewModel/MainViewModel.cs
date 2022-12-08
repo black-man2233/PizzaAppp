@@ -41,17 +41,6 @@ namespace PizzaApp_WPF.ViewModel
                 ToppingsList.Add(menu.ToppingsList[i]);
             #endregion
 
-            for (int i = 0; i < 1; i++)
-            {
-                var a = _menuList[i];
-                a.Extras = new();
-                foreach (var item in ExtrasList)
-                {
-                    a.Extras.Add((ExtrasModel)item.Clone());
-                }
-                CartList.Add((PizzaModel)a.Clone());
-            }
-
             #region Commands initialised
             ModifyFromCartCommand = new Command.RelayCommand.RelayCommand(ModifyFromCart, CanModiFy);
             RemoveFromCartCommand = new Command.RelayCommand.RelayCommand(RemoveFromCart, CanRemove);

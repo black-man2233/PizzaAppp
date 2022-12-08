@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaApp_WPF.View"
         x:Name="ConfWindow"
+        
+        xmlns:windowManager="clr-namespace:PulserTester.Convertors;assembly=TheNameOfTheAssemblyWithoutExtension"
+
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ConfirmViewModel}"
         mc:Ignorable="d"
        Title="Customize the Pizza"
@@ -95,7 +98,17 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </Border>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Width="350" FontSize="22" Foreground="White" />
+                            <TextBlock Text="{Binding Text}" RenderTransformOrigin="0,0" Margin="20">
+                            <!-- TranslateTransform to apply the scroll position to the text -->
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform X="{Binding ScrollPosition}" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+                            <!-- Timer to trigger the UpdateScrollPosition method -->
+                            <Timer Interval="50" Tick="{Binding UpdateScrollPosition}" IsEnabled="True" />
+
+
 
                         </StackPanel>
 

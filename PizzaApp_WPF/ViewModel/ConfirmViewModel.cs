@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,15 +28,49 @@ namespace PizzaApp_WPF.ViewModel
 
             _cartItems = cart;
 
+
             DrinksOrPizzas();
             BackButtonCommand = new Command.RelayCommand.RelayCommand(GoBack, CanGoBack);
             DeletePizzaCommand = new Command.RelayCommand.RelayCommand(DeletePizza, CanDeletePizza);
             DeleteDrinksCommand = new Command.RelayCommand.RelayCommand(DeleteDrink, CanDeleteDrinks);
             totCalc();
 
+
+            Text= "Lalalals asdalsdl";
         }
 
         #region Properties
+        //Timer
+        private string _text;
+        private double _scrollPosition;
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                OnPropertyChanged("Text");
+            }
+        }
+
+        public double ScrollPosition
+        {
+            get { return _scrollPosition; }
+            set
+            {
+                _scrollPosition = value;
+                OnPropertyChanged("ScrollPosition");
+            }
+        }
+
+        public void UpdateScrollPosition()
+        {
+            ScrollPosition += 1;
+        }
+
+
+
+
         //CartItems
         private ObservableCollection<PizzaModel>? _cartItems = new();
         public ObservableCollection<PizzaModel>? CartItems
