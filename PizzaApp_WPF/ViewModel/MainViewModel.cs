@@ -10,9 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PizzaApp_WPF.ViewModel
 {
@@ -105,7 +103,7 @@ namespace PizzaApp_WPF.ViewModel
 
 
         //cart
-        [ObservableProperty] public static ObservableCollection<PizzaModel> _cartList = new();
+        [ObservableProperty] public ObservableCollection<PizzaModel> _cartList = new();
 
         private PizzaModel _cartSelectedItem;
         public PizzaModel CartSelectedItem
@@ -121,7 +119,7 @@ namespace PizzaApp_WPF.ViewModel
         public int CartSelectedIndex { get; set; } = -1;
 
         //TotalPrice
-        public static string _totPrice;
+        public string _totPrice;
         public string TotPrice
         {
             get => _totPrice;
@@ -269,6 +267,7 @@ namespace PizzaApp_WPF.ViewModel
 
                 ConfirmWindow confirmWindow = new(CartList);
                 confirmWindow.ShowDialog();
+                totCalc();
             }
             else
                 MessageBox.Show("Fyld venligste Kurven op", "Hov");
@@ -296,21 +295,17 @@ namespace PizzaApp_WPF.ViewModel
         /// </summary>
         public void totCalc()
         {
-            try
+            if (_cartList.Count > 0 || _cartList is not null)
             {
                 var c = _cartList;
                 List<int> pricesCombined = new();
 
                 for (int i = 0; i < c.Count; i++)
-                {
                     pricesCombined.Add(c[i].Total);
-                }
+
                 TotPrice = (pricesCombined.Sum()).ToString();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
         }
         #endregion
 

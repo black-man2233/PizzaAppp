@@ -1,30 +1,30 @@
 ﻿[
   {
     "name": "Coca Cola",
-    "price": 8,
+    "price": 15,
     "description": "Drikken indeholder ofte kulsyre, koffein, fosforsyre og karamel. ",
     "capacity": [
       {
         "name": "small",
-        "price": 8,
-        "selected": false
-      },
-      {
-        "name": "medium",
         "price": 15,
         "selected": false
       },
       {
-        "name": "Large",
+        "name": "medium",
         "price": 20,
+        "selected": false
+      },
+      {
+        "name": "Large",
+        "price": 23,
         "selected": false
       }
     ]
   },
   {
-    "name": "Fanta",
-    "price": 8,
-    "description": "Cola er sødet læskedrik",
+    "name": "Fanta Berry",
+    "price": 13,
+    "description": "Fanta Berry er en læskedrik med kulsyre og med frisk smag af blåbær og hindbær. Koffeinfri",
     "capacity": [
       {
         "name": "small",
@@ -45,8 +45,8 @@
   },
   {
     "name": "Faxe Kondi",
-    "price": 8,
-    "description": "Cola er sødet læskedrik",
+    "price": 10,
+    "description": ". Den indeholder glukose, også kaldet druesukker",
     "capacity": [
       {
         "name": "small",
@@ -67,8 +67,8 @@
   },
   {
     "name": "Spiritus",
-    "price": 8,
-    "description": "Cola er sødet læskedrik",
+    "price": 49,
+    "description": "Alkoholiske drikkevarer med en alkoholprocent på over ca. 25%.",
     "capacity": [
       {
         "name": "small",

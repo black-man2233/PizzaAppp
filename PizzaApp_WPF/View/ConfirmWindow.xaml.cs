@@ -5,6 +5,9 @@ using System.Collections.ObjectModel;
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace PizzaApp_WPF.View
@@ -48,8 +51,16 @@ namespace PizzaApp_WPF.View
             if (sender is Button b)
             {
                 Image? i = b.Content as Image;
-                i.Height = 42;
-                i.Width = 42;
+
+                DoubleAnimation anim = new DoubleAnimation();
+                anim = new DoubleAnimation(-20, 150, TimeSpan.FromMilliseconds(1500))
+                {
+                    RepeatBehavior = RepeatBehavior.Forever,
+                    AutoReverse = true
+                };
+                anim.RepeatBehavior= RepeatBehavior.Forever;
+                b.BeginAnimation(Canvas.LeftProperty, anim);
+
                 //i.Source = new BitmapImage(new Uri(@"https://img.icons8.com/external-kiranshastry-solid-kiranshastry/512/external-recycle-bin-graph-design-kiranshastry-solid-kiranshastry.png"));
             }
         }
@@ -58,11 +69,46 @@ namespace PizzaApp_WPF.View
             if (sender is Button b)
             {
                 Image? i = b.Content as Image;
-                i.Height = 40;
-                i.Width = 40;
                 //i.Source = new BitmapImage(new Uri(@"https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png"));
             }
 
         }
+
+
+
+
+        private Point myMousePlacementPoint;
+
+        private void OnListViewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.MiddleButton == MouseButtonState.Pressed)
+            {
+                myMousePlacementPoint = this.PointToScreen(Mouse.GetPosition(this));
+            }
+        }
+
+        public static DependencyObject GetScrollViewer(DependencyObject o)
+        {
+            // Return the DependencyObject if it is a ScrollViewer
+            if (o is ScrollViewer)
+            { return o; }
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
+            {
+                var child = VisualTreeHelper.GetChild(o, i);
+
+                var result = GetScrollViewer(child);
+                if (result == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
     }
 }

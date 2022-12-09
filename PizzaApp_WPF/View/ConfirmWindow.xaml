@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:PizzaApp_WPF.View"
         x:Name="ConfWindow"
         
-        xmlns:windowManager="clr-namespace:PulserTester.Convertors;assembly=TheNameOfTheAssemblyWithoutExtension"
-
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ConfirmViewModel}"
         mc:Ignorable="d"
-       Title="Customize the Pizza"
+        Title="Customize the Pizza"
         Height="730" 
         Width="960"
         Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
@@ -33,7 +31,6 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="transparent " TargetName="Border" />
-                                <Setter Property="Width" Value="45" TargetName="Border"/>
                             </Trigger>
 
                         </ControlTemplate.Triggers>
@@ -41,6 +38,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
     </Window.Resources>
 
     <Grid DataContext="{Binding}">
@@ -66,12 +64,11 @@
 
         <TextBlock Background="#141414" Grid.Column="1" Grid.ColumnSpan="3" Text="Dine Order" FontSize="40" TextAlignment="Center" FontWeight="Bold" Foreground="White"/>
 
-
-        <ListBox Background="#181818" ItemsSource="{Binding Pizzas, UpdateSourceTrigger=PropertyChanged}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=3}">
+        <ListBox Background="#181818" ItemsSource="{Binding Pizzas, UpdateSourceTrigger=PropertyChanged}"  HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=3}" IsTextSearchEnabled="False" Width="450" Mouse.MouseDown="OnListViewMouseDown" ScrollViewer.CanContentScroll="False">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" x:Name="PizzaItem" Tag="{Binding}">
-                        <StackPanel>
+                    <StackPanel Width="440" Orientation="Horizontal" x:Name="PizzaItem" Tag="{Binding}">
+                        <StackPanel IsHitTestVisible="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="350">
                             <Grid HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition  Width="1*"/>
@@ -80,64 +77,72 @@
                                 <TextBlock Text="{Binding Path=Name}" FontSize="30" Foreground="White" FontWeight="Black" Grid.Column="0" Padding="0,0,55,0" HorizontalAlignment="Left"/>
                                 <TextBlock Text="{Binding Path=Total, StringFormat=' {0} kr.'}" Foreground="White" FontSize="30" Grid.Column="1" HorizontalAlignment="Right"/>
                             </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="170" BorderBrush="DimGray" BorderThickness="2" HorizontalAlignment="Center">
+                                    <ListBox Background="Transparent" BorderBrush="Transparent" ItemsSource ="{Binding Path=Extras}" IsHitTestVisible="False" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
 
-                            <Border BorderBrush="DimGray" BorderThickness="2" HorizontalAlignment="Center">
-                                <ListBox Background="Transparent" BorderBrush="Transparent" ItemsSource ="{Binding Path=Extras}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="150" />
-                                                    <ColumnDefinition Width="150"/>
-                                                </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding Path=Amount}" FontSize="20" Grid.Column="0" Foreground="White"/>
+                                                    <TextBlock Text="{Binding Path=Name}" FontSize="20" Grid.Column="2" Foreground="White"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
 
-                                                <TextBlock Text="{Binding Path=Name}" FontSize="22" Grid.Column="0" Foreground="White"  />
-                                                <TextBlock Text="{Binding Path=Amount, StringFormat=' {0} valgte.'}" FontSize="22" Grid.Column="1" Foreground="White"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </Border>
-                            <TextBlock Text="{Binding Text}" RenderTransformOrigin="0,0" Margin="20">
-                            <!-- TranslateTransform to apply the scroll position to the text -->
-                                <TextBlock.RenderTransform>
-                                    <TranslateTransform X="{Binding ScrollPosition}" />
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-
-                            <!-- Timer to trigger the UpdateScrollPosition method -->
-                            <Timer Interval="50" Tick="{Binding UpdateScrollPosition}" IsEnabled="True" />
-
-
-
+                                <Border Width="170" Grid.Column="1" BorderBrush="DimGray" BorderThickness="2" HorizontalAlignment="Center">
+                                    <ListBox Background="Transparent" BorderBrush="Transparent" ItemsSource ="{Binding Path=Toppings}" IsHitTestVisible="False" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel Width="150">
+                                                    <TextBlock Text="{Binding Path=Name}" FontSize="20" HorizontalAlignment="Left" Foreground="White"/>
+                                                    <TextBlock Text="{Binding Path=Selected}" FontSize="20" Foreground="#FFEAEAEA" HorizontalAlignment="Right" />
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </Grid>
+                            <TextBlock Text="{Binding Description}" Foreground="White" FontSize="20" TextWrapping="Wrap" />
                         </StackPanel>
 
-                        <Button CommandParameter="{Binding ElementName=PizzaItem}" Command="{Binding DataContext.DeletePizzaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave">
+                        <Button Canvas.Top="-9" CommandParameter="{Binding ElementName=PizzaItem}" Command="{Binding DataContext.DeletePizzaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" Height="40" Width="40" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave">
                             <Image Source="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png" />
                         </Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
         </ListBox>
 
-
-        <ListBox Background="#181818"  ItemsSource="{Binding Drinks , UpdateSourceTrigger=PropertyChanged}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=2}">
+        <ListBox Background="#181818"  ItemsSource="{Binding Drinks , UpdateSourceTrigger=PropertyChanged}" Focusable="False" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=2}" Mouse.MouseDown="OnListViewMouseDown" ScrollViewer.CanContentScroll="False">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Tag="{Binding}" x:Name="ThisDrink" Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                            <Grid HorizontalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition  Width="160"/>
-                                    <ColumnDefinition  Width="160"/>
-                                    <ColumnDefinition  Width="50"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="30" Foreground="White" TextWrapping="Wrap" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,0,55,0" HorizontalAlignment="Left"/>
-                                <TextBlock Text="{Binding Path=Total}" Foreground="White" FontSize="30" Grid.Column="1" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <TextBlock Foreground="White" FontWeight="Medium" FontSize="22" Text="{Binding Path=Description}" TextWrapping="Wrap"/>
-                        </StackPanel>
+                        <Border BorderBrush="DimGray" BorderThickness="2" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Vertical">
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition  Width="160"/>
+                                        <ColumnDefinition  Width="160"/>
+                                        <ColumnDefinition  Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="30" Foreground="White" TextWrapping="Wrap" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,0,55,0" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding Path=Total}" Foreground="White" FontSize="30" Grid.Column="1" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBlock Foreground="White" FontWeight="UltraLight" FontSize="22" Text="{Binding Path=Description}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
                         <Button CommandParameter="{Binding ElementName=ThisDrink}" Command="{Binding DataContext.DeleteDrinksCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}}" Width="40" Height="60" Background="Transparent" MouseEnter="MouseEnter" MouseLeave="MouseLeave">
                             <Image Source="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512/external-trash-can-layout-for-a-indication-to-throw-trash-mall-color-tal-revivo.png"/>
                             <Button.Style>
@@ -168,7 +173,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Text="{Binding TotalPrice, StringFormat=' I ALT : {0}'}" Grid.Row="3"  Grid.Column="3" Grid.ColumnSpan="2" TextAlignment="Center"  VerticalAlignment="Center"  Foreground="White" FontSize="40" FontWeight="DemiBold" />
+        <TextBlock Text="Total:" Grid.Column="3" Grid.Row="3" Foreground="White" FontSize="40" TextAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="{Binding TotalPrice}"  Grid.Row="3"  Grid.Column="4" TextAlignment="Center"  VerticalAlignment="Center"  Foreground="White" FontSize="40" FontWeight="DemiBold" />
 
         <Image Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Source="file:///C:/Users/Kevin/Desktop/WE/payment_logos_large.webp"/>
 

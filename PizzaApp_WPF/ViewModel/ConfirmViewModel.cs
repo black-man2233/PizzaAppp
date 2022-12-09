@@ -13,6 +13,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace PizzaApp_WPF.ViewModel
 {
@@ -28,49 +29,14 @@ namespace PizzaApp_WPF.ViewModel
 
             _cartItems = cart;
 
-
             DrinksOrPizzas();
             BackButtonCommand = new Command.RelayCommand.RelayCommand(GoBack, CanGoBack);
             DeletePizzaCommand = new Command.RelayCommand.RelayCommand(DeletePizza, CanDeletePizza);
             DeleteDrinksCommand = new Command.RelayCommand.RelayCommand(DeleteDrink, CanDeleteDrinks);
             totCalc();
-
-
-            Text= "Lalalals asdalsdl";
         }
 
         #region Properties
-        //Timer
-        private string _text;
-        private double _scrollPosition;
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                OnPropertyChanged("Text");
-            }
-        }
-
-        public double ScrollPosition
-        {
-            get { return _scrollPosition; }
-            set
-            {
-                _scrollPosition = value;
-                OnPropertyChanged("ScrollPosition");
-            }
-        }
-
-        public void UpdateScrollPosition()
-        {
-            ScrollPosition += 1;
-        }
-
-
-
-
         //CartItems
         private ObservableCollection<PizzaModel>? _cartItems = new();
         public ObservableCollection<PizzaModel>? CartItems
@@ -153,12 +119,13 @@ namespace PizzaApp_WPF.ViewModel
         {
             if (value is StackPanel s)
                 if (s.Tag is PizzaModel p)
+                {
                     CartItems.Remove(p);
+                    Pizzas.Remove(p);
+                }
+
+            totCalc();
         }
-
-
-        public ObservableCollection<PizzaModel> psada
-        { get => MainViewModel._cartList; }
 
         //Delete Drinks
         private bool CanDeleteDrinks(object value)
@@ -168,13 +135,16 @@ namespace PizzaApp_WPF.ViewModel
             else
                 return false;
         }
-
         private void DeleteDrink(Object value)
         {
             if (value is StackPanel s)
                 if (s.Tag is PizzaModel d)
+                {
                     CartItems.Remove(d);
+                    Drinks.Remove(d);
+                }
 
+            totCalc();
         }
 
         //Back Button
@@ -212,24 +182,27 @@ namespace PizzaApp_WPF.ViewModel
                     _pizzas.Add(_cartItems[i]);
                 else
                     _drinks.Add(_cartItems[i]);
+
+            totCalc();
         }
 
         void totCalc()
         {
-            List<int> pricesCombined = new();
+            List<int> _drinksPrices = new();
+            List<int> _pizzaPrices = new();
+            int total = 0;
+            if (Drinks.Count > 0)
+                for (int i = 0; i < Drinks.Count; i++)
+                    _drinksPrices.Add(Drinks[i].Total);
 
-            if (_pizzas.Count > 0 || _drinks.Count > 0)
-            {
-                for (int i = 0; i < _pizzas.Count; i++)
-                {
-                    for (int j = 0; j < _drinks.Count; j++)
-                    {
-                        pricesCombined.Add(_pizzas[i].Total);
+            if (Pizzas.Count > 0)
+                for (int i = 0; i < Pizzas.Count; i++)
+                    _pizzaPrices.Add(Pizzas[i].Total);
 
-                    }
+            if (_drinksPrices is not null && _pizzas is not null)
+                total = (_drinksPrices.Sum() + _pizzaPrices.Sum());
 
-                }
-            }
+            TotalPrice = total.ToString();
         }
         #endregion
 
