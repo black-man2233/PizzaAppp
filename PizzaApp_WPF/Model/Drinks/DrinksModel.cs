@@ -9,6 +9,21 @@ namespace PizzaApp_WPF.Model
     public partial class DrinksModel : ObservableObject, INotifyPropertyChanged
     {
         #region Propperties
+        //Image
+        private string _imageUrl;
+        public string ImageUrl
+        {
+            get
+            {
+                return _imageUrl;
+            }
+            set
+            {
+                _imageUrl = value;
+                OnPropertyChanged("ImageUrl");
+            }
+        }
+       
         //ID
         private int _id;
         public int Id

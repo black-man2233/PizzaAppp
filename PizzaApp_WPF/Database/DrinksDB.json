@@ -1,5 +1,29 @@
 ﻿[
   {
+    "imageUrl": "https://lyngenspizza.dk/wp-content/uploads/2018/02/kv_mineralvand.png",
+    "name": "Kildevand",
+    "price": 20,
+    "description": "Det er bare vand",
+    "capacity": [
+      {
+        "name": "small",
+        "price": 18,
+        "selected": false
+      },
+      {
+        "name": "medium",
+        "price": 20,
+        "selected": false
+      },
+      {
+        "name": "Large",
+        "price": 40,
+        "selected": false
+      }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pinimg.com/originals/fd/44/db/fd44db55e70aafdfee35ed9b184b82db.png",
     "name": "Coca Cola",
     "price": 15,
     "description": "Drikken indeholder ofte kulsyre, koffein, fosforsyre og karamel. ",
@@ -22,6 +46,7 @@
     ]
   },
   {
+    "imageUrl": "https://www.fanta.com/content/dam/nagbrands/us/fanta/en/products/berry/can_12_berry_desktop.png",
     "name": "Fanta Berry",
     "price": 13,
     "description": "Fanta Berry er en læskedrik med kulsyre og med frisk smag af blåbær og hindbær. Koffeinfri",
@@ -44,6 +69,7 @@
     ]
   },
   {
+    "imageUrl": "https://fadølslageret.dk/wp-content/uploads/2021/12/Faxe-Kondi-3.png",
     "name": "Faxe Kondi",
     "price": 10,
     "description": ". Den indeholder glukose, også kaldet druesukker",
@@ -66,6 +92,7 @@
     ]
   },
   {
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/03/06/18/00/liquor-3204101_960_720.png",
     "name": "Spiritus",
     "price": 49,
     "description": "Alkoholiske drikkevarer med en alkoholprocent på over ca. 25%.",
@@ -87,4 +114,6 @@
       }
     ]
   }
+
+
 ]

@@ -81,24 +81,25 @@
         </DataGrid>
 
 
-        <ListBox ItemsSource="{Binding DrinksList}" Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818" >
-            <ListBox.ItemTemplate>
+        <ListBox ItemsSource="{Binding DrinksList}" Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate >
                 <DataTemplate>
                     <DockPanel Width="330">
                         <Grid x:Name="grid">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="200" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="40" />
+                                <RowDefinition Height="50" />
                             </Grid.RowDefinitions>
+                            
+                            <Image Source="{Binding Path =ImageUrl}" Grid.Column="0" HorizontalAlignment="Center" Height="43" Width="50"/>
 
-                            <TextBlock  Text="{Binding Path=Name}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
-                            <TextBlock Text="{Binding Path =Price,StringFormat=' {0} kr.'}" Grid.Column="1" Foreground="White" FontSize="23"  HorizontalAlignment="Center"/>
+                            <TextBlock  Text="{Binding Path=Name}" Grid.Column="1" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
 
-                            <ComboBox ItemsSource="{Binding Path=Capacity}" SelectionChanged="ComboBox_SelectionChanged" Tag="{Binding}" Grid.Column="2" ToolTip="Vælge størrelsen på dit drikkevare" Text="sdas" MouseEnter="ComboBox_MouseEnter" MouseLeave="ComboBox_MouseEnter">
+                            <ComboBox ItemsSource="{Binding Path=Capacity}" SelectionChanged="ComboBox_SelectionChanged" Tag="{Binding}" Grid.Column="2" ToolTip="Vælge størrelsen på dit drikkevare" Text="sdas" MouseEnter="ComboBox_MouseEnter" MouseLeave="ComboBox_MouseEnter" Width="50">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
