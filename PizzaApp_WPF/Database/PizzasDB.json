@@ -1,37 +1,250 @@
 ﻿[
   {
-    "id": 1,
-    "description": "Opskrift på fantastisk hjemmelavet Pizza Margherita, den mest enkle pizza variant og helt og aldeles fantastisk hvis den laves rigtigt.",
+    "imageUrl": "https:\/\/www.onceuponachef.com\/images\/2020\/06\/Margherita-Pizza-1200x1707.jpg",
+    "id": "1",
+    "description": "Med tomatsauce, dobbelt mozarella ost og oregano",
     "name": "Margherita",
-    "price": 76,
-    "total": 76
+    "price": "76",
+    "total": "76"
   },
   {
-    "id": 2,
-    "description": "Pizza capricciosa er en pizza i det italienske køkken af mozzarella, italiensk skinke, svampe, artiskok og tomatSvampene. Den blev opfundet af Enea Dante Santerini, ejer af restauranten La Capricciosa på Via del Corso i Rom.",
+    "imageUrl": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/2\/2a\/Pizza_capricciosa.jpg",
+    "id": "2",
+    "description": "Med tomatsauce, mozarella ost, oregano, skinke og champignon",
     "name": "Capricciosa",
-    "total": 52,
-    "price": 52
+    "price": "52",
+    "total": "52"
   },
   {
-    "id": 3,
-    "description": "Hawaiipizza er en pizza med tomatsovs, ost, ananas og skinke. Nogle versioner kan også inkludere peberfrugt, svampe eller bacon. Den første pizza af denne type blev fremstillet af Sam Panopoulos i 1962 i Chatham-Kent, Canada.",
+    "imageUrl": "https:\/\/gastromand.dk\/wordpress\/wp-content\/uploads\/2019\/08\/hawaiipizza3-500x375.jpg",
+    "id": "3",
+    "description": "Med tomatsauce, mozarella ost, oregano, skinke og ananas",
     "name": "Hawaii",
-    "total": 72,
-    "price": 72
+    "price": "72",
+    "total": "72"
   },
   {
-    "id": 4,
-    "description": "Pizza quattro stagioni (four seasons pizza) is a variety of pizza in Italian cuisine that is prepared in four sections with diverse ingredients",
+    "imageUrl": "https:\/\/assets.wsimgs.com\/wsimgs\/rk\/images\/dp\/recipe\/202244\/0070\/img50l.jpg",
+    "id": "4",
+    "description": "Med tomatsauce, mozarella ost, oregano, skinke og bacon",
     "name": "Quatro stagioni",
-    "total": 84,
-    "price": 84
+    "price": "84",
+    "total": "84"
   },
   {
-    "id": 5,
+    "imageUrl": "https:\/\/cdn-rdb.arla.com\/Files\/arla-se\/346864562\/ec1d37f4-4a57-4cd1-857e-d42bec162498.jpg?crop=(278,0,0,0)&amp;w=375&amp;h=265&amp;mode=crop&amp;ak=f525e733&amp;hm=4b574910",
+    "id": "5",
     "description": "NATURLI’ Pizza Vesuvio – når det skal være hurtigt og lækkert. Den skal nok få din pizzatand til at løbe i vand på rekordtid. Flyt den fra fryseren til mikroovnen. Vent 3 minutter. Nemt!",
     "name": "Vesuvio",
-    "total": 53,
-    "price": 53
+    "price": "53",
+    "total": "53"
+  },
+  {
+    "imageUrl": "https:\/\/imagesvc.meredithcorp.io\/v3\/mm\/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F19%2F2014%2F07%2F10%2Fpepperoni-pizza-ck-x.jpg&amp;q=60",
+    "id": "6",
+    "description": "Stærk pizza med pepperoni, mozzarella, og tomatoes",
+    "name": "Pepperoni",
+    "price": "14",
+    "total": "14"
+  },
+  {
+    "imageUrl": "https:\/\/i0.wp.com\/www.thursdaynightpizza.com\/wp-content\/uploads\/2022\/06\/veggie-pizza-side-view-out-of-oven.png?resize=720%2C480&amp;ssl=1",
+    "id": "7",
+    "description": "Vegetarian pizza med svampe, peberfrugter, løg, og olives",
+    "name": "Vegetarian",
+    "price": "13",
+    "total": "13"
+  },
+  {
+    "imageUrl": "https:\/\/media-cdn.tripadvisor.com\/media\/photo-s\/17\/4c\/19\/39\/pizza-pescatora.jpg",
+    "id": "8",
+    "description": "Med tomatsauce, mozarella ost, oregano, skinke og pepperoni",
+    "name": "Solo mio",
+    "price": "76",
+    "total": "76"
+  },
+  {
+    "imageUrl": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/a\/a3\/Eq_it-na_pizza-margherita_sep2005_sml.jpg",
+    "id": "9",
+    "description": "Med tomatsauce, mozarella ost, oregano, pepperoni, løg og champignon",
+    "name": "Napoli",
+    "price": "52",
+    "total": "52"
+  },
+  {
+    "imageUrl": "https:\/\/www.vegplatter.in\/files\/public\/images\/partner\/catalog\/125\/Italiano%20Pizza.jpg",
+    "id": "10",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødsauce, champignon, løg, chili og hvidløg",
+    "name": "Italiano",
+    "price": "72",
+    "total": "72"
+  },
+  {
+    "imageUrl": "https:\/\/www.ruokaonvalmis.com\/wp-content\/uploads\/2022\/05\/gorgonzolaandwalnutpizza-resized.jpg",
+    "id": "11",
+    "description": "Med tomatsauce, mozarella ost, oregano, kebab, champignon, gorgonzola og løg",
+    "name": "Gorgonzola",
+    "price": "84",
+    "total": "84"
+  },
+  {
+    "imageUrl": "https:\/\/www.dengroenneslagter.dk\/media\/208780\/dgs-pizza-med-kyllingebryst-og-gule-cherrytomater.jpg?anchor=center&amp;mode=crop&amp;width=640&amp;height=640&amp;rnd=133016090290000000",
+    "id": "12",
+    "description": "Med tomatsauce, mozarella ost, oregano, champignon, bacon og kødfars",
+    "name": "Gülle",
+    "price": "53",
+    "total": "53"
+  },
+  {
+    "imageUrl": "https:\/\/mambeno.dk\/wp-content\/uploads\/2020\/08\/Vegetarpizza-med-loeg-peberfrugt-og-champignon-scaled.jpg",
+    "id": "13",
+    "description": "Med tomatsauce, mozarella ost, oregano, champignon, løg, ananas, falaffel og rød peber",
+    "name": "Vegetar",
+    "price": "14",
+    "total": "14"
+  },
+  {
+    "imageUrl": "https:\/\/sundmad.net\/wp-content\/uploads\/2016\/01\/Rodfrugtpizza-1-1000x675.jpg",
+    "id": "14",
+    "description": "Med tomatsauce, mozarella ost, oregano, kebab, champignon, løg og pepperoni",
+    "name": "Herli",
+    "price": "13",
+    "total": "13"
+  },
+  {
+    "imageUrl": "https:\/\/slicelife.imgix.net\/12043\/photos\/original\/61819962_832497507127534_6985189374031822848_o.jpg?auto=compress&amp;auto=format",
+    "id": "15",
+    "description": "Med tomatsauce, mozarella ost, oregano, spaghetti, kødsauce og cocktailpølser",
+    "name": "Milano",
+    "price": "76",
+    "total": "76"
+  },
+  {
+    "imageUrl": "https:\/\/images.squarespace-cdn.com\/content\/v1\/5702d655746fb9634798af7c\/1536782460678-KRN6R2FCHYB0R4N91NTP\/IMG_1899.JPG?format=1500w",
+    "id": "16",
+    "description": "Med tomatsauce, mozarella ost, oregano, kebab, champignon, løg, chili, hvidløg og dressing før ovn",
+    "name": "Josef",
+    "price": "52",
+    "total": "52"
+  },
+  {
+    "imageUrl": "https:\/\/www.sargento.com\/assets\/Uploads\/Recipe\/Image\/702-Pizza_Mexicana__FillWzExNzAsNTgzXQ.jpg",
+    "id": "17",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, bacon, løg, champignon og chili",
+    "name": "Mexicano",
+    "price": "72",
+    "total": "72"
+  },
+  {
+    "imageUrl": "https:\/\/static.wixstatic.com\/media\/d203f6_a647fb37c02c4282b53b9ca81ff2c114~mv2.jpg\/v1\/fill\/w_640,h_582,al_c,q_85,usm_0.66_1.00_0.01,enc_auto\/d203f6_a647fb37c02c4282b53b9ca81ff2c114~mv2.jpg",
+    "id": "18",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, skinke og bacon",
+    "name": "Sicilie",
+    "price": "84",
+    "total": "84"
+  },
+  {
+    "imageUrl": "https:\/\/images.deliveryhero.io\/image\/fd-op\/LH\/v2up-hero.jpg",
+    "id": "19",
+    "description": "Med tomatsauce, mozarella ost, oregano, kylling, bacon, pepperoni og hvidløg",
+    "name": "Titanic",
+    "price": "53",
+    "total": "53"
+  },
+  {
+    "imageUrl": "https:\/\/mambeno.dk\/wp-content\/uploads\/2017\/09\/Pizza-med-kylling-og-portobello.jpg",
+    "id": "20",
+    "description": "Med tomatsauce, mozarella ost, oregano, kylling, ananas, champignon, løg og karry",
+    "name": "Kylling pizza",
+    "price": "14",
+    "total": "14"
+  },
+  {
+    "imageUrl": "https:\/\/lh3.googleusercontent.com\/p\/AF1QipNKuknbIH1AR5BN8JLpdKwiN7hg5mUXL6gXaHKe=w768-h768-n-o-v1",
+    "id": "21",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, pommes frites, chili, hvidløg, dressing og rød dressing",
+    "name": "Chaplin",
+    "price": "13",
+    "total": "13"
+  },
+  {
+    "imageUrl": "https:\/\/pyzamadeinpoland.pl\/wp-content\/uploads\/2020\/03\/barese-12-1190x793.jpg",
+    "id": "22",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, pepperoni, champignon, løg, chili og hvidløg",
+    "name": "Bari",
+    "price": "76",
+    "total": "76"
+  },
+  {
+    "imageUrl": "https:\/\/sason.dk\/File\/128\/4.jpg?ticks=637896888200000000",
+    "id": "23",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, kebab og pepperoni",
+    "name": "Botan",
+    "price": "52",
+    "total": "52"
+  },
+  {
+    "imageUrl": "http:\/\/3.bp.blogspot.com\/-5BhCCfmsldE\/UA5JGxSPmbI\/AAAAAAAAY3c\/rHS9XS0JUrA\/s1600\/2012-07-23%2B18.26.25.jpg",
+    "id": "24",
+    "description": "Med tomatsauce, mozarella ost, oregano, kebab, rød peber, sucuk, løg, chili og hvidløg",
+    "name": "Super stærk",
+    "price": "72",
+    "total": "72"
+  },
+  {
+    "imageUrl": "https:\/\/assets.website-files.com\/61903595abdd6862e1d4ae00\/61906f60130a2bbc1232b0c9_amalfi-pizza-mushroom.jpg",
+    "id": "25",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødsauce, bacon, pepperoni, løg og rød peber",
+    "name": "Amalfi",
+    "price": "84",
+    "total": "84"
+  },
+  {
+    "imageUrl": "https:\/\/media-cdn.tripadvisor.com\/media\/photo-s\/17\/30\/5c\/1c\/photo0jpg.jpg",
+    "id": "26",
+    "description": "Med tomatsauce, mozarella ost, oregano, skinke, pepperoni, bacon og cocktailpølser",
+    "name": "Nico",
+    "price": "53",
+    "total": "53"
+  },
+  {
+    "imageUrl": "https:\/\/realfood.tesco.com\/media\/images\/1400x919-Cheats-mushroom-pizza-9952318c-cb77-422d-8af6-4246d0b491b7-0-1400x919.jpg",
+    "id": "27",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, sucuk, løg, dressing før ovn og chili",
+    "name": "Oliver",
+    "price": "14",
+    "total": "14"
+  },
+  {
+    "imageUrl": "https:\/\/altidmonalisa.dk\/wp-content\/uploads\/2021\/08\/HUSETS-PIZZA.jpg",
+    "id": "28",
+    "description": "Med tomatsauce, mozarella ost, oregano, kebab, kylling, sucuk, dressing før ovn",
+    "name": "Husets",
+    "price": "13",
+    "total": "13"
+  },
+  {
+    "imageUrl": "https:\/\/spiseguidenaarhus.dk\/wp-content\/uploads\/2021\/12\/San-Mario-Pizzaria-4-1024x576.jpg",
+    "id": "29",
+    "description": "Med tomatsauce, mozarella ost, oregano, kødfars, cocktailpølser, pepperoni og bacon",
+    "name": "Omario",
+    "price": "76",
+    "total": "76"
+  },
+  {
+    "imageUrl": "https:\/\/howtothisandthat.com\/wp-content\/uploads\/2018\/03\/keto-diet-tips-2.png",
+    "id": "30",
+    "description": "Med tomatsauce, mozarella ost, oregano, kebab, pepperoni, bacon, jalapeños, chili og hvidløg",
+    "name": "Jalapeño",
+    "price": "52",
+    "total": "52"
+  },
+  {
+    "imageUrl": "https:\/\/popmenucloud.com\/cdn-cgi\/image\/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60\/oyxtwnas\/10ef1dda-1a32-42f4-92d7-b6961c555366.jpeg",
+    "id": "31",
+    "description": "Med tomatsauce, mozarella ost, oregano, skinke, kebab, kødsauce, løg, rød peber og chili",
+    "name": "Amerikansk (stærk)",
+    "price": "72",
+    "total": "72"
   }
 ]

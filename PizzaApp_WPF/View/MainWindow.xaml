@@ -16,10 +16,6 @@
         ResizeMode="NoResize"
         BorderThickness=".5">
 
-    <!--<Window.Resources>
-        <viewmodel:MainViewModel x:Key="vm"></viewmodel:MainViewModel>
-    </Window.Resources>-->
-
     <Grid Background="Black">
 
         <Grid.ColumnDefinitions>
@@ -58,10 +54,16 @@
         <!--Menukortets ListBoxen-->
         <DataGrid ItemsSource="{Binding MenuList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding MenuSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" Tag="{Binding}" SelectedItem="{Binding MenuSelectedItem}">
-
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" Tag="{Binding}" SelectedItem="{Binding MenuSelectedItem}"  d:ItemsSource="{d:SampleData ItemCount=2}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTemplateColumn Width="40">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=ImageUrl}" Height="35" Width="35"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="200" Foreground="#fff" Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn  Foreground="#fff" Header="Price" Binding="{Binding Path=Price,StringFormat=' {0} kr.'}"/>
             </DataGrid.Columns>
 
@@ -120,7 +122,7 @@
 
         <Button Command="{Binding ModifyFromCartCommand}" Content="Redigere" Grid.Column="1" Grid.Row="3" FontSize="30" FontWeight="DemiBold" Margin="74,28,73,10" Background="#181818" Foreground="WhiteSmoke"/>
 
-        <DataGrid ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" SelectedItem="{Binding CartSelectedItem}" Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" Tag="{Binding}" MouseDoubleClick="DataGrid_MouseDoubleClick">
+        <DataGrid ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" SelectedItem="{Binding CartSelectedItem}" Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" Tag="{Binding}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="230" Foreground="#fff" Header="Name" Binding="{Binding Path=Name}"/>

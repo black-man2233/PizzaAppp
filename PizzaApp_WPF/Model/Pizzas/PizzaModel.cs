@@ -12,6 +12,21 @@ namespace PizzaApp_WPF.Model
     public partial class PizzaModel : ObservableObject, INotifyPropertyChanged, ICloneable
     {
         #region Properties
+        //Image Url
+        private string _imageUrl;
+        public string ImageUrl
+        {
+            get
+            {
+                return _imageUrl;
+            }
+            set
+            {
+                _imageUrl = value;
+                OnPropertyChanged("ImageUrl");
+            }
+        }
+
         //id
         private int _id;
         public int ID
@@ -112,8 +127,9 @@ namespace PizzaApp_WPF.Model
         #endregion
 
         #region Constructors
-        public PizzaModel(int id, string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
+        public PizzaModel(string url, int id, string? name, int price, int total, string? description, ObservableCollection<ToppingsModel>? toppings, ObservableCollection<ExtrasModel>? extras)
         {
+            this.ImageUrl= url;
             this.ID= id;
             Name = new(name);
             Price = price;
@@ -128,23 +144,10 @@ namespace PizzaApp_WPF.Model
         #region Clone
         public object Clone()
         {
-            return new PizzaModel(this.ID, this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
+            return new PizzaModel(this.ImageUrl, this.ID, this.Name, this.Price, this.Total, this.Description, this.Toppings, this.Extras);
         }
         #endregion
 
-        #region Hash Code for all properties
-        public void printHash()
-        {
-            try
-            {
-                MessageBox.Show($"This Has = {this.GetHashCode()}  \nToppings Hash = {this.Toppings.GetHashCode()} \nExtras Has ={this.Extras.GetHashCode()}");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("No HashCodes For u BRother");
-            }
-        }
-        #endregion  
 
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

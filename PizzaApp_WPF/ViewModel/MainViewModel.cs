@@ -168,17 +168,36 @@ namespace PizzaApp_WPF.ViewModel
                 if (MenuSelectedItem.Clone() is PizzaModel pizza)
                     if (MenuSelectedItem.ID.ToString() is not null)
                     {
-                        var _toppingslist = (ToppingsList[MenuSelectedItem.ID - 1].Toppings);
-                        pizza.Toppings = new();
+                        if (ToppingsList.Count > MenuSelectedItem.ID - 1)
+                        {
+                            var _toppingslist = (ToppingsList[MenuSelectedItem.ID - 1].Toppings);
+                            pizza.Toppings = new();
 
-                        foreach (var item in _toppingslist)
-                            pizza.Toppings.Add((ToppingsModel)item.Clone());
+                            foreach (var item in _toppingslist)
+                                pizza.Toppings.Add((ToppingsModel)item.Clone());
 
-                        pizza.Extras = new();
-                        foreach (var item in ExtrasList)
-                            pizza.Extras.Add(item.Clone() as ExtrasModel);
+                            pizza.Extras = new();
+                            foreach (var item in ExtrasList)
+                                pizza.Extras.Add(item.Clone() as ExtrasModel);
 
-                        _cartList.Add(pizza.Clone() as PizzaModel);
+                            _cartList.Add(pizza.Clone() as PizzaModel);
+                        }
+                        else
+                        {
+                            Random _randomNumber = new Random();
+                            int _randIndex = _randomNumber.Next(ToppingsList.Count);
+                            var _toppingslist = (ToppingsList[_randIndex].Toppings);
+                            pizza.Toppings = new();
+
+                            foreach (var item in _toppingslist)
+                                pizza.Toppings.Add((ToppingsModel)item.Clone());
+
+                            pizza.Extras = new();
+                            foreach (var item in ExtrasList)
+                                pizza.Extras.Add(item.Clone() as ExtrasModel);
+
+                            _cartList.Add(pizza.Clone() as PizzaModel);
+                        }
                     }
                 totCalc();
 

@@ -25,9 +25,9 @@
 
     <Grid DataContext="{Binding Pizza}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="270" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
 
         <TextBlock Text="{Binding Description}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" FontSize="25" Foreground="Wheat" FontWeight="Bold" Background="#181818" TextWrapping="Wrap" TextTrimming="None" Width="Auto"/>
 
-        <ListBox ItemsSource="{Binding Toppings}" Tag="{Binding}" Foreground="White" FontSize="15" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent">
+        <ListBox ItemsSource="{Binding Toppings}" Tag="{Binding}" Foreground="White" FontSize="15" Background="#181818" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalContentAlignment="Center" BorderBrush="Transparent" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Width="300">
@@ -65,7 +65,10 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox ItemsSource="{Binding Extras}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#181818" Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="32" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderBrush="Transparent" >
+        <Image Source="{Binding ImageUrl}" Grid.Column="2" Grid.Row="3" Grid.RowSpan="3"/>
+
+
+        <ListBox ItemsSource="{Binding Extras}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#181818" Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="32" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderBrush="Transparent" d:ItemsSource="{d:SampleData ItemCount=5}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
             <Grid Width="360">

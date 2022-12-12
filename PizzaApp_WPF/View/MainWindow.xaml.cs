@@ -31,15 +31,6 @@ namespace PizzaApp_WPF.View
         }
 
 
-        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            DataGrid d = sender as DataGrid;
-
-            PizzaModel p = d.SelectedItem as PizzaModel;
-
-            p.printHash();
-        }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ComboBox c)
@@ -47,7 +38,7 @@ namespace PizzaApp_WPF.View
                 {
                     DrinksModel? dm = c.Tag as DrinksModel;
 
-                    vm.CartList.Add((PizzaModel)new PizzaModel(dm.Id, $"{FirstCharToUpper(ds.Name)} {dm.Name}",
+                    vm.CartList.Add((PizzaModel)new PizzaModel(null, dm.Id, $"{FirstCharToUpper(ds.Name)} {dm.Name}",
                         ds.Price,
                         ds.Price,
                         dm.Description,
