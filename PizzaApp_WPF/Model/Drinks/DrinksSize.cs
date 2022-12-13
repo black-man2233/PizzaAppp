@@ -12,5 +12,13 @@ namespace PizzaApp_WPF.Model
         [ObservableProperty] string? _name;
         [ObservableProperty] int _price;
         [ObservableProperty] bool _selected;
+
+        public DrinksSize(string name, int price, bool b)
+        {
+            this.Name = name;
+            this.Price = price;
+            this.Selected = b;
+        }
+
     }
 }

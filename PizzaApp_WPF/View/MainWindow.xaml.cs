@@ -3,6 +3,7 @@ using PizzaApp_WPF.ViewModel;
 using System.Linq;
 using System;
 using System.Windows;
+using System.Data.SqlClient;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -38,7 +39,10 @@ namespace PizzaApp_WPF.View
                 {
                     DrinksModel? dm = c.Tag as DrinksModel;
 
-                    vm.CartList.Add((PizzaModel)new PizzaModel(null, dm.Id, $"{FirstCharToUpper(ds.Name)} {dm.Name}",
+                    vm.CartList.Add((PizzaModel)new PizzaModel(
+                        dm.ImageUrl,
+                        (int)0,
+                        $"{FirstCharToUpper(ds.Name)} {dm.Name}",
                         ds.Price,
                         ds.Price,
                         dm.Description,

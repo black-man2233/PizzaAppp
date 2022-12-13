@@ -3,20 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PizzaApp_WPF.View"
         xmlns:viewmodel="clr-namespace:PizzaApp_WPF.ViewModel"
-        xmlns:model="clr-namespace:PizzaApp_WPF.Model"
         mc:Ignorable="d"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-        WindowStyle="SingleBorderWindow"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         WindowStartupLocation="CenterScreen"
         Height="800" 
         Width="1040"
-        Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
+        WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
+        Icon="https://cdn.dribbble.com/users/242107/screenshots/5724354/_hot-line-set__gif.gif"
         BorderThickness=".5">
 
-    <Grid Background="Black">
+
+    <Grid Background="Black" Tag="{Binding}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -27,12 +26,13 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition Height="50"/>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <!--Logoen til appen -->
-        <Image Source="https://media4.giphy.com/media/vXufyZ1LxgV6iQ4jfO/giphy.gif" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="5" >
+        <Image Source="https://media4.giphy.com/media/vXufyZ1LxgV6iQ4jfO/giphy.gif" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="6" >
             <Image.Effect>
                 <BlurEffect Radius="50"/>
             </Image.Effect>
@@ -46,15 +46,17 @@
         </Image>
 
         <!--Menu kortets label-->
-        <Label Content="Menu" Foreground="#FFF" FontSize="35" FontFamily="Arial Black" VerticalContentAlignment="Bottom" />
+        <Label Content="Pazzaer" Foreground="#FFF" FontSize="35" FontFamily="Arial Black" Background="Black" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+
+        <Label Content="Drinkke Vare" Foreground="#FFF" FontSize="35" FontFamily="Arial Black" Background="Black" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="3" />
 
         <!--Indkøbskurv label-->
-        <Label Content="Indkøbskurv" Foreground="#FFF" FontSize="35" FontFamily="Arial Black" VerticalContentAlignment="Bottom" Grid.Column="2" />
+        <Label Content="Indkøbskurv" Foreground="#FFF" Background="Black" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="35" FontFamily="Arial Black" VerticalContentAlignment="Bottom" Grid.Column="2" />
 
         <!--Menukortets ListBoxen-->
         <DataGrid ItemsSource="{Binding MenuList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding MenuSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Hidden" Tag="{Binding}" SelectedItem="{Binding MenuSelectedItem}"  d:ItemsSource="{d:SampleData ItemCount=2}">
+                  Grid.Row="1" Grid.RowSpan="2" RowHeight="35" FontSize="23" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" VerticalScrollBarVisibility="Auto" Tag="{Binding}" SelectedItem="{Binding MenuSelectedItem}"  d:ItemsSource="{d:SampleData ItemCount=2}" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="40">
                     <DataGridTemplateColumn.CellTemplate>
@@ -81,7 +83,7 @@
         </DataGrid>
 
 
-        <ListBox ItemsSource="{Binding DrinksList}" Grid.Row="3" Grid.RowSpan="3" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox ItemsSource="{Binding DrinksList}" Grid.Row="4" Grid.RowSpan="2" FontSize="20" BorderBrush="#181818" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FF181818" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <DockPanel Width="330">
@@ -94,7 +96,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
                             </Grid.RowDefinitions>
-                            
+
                             <Image Source="{Binding Path =ImageUrl}" Grid.Column="0" HorizontalAlignment="Center" Height="43" Width="50"/>
 
                             <TextBlock  Text="{Binding Path=Name}" Grid.Column="1" Grid.ColumnSpan="1" Foreground="White" Background="Transparent" FontSize="23"/>
@@ -121,7 +123,7 @@
 
         <Button Command="{Binding RemoveFromCartCommand}" Grid.Column="1" Grid.Row="2" Content="Slet" FontSize="30" FontWeight="DemiBold" Margin="23" Width="200" Height="100" Background="#181818" Foreground="WhiteSmoke" />
 
-        <Button Command="{Binding ModifyFromCartCommand}" Content="Redigere" Grid.Column="1" Grid.Row="3" FontSize="30" FontWeight="DemiBold" Margin="74,28,73,10" Background="#181818" Foreground="WhiteSmoke"/>
+        <Button Command="{Binding ModifyFromCartCommand}" Content="Redigere" Grid.Column="1" Grid.Row="4" FontSize="30" FontWeight="DemiBold" Margin="74,28,73,10" Background="#181818" Foreground="WhiteSmoke"/>
 
         <DataGrid ItemsSource="{Binding CartList}" SelectedIndex="{Binding CartSelectedIndex}" SelectedItem="{Binding CartSelectedItem}" Grid.Row="1" Grid.Column="2" FontSize="23" Height="Auto" Grid.RowSpan="2" RowHeight="35" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderBrush="#181818" AlternatingRowBackground="#181818" RowBackground="#181818" Foreground="#121212" Background="#181818" Tag="{Binding}">
 
@@ -146,39 +148,49 @@
         </DataGrid>
 
         <!--Den samlede pris af indkøbskruvens indhold-->
-        <Grid  Grid.Column="2" Grid.Row="3"  Background="#181818" VerticalAlignment="Center" HorizontalAlignment="Center" Height="70" >
+        <Grid  Grid.Column="2" Grid.Row="4"  Background="#181818" VerticalAlignment="Center" HorizontalAlignment="Center" Height="70" >
             <TextBlock Text="{Binding TotPrice, StringFormat=' Total : {0} ', UpdateSourceTrigger=PropertyChanged}" Width="300"  FontFamily="Arial" FontSize=" 30" FontWeight="DemiBold" TextAlignment="Center" Foreground="#FFF" VerticalAlignment="Center" />
         </Grid>
 
 
-        <Button Command="{Binding GoToConfirmCommand}" FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="4" Height="130" Background="Transparent" Width="140" BorderBrush="Transparent">
-            <Button.Content >
-                <Grid >
-                    <Image Source="https://cdn-icons-png.flaticon.com/512/2038/2038792.png"/>
-                </Grid>
-            </Button.Content>
+        <Button Command="{Binding GoToConfirmCommand}" FontFamily="Arial" FontSize="30" FontWeight="DemiBold" Grid.Column="2" Grid.Row="5" Height="130" Background="Transparent" Width="140" BorderBrush="Transparent">
+
+            <Image Source="https://cdn-icons-png.flaticon.com/512/2038/2038792.png"/>
+
             <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="LightBlue" />
+
+                <Style TargetType="Button">
 
                     <Setter Property="Template">
+
                         <Setter.Value>
+
                             <ControlTemplate TargetType="{x:Type Button}">
+
                                 <Border x:Name="Border" Background="{TemplateBinding Background}">
+
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
                                 </Border>
 
                                 <ControlTemplate.Triggers>
+
                                     <Trigger Property="IsMouseOver" Value="True">
+
                                         <Setter Property="Background" Value="transparent " TargetName="Border" />
-                                        <Setter Property="Width" Value="100" TargetName="Border"/>
+
                                     </Trigger>
 
                                 </ControlTemplate.Triggers>
+
                             </ControlTemplate>
+
                         </Setter.Value>
+
                     </Setter>
+
                 </Style>
+
             </Button.Style>
         </Button>
 

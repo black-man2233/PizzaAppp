@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -6,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace PizzaApp_WPF.Model
 {
 #pragma warning disable
-    public partial class DrinksModel : ObservableObject, INotifyPropertyChanged
+    public partial class DrinksModel : ObservableObject, INotifyPropertyChanged, ICloneable
     {
         #region Propperties
         //Image
@@ -24,21 +25,6 @@ namespace PizzaApp_WPF.Model
             }
         }
        
-        //ID
-        private int _id;
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-
         //name
         private string? _name;
         public string? Name
@@ -91,6 +77,21 @@ namespace PizzaApp_WPF.Model
         }
         #endregion
 
+        public DrinksModel(string url,  string name, int price, string desc, ObservableCollection<DrinksSize> s)
+        {
+            ImageUrl = url;
+            Name = name;
+            Price = price;
+            Description = desc;
+            _capacity = s;
+        }
+        
+        
+        public object Clone()
+        {
+            return new DrinksModel(this._imageUrl, this.Name, this.Price, this.Description,this.Capacity);
+        }
+
         #region OnPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -98,6 +99,7 @@ namespace PizzaApp_WPF.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
 
         #endregion
 
