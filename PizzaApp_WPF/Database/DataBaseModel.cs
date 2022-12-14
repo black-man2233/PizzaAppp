@@ -11,10 +11,10 @@ using DevExpress.Internal;
 namespace PizzaApp_WPF.Model
 {
 #pragma warning disable
-    public partial class DataBaseViewModel : ObservableObject
+    public partial class DataBaseModel : ObservableObject
 
     {
-        public DataBaseViewModel()
+        public DataBaseModel()
         {
             ConnectToDataBases();
 

@@ -24,7 +24,7 @@ namespace PizzaApp_WPF.ViewModel
         public MainViewModel()
         {
             #region Data
-            DataBaseViewModel menu = new();
+            DataBaseModel menu = new();
 
             for (int i = 0; i < menu.ExtrasList.Count; i++)
                 ExtrasList.Add((menu.ExtrasList[i].Clone()) as ExtrasModel);

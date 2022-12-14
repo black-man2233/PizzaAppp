@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Database\PizzasDB.json">
+    <None Update="Database\Jsons\PizzasDB.json">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Image\accept.png">
