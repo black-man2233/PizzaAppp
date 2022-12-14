@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PizzaApp_WPF.Model.Toppings
 {
 #pragma warning disable
-    public class ToppingsListModel : INotifyPropertyChanged
+    public class ToppingsListModel : INotifyPropertyChanged, ICloneable
     {
         private ObservableCollection<ToppingsModel>? _toppings;
         public ObservableCollection<ToppingsModel>? Toppings
@@ -26,7 +26,15 @@ namespace PizzaApp_WPF.Model.Toppings
             }
         }
 
+        public ToppingsListModel(ObservableCollection<ToppingsModel>? toppings)
+        {
+            Toppings = toppings;
+        }
 
+        public Object Clone()
+        {
+            return new ToppingsListModel(this._toppings);
+        }
 
 
         #region OnPropertyChanged

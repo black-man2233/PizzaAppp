@@ -32,4 +32,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\Db\DbQueries\" />
+  </ItemGroup>
+
 </Project>

@@ -16,8 +16,21 @@ namespace PizzaApp_WPF.Model
     {
         public DataBaseViewModel()
         {
-            ConnectToDataBase();
+            ConnectToDataBases();
 
+            ImportDataItemsToProperties();
+        }
+
+        #region Properties
+        [ObservableProperty] ObservableCollection<PizzaModel>? _pizzasList;
+        [ObservableProperty] ObservableCollection<DrinksModel>? _drinksList;
+        [ObservableProperty] ObservableCollection<ExtrasModel>? _extrasList;
+        [ObservableProperty] ObservableCollection<ToppingsListModel>? _toppingsList;
+        #endregion
+
+        #region ImportDataItemsToProperties
+        void ImportDataItemsToProperties()
+        {
             _pizzasList = new();
             for (int i = 0; i < _dbPizzas.Count; i++)
                 _pizzasList.Add((PizzaModel)_dbPizzas[i].Clone());
@@ -26,40 +39,126 @@ namespace PizzaApp_WPF.Model
             for (int i = 0; i < _dbDrinks.Count; i++)
                 _drinksList.Add((DrinksModel)_dbDrinks[i].Clone());
 
-            _extrasList = new ObservableCollection<ExtrasModel>(JsonConvert.DeserializeObject<ObservableCollection<ExtrasModel>>(ExtrasDbText));
-            _toppingsList = new ObservableCollection<ToppingsListModel>(JsonConvert.DeserializeObject<ObservableCollection<ToppingsListModel>>(ToppingsText));
+            _toppingsList = new();
+            for (int i = 0; i < _dbToppings.Count; i++)
+                _toppingsList.Add((ToppingsListModel)_dbToppings[i].Clone());
 
+            _extrasList = new();
+            for (int i = 0; i < _dbExtras.Count; i++)
+                _extrasList.Add((ExtrasModel)_dbExtras[i].Clone());
         }
-
-        #region Properties
-        [ObservableProperty] ObservableCollection<PizzaModel>? _pizzasList;
-
-        [ObservableProperty] ObservableCollection<DrinksModel>? _drinksList;
-
-
-        ////Extras
-        private readonly string ExtrasDbText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Database\ExtrasDb.json");
-
-        [ObservableProperty] ObservableCollection<ExtrasModel>? _extrasList;
-
-        ////Toppings
-        private readonly string ToppingsText = File.ReadAllText(@"C:\Users\Kevin\source\repos\PizzaAppp\PizzaApp_WPF\Database\ToppingsDB.json");
-
-        [ObservableProperty] ObservableCollection<ToppingsListModel>? _toppingsList;
         #endregion
-
 
         #region DataBaseData
         private ObservableCollection<PizzaModel> _dbPizzas = new();
         private ObservableCollection<DrinksModel> _dbDrinks = new();
-        void ConnectToDataBase()
+        private ObservableCollection<ToppingsListModel> _dbToppings = new();
+        private ObservableCollection<ExtrasModel> _dbExtras= new();
+        void ConnectToDataBases()
         {
             PizzaListCon();
 
             DrinksDbCon();
+
+            ToppingsDbCon();
+
+            ExtrasDbCon();
         }
 
+        //Extras
+        void ExtrasDbCon()
+        {
+            const string connstring = @"Data Source = .\SQLEXPRESS; Initial Catalog=PizzaApp; Integrated Security = true ";
 
+            SqlConnection con = new SqlConnection(connstring);
+            con.Open();
+
+            string query = "Select * From Extras";
+            SqlCommand cmd = new(query, con);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                this._dbExtras.Add(new ExtrasModel(
+                    (string)reader.GetValue(1) /* Name */ ,
+                    (int)reader.GetValue(2) /* Price */ ,
+                    (int)reader.GetValue(3) /* Amount */
+                    ));
+            }
+
+            con.Close();
+        }
+
+        //Toppings
+        void ToppingsDbCon()
+        {
+            const string connstring = @"Data Source = .\SQLEXPRESS; Initial Catalog=PizzaApp; Integrated Security = true; Encrypt = False ";
+
+            SqlConnection connection = new SqlConnection(connstring);
+            connection.Open();
+
+            string query = "Select * From Toppings";
+            SqlCommand command = new(query, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                var _toppings = new ObservableCollection<ToppingsModel>();
+                if (reader.GetValue(0) is not System.DBNull)
+                {
+                    _toppings.Add(new ToppingsModel(
+                        (int)reader.GetValue(0),/* id */
+                        (string)reader.GetValue(1), /* Name*/
+                        (bool)(bool.Parse(reader.GetValue(2).ToString())) /* is Selected*/
+                        ));
+
+                    if (reader.GetValue(3) is not System.DBNull)
+                    {
+                        _toppings.Add(new ToppingsModel(
+                            (int)reader.GetValue(3),/* id */
+                            (string)reader.GetValue(4), /* Name*/
+                            (bool)(bool.Parse(reader.GetValue(5).ToString())) /* is Selected*/
+                            ));
+                        if (reader.GetValue(6) is not System.DBNull)
+                        {
+                            _toppings.Add(new ToppingsModel(
+                                (int)reader.GetValue(6),/* id */
+                                (string)reader.GetValue(7), /* Name*/
+                                (bool)(bool.Parse(reader.GetValue(8).ToString())) /* is Selected*/
+                                ));
+
+                            if (reader.GetValue(9) is not System.DBNull)
+                            {
+                                _toppings.Add(new ToppingsModel(
+                                    (int)reader.GetValue(9),/* id */
+                                    (string)reader.GetValue(10), /* Name*/
+                                    (bool)(bool.Parse(reader.GetValue(11).ToString())) /* is Selected*/
+                                    ));
+                                if (reader.GetValue(12) is not System.DBNull)
+                                {
+                                    _toppings.Add(new ToppingsModel(
+                                        (int)reader.GetValue(12),/* id */
+                                        (string)reader.GetValue(13), /* Name*/
+                                        (bool)(bool.Parse(reader.GetValue(14).ToString())) /* is Selected*/
+                                        ));
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                //Adds the toppings
+                _dbToppings.Add(new ToppingsListModel(_toppings));
+            }
+
+            connection.Close();
+        }
+
+        //drinks
         void DrinksDbCon()
         {
             const string connstring = @"Data Source = .\SQLEXPRESS; Initial Catalog=PizzaApp; Integrated Security = true; Encrypt = False ";
@@ -79,7 +178,7 @@ namespace PizzaApp_WPF.Model
                 //creates a local list of the drinks Size and fills it up
                 ObservableCollection<DrinksSize> _dbsizes = new();
                 _dbsizes.Add(new DrinksSize(
-                    (string)reader.GetValue(4), 
+                    (string)reader.GetValue(4),
                     (int)reader.GetValue(5),
                     (bool)bool.Parse(reader.GetValue(6).ToString())
                     ));
@@ -109,6 +208,7 @@ namespace PizzaApp_WPF.Model
             connection.Close();
         }
 
+        //pizzas
         void PizzaListCon()
         {
             const string connstring = @"Data Source = .\SQLEXPRESS; Initial Catalog=PizzaApp; Integrated Security = true; Encrypt = False ";
@@ -143,8 +243,6 @@ namespace PizzaApp_WPF.Model
         }
 
         #endregion
-
-
 
     }
 }
